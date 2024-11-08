@@ -11,10 +11,9 @@ class AuthenController
 
     public function showFormLogin()
     {
-        $view = 'authen/form-login';
-        $title = 'Đăng nhập';
+        
 
-        require_once PATH_VIEW_ADMIN_MAIN;
+        require_once PATH_VIEW_ADMIN . 'authen/form-login.php';
     }
 
     public function login()
@@ -59,7 +58,8 @@ class AuthenController
 
     public function logout()
     {
-        session_destroy();  // hủy session trên máy chủ bao gồm cả session ID.
+        session_destroy();  
+        // hủy session trên máy chủ bao gồm cả session ID.
 
         header('Location: ' . BASE_URL);
         exit();

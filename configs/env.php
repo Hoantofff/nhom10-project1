@@ -1,7 +1,7 @@
 <?php
 
-define('BASE_URL', 'http://localhost/Project-sample-Poly/Demo_OOP/MVC/');
-define('BASE_URL_ADMIN', 'http://localhost/Project-sample-Poly/Demo_OOP/MVC/?role=admin');
+define('BASE_URL', 'http://localhost/nhom10-project1/');
+define('BASE_URL_ADMIN', 'http://localhost/nhom10-project1/?role=admin');
 
 define('PATH_ROOT', __DIR__  .'/../');
 
@@ -26,7 +26,7 @@ define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'test_db');
+define('DB_NAME', 'nhom10-project1');
 define('DB_OPTIONS', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

@@ -16,7 +16,7 @@ match($act){
     'test-show' => (new TestController)->show(),
 
     //Authen
-    'show-form-login' => (new AuthenController)->showFormLogin(),
+    'show-form-login'       => (new AuthenController)->showFormLogin(),
     'login'                 => (new AuthenController)->login(),
     'logout'                => (new AuthenController)->logout(),
     
@@ -29,12 +29,4 @@ match($act){
     'users-show' => (new UserController)->show(),
     'users-delete' => (new UserController)->delete(),
 
-    // CRUD Books
-    'books-index' => (new BookController)->index(),
-    'books-create' => (new BookController)->create(),
-    'books-store' => (new BookController)->store(), // Lưu Dữ Liệu Thêm Mới
-    'books-edit' => (new BookController)->edit(), 
-    'books-update' => (new BookController)->update(), // Lưu Dữ Liệu Update
-    'books-show' => (new BookController)->show(),
-    'books-delete' => (new BookController)->delete(),
 };
