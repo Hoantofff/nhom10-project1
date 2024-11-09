@@ -109,6 +109,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                    <!-- Content -->
                     <?php if(isset($view)){
                         require_once PATH_VIEW_ADMIN . $view . '.php';
                     } ?>
