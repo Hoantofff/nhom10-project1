@@ -55,3 +55,4 @@ class User extends BaseModel{
         return $stmt->fetch();
     }
 }
+
