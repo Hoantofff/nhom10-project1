@@ -38,15 +38,21 @@ class AuthenController
                     'password'  => $password
                 ]
             );
+            
 
             if (empty($user)) {
                 throw new Exception('Thông tin tài khoản không đúng!');
             }
 
             $_SESSION['user'] = $user;
-
-            header('Location: ' . BASE_URL_ADMIN);
-            exit();
+            if($_SESSION['user']['role_id'] == 2){
+                header('Location: ' . BASE_URL_ADMIN);
+                exit();
+            }else{
+                header('Location: ' . BASE_URL);
+                exit();
+            }
+            
         } catch (\Throwable $th) {
             $_SESSION['success'] = false;
             $_SESSION['msg'] = $th->getMessage();
