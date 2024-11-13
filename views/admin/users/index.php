@@ -1,41 +1,78 @@
-<a class="btn btn-primary w-100" href="<?= BASE_URL_ADMIN . '&act=users-create'?>">Thêm Mới</a>
-<?php
-if(isset($_SESSION['success'])){
-    $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
-    
-    echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4"><?= $title ?></h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><?= $title ?></li>
+        </ol>
+        <?php
+        if (isset($_SESSION['success'])) {
+            $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
 
-    unset($_SESSION['success']);
-    unset($_SESSION['msg']);
-}
-?>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Avatar</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($data as $user): ?>
-            <tr>
-                <td><?= $user['id'] ?></td>
-                <td><?php if(!empty($user['avatar'])): ?>
-                        <img src="<?= BASE_ASSETS_UPLOADS . $user['avatar'] ?>" width="100px">
-                    <?php endif; ?>
-                </td>
-                <td><?= $user['name'] ?></td>
-                <td><?= $user['email'] ?></td>
-                <td>
-                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['id'] ?>">Show</a>
-                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=users-edit&id=' . $user['id'] ?>">Update</a>
-                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '&act=users-delete&id=' . $user['id'] ?>" 
-                    onclick="return confirm('Bạn có chắc muốn xóa hay không?')">Delete</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+            echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
+
+            unset($_SESSION['success']);
+            unset($_SESSION['msg']);
+        }
+        ?>
+        </table>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                <?= $title ?>
+                <a class="btn btn-success" href="<?= BASE_URL_ADMIN ?>&act=users-create">Tạo mới</a>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>avatar</th>
+                            <th>email</th>
+                            <th>address</th>
+                            <th>phone</th>
+                            <th>role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>avatar</th>
+                            <th>email</th>
+                            <th>address</th>
+                            <th>phone</th>
+                            <th>role</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php foreach ($data as $user): ?>
+                            <tr>
+                                <td><?= $user['u_id'] ?></td>
+                                <td><?= $user['u_name'] ?></td>
+                                <td>
+                                    <?php if (!empty($user['u_avatar'])): ?>
+                                        <img src="<?= BASE_ASSETS_UPLOADS . $user['u_avatar'] ?>" width="100px">
+                                    <?php endif; ?>
+                                </td>
+                                <td><?= $user['u_email'] ?></td>
+                                <td><?= $user['u_address'] ?></td>
+                                <td><?= $user['u_phone'] ?></td>
+                                <td><?= $user['r_name'] ?></td>
+                                <td>
+                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['u_id'] ?>">Show</a>
+                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=users-edit&id=' . $user['u_id'] ?>">Update</a>
+                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '&act=users-delete&id=' . $user['u_id'] ?>"
+                                        onclick="return confirm('Bạn có chắc muốn xóa hay không?')">Delete</a>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
