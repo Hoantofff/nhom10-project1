@@ -37,7 +37,6 @@ match ($act) {
     'users-update' => (new UserController)->update(), // Lưu Dữ Liệu Update
     'users-show' => (new UserController)->show(),
     'users-delete' => (new UserController)->delete(),
-
     // CRUD Product 
     'products-index' => (new ProductController)->index(),
     'products-create' => (new ProductController)->goToCreate(),
