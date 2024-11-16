@@ -1,5 +1,5 @@
 <?php
-
+// Fix config
 class HomeController
 {
     private $home;
