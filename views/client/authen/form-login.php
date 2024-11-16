@@ -35,7 +35,7 @@
                                         unset($_SESSION['msg']);
                                     }
                                     ?>
-                                    <form action="<?= BASE_URL_ADMIN ?>&act=login" method="POST">
+                                    <form action="<?= BASE_URL ?>?act=login" method="POST">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" name="email" type="email"
                                                 placeholder="name@example.com" />
@@ -59,7 +59,7 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="<?= BASE_URL ?>?act=show-form-register">Need an account? Sign up!</a></div>
                                 </div>
                             </div>
                         </div>

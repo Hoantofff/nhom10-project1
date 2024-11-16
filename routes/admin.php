@@ -4,13 +4,22 @@
 
 $act = $_GET['act'] ?? '/';
 
-if (
-    empty($_SESSION['user'])
-    && !in_array($act, ['show-form-login', 'login'])
-) {
-    header('Location: ' . BASE_URL_ADMIN . '&act=show-form-login');
+if (!empty($_SESSION['user_client'])) {
+    echo '<script>
+        alert("Bạn không có quyển truy cập.");
+        window.location.href = "' . BASE_URL . '";
+        </script>';
     exit();
 }
+
+if (
+    empty($_SESSION['user_admin'])
+    && !in_array($act, ['show-form-login', 'login'])
+) {
+    header('Location: ' . BASE_URL . '?act=show-form-login');
+    exit();
+}
+
 match ($act) {
     '/' => (new DashboardController)->index(),
     'test-show' => (new TestController)->show(),
@@ -28,6 +37,7 @@ match ($act) {
     'users-update' => (new UserController)->update(), // Lưu Dữ Liệu Update
     'users-show' => (new UserController)->show(),
     'users-delete' => (new UserController)->delete(),
+
     // CRUD Product 
     'products-index' => (new ProductController)->index(),
     'products-create' => (new ProductController)->goToCreate(),

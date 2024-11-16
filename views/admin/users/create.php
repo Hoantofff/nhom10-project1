@@ -15,14 +15,14 @@
         }
         ?>
         <?php if (!empty($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <ul>
-                <?php foreach ($_SESSION['error'] as $err):  ?>
-                <li><?= $err ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION['error']) ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $err):  ?>
+                        <li><?= $err ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['error']) ?>
         <?php endif; ?>
 
         <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=users-store' ?>" method="POST"
@@ -35,6 +35,7 @@
                             value="<?= $_SESSION['data']['name'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
+
                         <label for="role_id" class="form-label">Category:</label>
                         <input type="text" class="form-control" name="role_id">
 
@@ -43,10 +44,15 @@
                         <label for="role" class="form-label">role:</label>
                         <select id="role" class="form-control" name="role">
                             <?php foreach ($rolePluck as $id => $name): ?>
-                            <option value="<?= $id ?>"> <?= $name ?> </option>
+                                <option value="<?= $id ?>"> <?= $name ?> </option>
                             <?php endforeach; ?>
 
-                        </select>
+
+                            <label for="role_id" class="form-label">Role:</label>
+                            <select class="form-control" id="role_id" name="role_id">
+                                <option value="<?= $role['id'] ?>"> <?= $role['name'] ?> </option>
+
+                            </select>
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">email:</label>
@@ -78,7 +84,7 @@
                     <input type="file" class="form-control" id="avatar" name="avatar">
 
                     <?php if (!empty($user['u_avatar'])): ?>
-                    <img src="<?= BASE_ASSETS_UPLOADS . $user['u_avatar'] ?>" width="100px">
+                        <img src="<?= BASE_ASSETS_UPLOADS . $user['u_avatar'] ?>" width="100px">
                     <?php endif; ?>
                 </div>
             </div>
