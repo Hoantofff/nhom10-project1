@@ -21,7 +21,7 @@
             }
             require_once PATH_VIEW_CLIENT . 'authen/form-login.php';
         }
-
+       
         public function showFormRegister()
         {
             require_once PATH_VIEW_CLIENT . 'authen/register.php';
@@ -115,19 +115,20 @@
                     'email = :email',
                     ['email' => $email]
                 );
-
+                
                 if (empty($user)) {
                     throw new Exception('Thông tin tài khoản không đúng!');
                 }
                 if (!password_verify($password, $user['password'])) {
                     throw new Exception('Mật khẩu không đúng!');
                 }
-
+                
                 if ($user['role_id'] == 2) {
                     header('Location: ' . BASE_URL_ADMIN);
                     $_SESSION['user_admin'] = $user;
                     exit();
-                } else {
+                }
+                if($user['role_id'] == 1){
                     header('Location: ' . BASE_URL);
                     $_SESSION['user_client'] = $user;
                     exit();

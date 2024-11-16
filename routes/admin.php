@@ -52,5 +52,5 @@ match ($act) {
     'categories-edit' => (new CategoriesController)->edit(),  // Sửa danh mục
     'categories-update' => (new CategoriesController)->update(),  // Cập nhật danh mục
     'categories-show' => (new CategoriesController)->show(),  // Xem chi tiết danh mục
-    'categories-delete' => (new CategoriesController)->delete(),  // Xóa danh mục
+    // 'categories-delete' => (new CategoriesController)->delete(),  // Xóa danh mục
 };
