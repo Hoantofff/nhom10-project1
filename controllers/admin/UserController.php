@@ -14,6 +14,7 @@ class UserController
         $view = 'users/index';
         $title = 'Danh Sách user';
         $data = $this->user->getAll();
+        $dataClient = $this->user->getAllClient();
 
         require_once PATH_VIEW_ADMIN_MAIN;
     }
@@ -22,8 +23,7 @@ class UserController
         $view = 'users/create';
         $title = 'Thêm Mới user';
 
-        $role = $this->role->select();
-        $rolePluck = array_column($role, 'name', 'id');
+        $role = $this->role->find('*','id = :id', ['id' => 2]);
         require_once PATH_VIEW_ADMIN_MAIN;
     }
     public function store()
@@ -52,8 +52,8 @@ class UserController
                 $_SESSION['error']['email'] = 'Trường email bắt buộc, độ dài không quá 100 ký tự và không được trùng';
             }
 
-            if (empty($data['password']) || strlen($data['password']) < 6 || strlen($data['password']) > 30) {
-                $_SESSION['error']['password'] = 'Trường password bắt buộc, độ dài trong khoảng từ 6 đến 30 ký tự.';
+            if (empty($data['password']) || strlen($data['password']) < 6 ) {
+                $_SESSION['error']['password'] = 'Trường password bắt buộc, độ dài trong khoảng từ 6 trở lên';
             }
             if (empty($data['phone'])) {
                 $_SESSION['error']['phone'] = 'Trường phone không được bỏ trống';
@@ -74,6 +74,7 @@ class UserController
                 }
             }
 
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
             if (!empty($_SESSION['error'])) {
                 $_SESSION['data'] = $data;
                 throw new Exception('Dữ Liệu Lỗi');
@@ -84,7 +85,16 @@ class UserController
             } else {
                 $data['avatar'] = null;
             }
-            $rowcount = $this->user->insert($data);
+            $user_data = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'password' => $hashedPassword,
+                'role_id' => $data['role_id'],
+                'address' => $data['address'],
+                'avatar' => $data['avatar']
+            ];
+            $rowcount = $this->user->insert($user_data);
 
             if ($rowcount > 0) {
                 $_SESSION['success'] = true;
@@ -117,9 +127,8 @@ class UserController
             $view = 'users/edit';
             $title = "Cập nhật user có ID = $id";
 
-            $role = $this->role->select();
-            $rolePluck = array_column($role, 'name', 'id');
-
+            $role = $this->role->find('*','id = :id', ['id' => 2]);
+            
             require_once PATH_VIEW_ADMIN_MAIN;
         } catch (\Throwable $th) {
             $_SESSION['success'] = false;
@@ -165,8 +174,8 @@ class UserController
                 $_SESSION['error']['email'] = 'Trường email bắt buộc, độ dài không quá 100 ký tự và không được trùng';
             }
 
-            if (empty($data['password']) || strlen($data['password']) < 6 || strlen($data['password']) > 30) {
-                $_SESSION['error']['password'] = 'Trường password bắt buộc, độ dài trong khoảng từ 6 đến 30 ký tự.';
+            if (empty($data['password']) || strlen($data['password']) < 6 ) {
+                $_SESSION['error']['password'] = 'Trường password bắt buộc, độ dài trong khoảng từ 6 trở lên';
             }
             if (empty($data['phone'])) {
                 $_SESSION['error']['phone'] = 'Trường phone không được bỏ trống';
@@ -198,11 +207,19 @@ class UserController
             } else {
                 $data['avatar'] = null;
             }
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+            $user_data = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'password' => $hashedPassword,
+                'role_id' => $data['role_id'],
+                'address' => $data['address'],
+                'avatar' => $data['avatar'],
+                'updated_at' => date('Y-m-d h:i:s')
+            ];
 
-
-            $data['updated_at'] = date('Y-m-d h:i:s');
-
-            $rowcount = $this->user->update($data, 'id = :id', ['id' => $id]);
+            $rowcount = $this->user->update($user_data, 'id = :id', ['id' => $id]);
 
             if ($rowcount > 0) {
                 if ($_FILES['avatar']['size'] == 0 || $_FILES['avatar']['size'] > 0 && !empty($user['avatar']) && file_exists(PATH_ASSETS_UPLOADS . $user['avatar'])) {
