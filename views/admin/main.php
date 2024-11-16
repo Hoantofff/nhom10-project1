@@ -84,6 +84,19 @@
                                 <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=products-create">Create Product</a>
                             </nav>
                         </div>
+
+                    <!-- Categories -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                                Categories
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">List Categories</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create Category</a>
+                                </nav>
+                            </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
