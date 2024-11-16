@@ -2,6 +2,7 @@
 
 class HomeController {
     private $home;
+
     public function index()
     {
         $view = "user/home";
