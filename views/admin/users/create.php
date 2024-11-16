@@ -15,66 +15,52 @@
         }
         ?>
         <?php if (!empty($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <ul>
-                <?php foreach ($_SESSION['error'] as $err):  ?>
-                <li><?= $err ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION['error']) ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $err):  ?>
+                        <li><?= $err ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['error']) ?>
         <?php endif; ?>
 
-        <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=users-store' ?>" method="POST"
-            enctype="multipart/form-data">
+        <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=users-store'?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
                         <label for="name" class="form-label">name:</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            value="<?= $_SESSION['data']['name'] ?? null ?>">
+                        <input type="text" class="form-control" id="name" name="name" value="<?= $_SESSION['data']['name'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
-                        ]
                         <label for="role_id" class="form-label">Category:</label>
                         <input type="text" class="form-control" name="role_id">
+                        <select class="form-control" id="role_id" name="role_id">
 
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="role" class="form-label">role:</label>
-                        <select id="role" class="form-control" name="role">
                             <?php foreach ($rolePluck as $id => $name): ?>
-                            <option value="<?= $id ?>"> <?= $name ?> </option>
+                                <option
+                                    value="<?= $id ?>"> <?= $name ?> </option>
                             <?php endforeach; ?>
 
-
-                            <label for="role_id" class="form-label">Role:</label>
-                            <select class="form-control" id="role_id" name="role_id">
-                                <option value="<?= $role['id'] ?>"> <?= $role['name'] ?> </option>
-
-                            </select>
+                        </select>
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">email:</label>
-                        <input type="text" class="form-control" id="email" name="email"
-                            value="<?= $_SESSION['data']['email'] ?? null ?>">
+                        <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION['data']['email'] ?? null ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
                         <label for="password" class="form-label">password:</label>
-                        <input type="password" class="form-control" id="password" name="password"
-                            value="<?= $_SESSION['data']['password'] ?? null ?>">
+                        <input type="password" class="form-control" id="password" name="password" value="<?= $_SESSION['data']['password'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="address" class="form-label">address:</label>
-                        <input type="text" class="form-control" id="address" name="address"
-                            value="<?= $_SESSION['data']['address'] ?? null ?>">
+                        <input type="text" class="form-control" id="address" name="address" value="<?= $_SESSION['data']['address'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="phone" class="form-label">phone:</label>
-                        <input type="text" class="form-control" id="phone" name="phone"
-                            value="<?= $_SESSION['data']['phone'] ?? null ?>">
+                        <input type="text" class="form-control" id="phone" name="phone" value="<?= $_SESSION['data']['phone'] ?? null ?>">
                     </div>
                 </div>
 
@@ -84,12 +70,12 @@
                     <input type="file" class="form-control" id="avatar" name="avatar">
 
                     <?php if (!empty($user['u_avatar'])): ?>
-                    <img src="<?= BASE_ASSETS_UPLOADS . $user['u_avatar'] ?>" width="100px">
+                        <img src="<?= BASE_ASSETS_UPLOADS . $user['u_avatar'] ?>" width="100px">
                     <?php endif; ?>
                 </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=users-index">Quay lại trang danh sách</a>
-            <button class="btn btn-success " type="submit">Tạo Mới</button>
+            <button class="btn btn-success " type="submit">Tạo Mới</button> 
 
         </form>
 
