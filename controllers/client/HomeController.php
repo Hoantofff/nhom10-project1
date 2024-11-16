@@ -1,7 +1,6 @@
 <?php
 
 class HomeController {
-<<<<<<< HEAD
     private $home;
 
     public function index()
@@ -13,9 +12,3 @@ class HomeController {
     }
 }
 
-=======
-    public function index(){
-        require_once PATH_VIEW_CLIENT . 'home.php';
-    }
-}
->>>>>>> parent of 33f6b4a (Merge pull request #10 from Hoantofff/DucManh)
