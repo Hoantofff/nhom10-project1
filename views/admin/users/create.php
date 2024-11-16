@@ -35,7 +35,7 @@
                             value="<?= $_SESSION['data']['name'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
-
+                        ]
                         <label for="role_id" class="form-label">Category:</label>
                         <input type="text" class="form-control" name="role_id">
 
