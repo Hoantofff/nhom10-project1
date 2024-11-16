@@ -167,11 +167,6 @@ class CategoriesController
             if (empty($categories)) {
                 throw new Exception("Danh mục với ID = $id không tồn tại");
             }
-             // Lấy thông tin về icon (hoặc các trường khác)
-            $icon_name = $categories[0]['icon_name']; // Giả sử icon là trường trong cơ sở dữ liệu
-
-        // Chuyển dữ liệu vào session để hiển thị lại trên form
-            $_SESSION['data'] = $categories[0]; // Lưu tất cả thông tin vào session
 
             $view = 'categories/show';
             $title = 'Chi Tiết Danh Mục';
