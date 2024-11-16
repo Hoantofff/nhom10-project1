@@ -1,12 +1,10 @@
 <?php
 
-class HomeController
-{
-    private $home;
-    public function __construct()
-    {
-        $this->home = new Home();
+class HomeController {
+    public function index(){
+        require_once PATH_VIEW_CLIENT . 'home.php';
     }
+<<<<<<< HEAD
     public function index()
     {
         $view = "user/home";
@@ -15,3 +13,6 @@ class HomeController
         require_once PATH_VIEW_CLIENT_MAIN;
     }
 }
+=======
+}
+>>>>>>> 2bd1cdd55fb0cd3e76f596da7008474139abcafd
