@@ -18,7 +18,11 @@ if (
     header('Location: ' . BASE_URL_ADMIN . '&act=show-form-login');
     exit();
 }
+<<<<<<< HEAD
 match($act){
+=======
+match ($act) {
+>>>>>>> parent of 33f6b4a (Merge pull request #10 from Hoantofff/DucManh)
     '/' => (new DashboardController)->index(),
     'test-show' => (new TestController)->show(),
 
