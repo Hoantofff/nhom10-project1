@@ -40,16 +40,21 @@
                     </tfoot>
                     <tbody>
                         <?php foreach ($data as $category): ?>
-                            <tr>
-                                <td><?= $category['id'] ?></td>
-                                <td><?= $category['name'] ?></td>
-                                <td><?= $category['icon_name'] ?></td>
-                                <td>
-                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=categories-show&id=' . $category['id'] ?>">Show</a>
-                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=categories-edit&id=' . $category['id'] ?>">Update</a>
-                                 
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><?= $category['id'] ?></td>
+                            <td><?= $category['name'] ?></td>
+                            <td>
+                                <p class="text-center"><i
+                                        class="fa-solid display-6   <?= $category['icon_name'] ?> "></i></p>
+                            </td>
+                            <td>
+                                <a class="btn btn-success"
+                                    href="<?= BASE_URL_ADMIN . '&act=categories-show&id=' . $category['id'] ?>">Show</a>
+                                <a class="btn btn-info"
+                                    href="<?= BASE_URL_ADMIN . '&act=categories-edit&id=' . $category['id'] ?>">Update</a>
+
+                            </td>
+                        </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

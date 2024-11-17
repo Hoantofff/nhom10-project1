@@ -27,7 +27,6 @@
 
 <body class="scroll-smooth">
     <div class="container relative h-auto" id="showHere">
-        <?php session_start(); ?>
         <header class="h-[64px] pl-[50px] w-screen bg-[#e1042b] fixed top-[0] z-10">
             <nav class="w-full h-full flex items-center gap-[5px]">
                 <a href="?action=index"><img src="<?= BASE_ASSETS_UPLOADS ?>/img/Logo.png"
@@ -118,31 +117,8 @@
                         class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
                         <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
                         <p class="text-[12px] text-white">Đăng nhập</p>
-                    </span>
-                    <?php if (isset($_SESSION['errorsLogin']) && $_SESSION['errorsLogin'] == true) { ?>
-                        <script>
-                            let errorsLogin = true;
-                        </script>
-                    <?php
-                        session_destroy();
-                    } ?>
-                    <?php if (isset($_SESSION['errorsSignIn']) && $_SESSION['errorsSignIn'] == true) { ?>
-                        <script>
-                            let errorsSignIn = true;
-                        </script>
-                    <?php
-                        session_destroy();
-                    }
-                    ?>
-                    <?php if (isset($_SESSION['errorForgot']) && $_SESSION['errorForgot'] == true) { ?>
-                        <script>
-                            let errorForgot = true;
-                        </script>
-                    <?php } ?>
-                <?php session_destroy();
-                } ?>
+                    </span> <?php } ?>
             </nav>
-
         </header>
         <main class="w-screen px-[100px] mt-[50px] bg-[#fcfcfc]">
             <?php if (isset($view)) {
@@ -569,18 +545,9 @@
                 </div>
             </div>
         </footer>
-        <?php include './includes/loginForm.php' ?>
-        <?php include './includes/signInForm.php' ?>
-        <?php include './includes/forgotForm.php' ?>
     </div>
-    <!-- UpdateUserSuccess -->
-    <?php if (isset($_SESSION['updateUserSuccess'])) { ?>
-        <script>
-            alert("Thay đổi thông tin tài khoản thành công")
-        </script>
-    <?php unset($_SESSION['updateUserSuccess']);
-    } ?>
+
 </body>
-<script src="./assets/js/home.js"></script>
+
 
 </html>

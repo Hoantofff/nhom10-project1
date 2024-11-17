@@ -44,7 +44,7 @@ match ($act) {
     'products-show' => (new ProductController)->showProduct(),
     'products-edit' => (new ProductController)->goToEdit(),
     'products-update' => (new ProductController)->startUpdate(),
-
+    'products-delete' => (new ProductController)->delete(),
     // CRUD Category
     'categories-index' => (new CategoriesController)->index(),  // Danh sách danh mục
     'categories-create' => (new CategoriesController)->create(),  // Tạo danh mục
