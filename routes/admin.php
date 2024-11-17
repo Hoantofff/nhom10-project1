@@ -53,4 +53,6 @@ match ($act) {
     'categories-update' => (new CategoriesController)->update(),  // Cập nhật danh mục
     'categories-show' => (new CategoriesController)->show(),  // Xem chi tiết danh mục
     // 'categories-delete' => (new CategoriesController)->delete(),  // Xóa danh mục
+    // HOME CLIENT
+    "productDetail" => (new ProductDetailController)->goToProductDetail()
 };
