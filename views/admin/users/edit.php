@@ -36,14 +36,7 @@
                         <label for="role_id" class="form-label">Category:</label>
 
                         <select class="form-control" id="role_id" name="role_id">
-
-                            <?php foreach ($rolePluck as $id => $name): ?>
-                                <option
-                                    value="<?= $id ?>" 
-                                    <?= $id  == $user['u_role_id'] ? 'selected' : null ?> > <?= $name ?> 
-                                </option>
-                            <?php endforeach; ?>
-
+                                <option value="<?= $role['id'] ?>" <?= $id  == $user['u_role_id'] ? 'selected' : null ?> > <?= $role['name'] ?> </option>
                         </select>
                     </div>
                     <div class="mb-3 mt-3">
