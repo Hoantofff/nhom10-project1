@@ -29,4 +29,8 @@ match($act){
     'users-show' => (new UserController)->show(),
     'users-delete' => (new UserController)->delete(),
 
+    // CRUD Slider
+    'sliders-index' => (new SliderController)->index(),
+    'sliders-edit' => (new SliderController)->edit(), 
+    'sliders-update' => (new SliderController)->update(),
 };

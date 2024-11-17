@@ -151,6 +151,11 @@ class BaseModel
         $stmt = $this->pdo->prepare($sql);
         //bindParams trong set 
         foreach ($data as $key => &$value) {
+            // 
+            if (is_array($value)) {
+                // Chuyển mảng thành chuỗi
+                $value = implode(',', $value); // Chuyển mảng thành chuỗi với dấu phẩy
+            }
             $stmt->bindParam(":set_$key", $value);
         }
         // bindParam trong where
