@@ -22,7 +22,7 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <h3 class="text-center font-weight-light my-4">Đăng Nhập</h3>
                                 </div>
                                 <div class="card-body">
                                     <?php
@@ -53,13 +53,13 @@
                                                 Password</label>
                                         </div> -->
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password.html">Forgot Password?</a>
+                                            <a class="small" href="#">Quên mật khẩu</a>
                                             <button class="btn btn-primary">Đăng nhập</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="<?= BASE_URL ?>?act=show-form-register">Need an account? Sign up!</a></div>
+                                    <div class="small"><a href="<?= BASE_URL ?>?act=show-form-register">Bạn chưa có tài khoản? Đăng Ký.</a></div>
                                 </div>
                             </div>
                         </div>

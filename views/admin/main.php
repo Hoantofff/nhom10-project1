@@ -35,13 +35,13 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><a class="dropdown-item" href="#!">Cài đặt</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>">Sang trang Web</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
                     <li><a class="dropdown-item" onclick="return confirm('Bạn có chắc muốn đăng xuất không?')"
-                            href="<?= BASE_URL_ADMIN ?>&act=logout">Logout</a></li>
+                            href="<?= BASE_URL_ADMIN ?>&act=logout">Đăng xuất</a></li>
                 </ul>
             </li>
         </ul>
@@ -54,41 +54,41 @@
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="<?= BASE_URL_ADMIN ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            Thống kê
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Users
+                            Người Dùng
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=users-index">List User</a>
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=users-create">Create User</a>
+                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=users-index">Danh Sách</a>
+                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=users-create">Tạo Mới </a>
                             </nav>
                         </div>
                         <!-- PRODUCT-->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Products
+                            Sản Phẩm
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseProducts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=products-index">List Product</a>
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=products-create">Create Product</a>
+                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=products-index">Danh Sách</a>
+                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=products-create">Tạo Mới</a>
                             </nav>
                         </div>
 
                     <!-- Categories -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
-                                Categories
+                                Danh Mục Sản phẩm
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -97,54 +97,17 @@
                                     <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create Category</a>
                                 </nav>
                             </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                    aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">401 Page</a>
-                                        <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
+                           
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Slider
+                            </a>
+                            <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a>
+                        
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

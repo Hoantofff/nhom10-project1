@@ -205,7 +205,7 @@ class UserController
             if ($data['avatar']['size'] > 0) {
                 $data['avatar'] = upload_file('users', $data['avatar']);
             } else {
-                $data['avatar'] = null;
+                $data['avatar'] = $user['avatar'];
             }
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
             $user_data = [
@@ -222,7 +222,7 @@ class UserController
             $rowcount = $this->user->update($user_data, 'id = :id', ['id' => $id]);
 
             if ($rowcount > 0) {
-                if ($_FILES['avatar']['size'] == 0 || $_FILES['avatar']['size'] > 0 && !empty($user['avatar']) && file_exists(PATH_ASSETS_UPLOADS . $user['avatar'])) {
+                if ($_FILES['avatar']['size'] > 0 && !empty($user['avatar']) && file_exists(PATH_ASSETS_UPLOADS . $user['avatar'])) {
                     unlink(PATH_ASSETS_UPLOADS . $user['avatar']);
                 }
                 $_SESSION['success'] = true;
