@@ -93,19 +93,21 @@
                             </a>
                             <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">Danh sách</a>
-                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Tạo Mới</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">List Categories</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create Category</a>
                                 </nav>
                             </div>
+                           
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Quản Lý Banner
+                                Slider
                             </a>
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables
                             </a>
+                        
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
