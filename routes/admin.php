@@ -44,5 +44,13 @@ match ($act) {
     'products-show' => (new ProductController)->showProduct(),
     'products-edit' => (new ProductController)->goToEdit(),
     'products-update' => (new ProductController)->startUpdate(),
-    'products-delete' => (new ProductController)->delete()
+    'products-delete' => (new ProductController)->delete(),
+    // CRUD Category
+    'categories-index' => (new CategoriesController)->index(),  // Danh sách danh mục
+    'categories-create' => (new CategoriesController)->create(),  // Tạo danh mục
+    'categories-store' => (new CategoriesController)->store(),  // Lưu danh mục mới
+    'categories-edit' => (new CategoriesController)->edit(),  // Sửa danh mục
+    'categories-update' => (new CategoriesController)->update(),  // Cập nhật danh mục
+    'categories-show' => (new CategoriesController)->show(),  // Xem chi tiết danh mục
+    // 'categories-delete' => (new CategoriesController)->delete(),  // Xóa danh mục
 };
