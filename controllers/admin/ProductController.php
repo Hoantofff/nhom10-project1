@@ -174,4 +174,32 @@ class ProductController
         header('location: ' . BASE_URL_ADMIN . '&act=products-create');
         exit();
     }
+    public function delete()
+    {
+        try {
+            if (!isset($_GET['id'])) {
+                throw new Exception('Thiếu Tham Số id', 99);
+            }
+            $id = $_GET['id'];
+
+            $product = $this->product->find('*', 'id = :id', ['id' => $id]);
+
+            if (empty($product)) {
+                throw new Exception("product có Id = $id Không Tồn Tại");
+            }
+
+            $rowcount = $this->product->delete('id = :id', ['id' => $id]);
+
+            if ($rowcount > 0) {
+                $_SESSION['success'] = true;
+                $_SESSION['msg'] = 'Thao Tác Thành công';
+            }
+        } catch (\Throwable $th) {
+            $_SESSION['success'] = false;
+            $_SESSION['msg'] = $th->getMessage();
+        }
+
+        header('location: ' . BASE_URL_ADMIN . '&act=products-index');
+        exit();
+    }
 }

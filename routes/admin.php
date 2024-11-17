@@ -43,5 +43,6 @@ match ($act) {
     'product-startCreate' => (new ProductController)->startCreate(),
     'products-show' => (new ProductController)->showProduct(),
     'products-edit' => (new ProductController)->goToEdit(),
-    'products-update' => (new ProductController)->startUpdate()
+    'products-update' => (new ProductController)->startUpdate(),
+    'products-delete' => (new ProductController)->delete()
 };
