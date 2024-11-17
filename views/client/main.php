@@ -89,35 +89,35 @@
                         hàng
                     </p>
                 </a>
-                <?php if (isset($_SESSION['user_name']) && $_SESSION['role'] == 0) { ?>
+                <?php if (isset($_SESSION['user_client'])) { ?>
                     <div class="user w-[130px] flex">
-                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_name'] ?>
+                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
                             <a class="text-[#fff] text-[12px] underline"
-                                href="?action=infoUser&userName=<?= $_SESSION['user_name'] ?>">Thông tin tài khoản</a>
+                                href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài khoản</a>
                         </span>
                     </div>
-                    <a href="?action=logout"
+                    <a href="<?= BASE_URL ?>?act=logout"
                         class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
                         <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
                         <p class="text-[12px] text-white">Đăng xuất</p>
                     </a>
-                <?php  } else if (isset($_SESSION['user_name']) && $_SESSION['role'] == 1) { ?>
-                    <a href="?action=admin&id=1"
+                <?php  } else if (isset($_SESSION['user_admin'])) { ?>
+                    <a href="<?= BASE_URL_ADMIN ?>"
                         class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
                         <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
                         <p class="text-[12px] text-white">Đến trang quản trị</p>
                     </a>
-                    <a href="?action=logout"
+                    <a href="<?= BASE_URL ?>?act=logout"
                         class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
                         <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
                         <p class="text-[12px] text-white">Đăng xuất</p>
                     </a>
                 <?php } else { ?>
-                    <span id="openLogin"
+                    <a href="<?= BASE_URL ?>?act=show-form-login"
                         class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
                         <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
                         <p class="text-[12px] text-white">Đăng nhập</p>
-                    </span> <?php } ?>
+                    </a> <?php } ?>
             </nav>
         </header>
         <main class="w-screen px-[100px] mt-[50px] bg-[#fcfcfc]">
