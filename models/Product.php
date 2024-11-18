@@ -67,4 +67,27 @@ class Product extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function sameProduct($id, $categoryId)
+    {
+        $sql = "SELECT  
+        pd.name, 
+        pd.image, 
+        pd.price,
+        pd.sale_price,
+        br.name AS 
+        brand_name, 
+        pd.brand_id,
+        pd.id,
+        pd.view_count,
+        pd.content,
+        pd.category_id,
+        pd.discount
+        FROM products AS pd
+        INNER JOIN brands as br ON br.id = pd.brand_id
+        WHERE pd.id != $id AND pd.category_id = $categoryId
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
