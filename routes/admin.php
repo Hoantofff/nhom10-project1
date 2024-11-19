@@ -36,11 +36,11 @@ match ($act) {
     'users-update' => (new UserController)->update(), // Lưu Dữ Liệu Update
     'users-show' => (new UserController)->show(),
     'users-delete' => (new UserController)->delete(),
-
     // CRUD Slider
     'sliders-index' => (new SliderController)->index(),
-    'sliders-edit' => (new SliderController)->edit(), 
+    'sliders-edit' => (new SliderController)->edit(),
     'sliders-update' => (new SliderController)->update(),
+
     // CRUD Product 
     'products-index' => (new ProductController)->index(),
     'products-create' => (new ProductController)->goToCreate(),
