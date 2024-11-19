@@ -22,7 +22,6 @@ if (
 
 match ($act) {
     '/' => (new DashboardController)->index(),
-    'test-show' => (new TestController)->show(),
 
     //Authen
     'show-form-login'       => (new AuthenController)->showFormLogin(),
@@ -58,6 +57,8 @@ match ($act) {
     'categories-update' => (new CategoriesController)->update(),  // Cập nhật danh mục
     'categories-show' => (new CategoriesController)->show(),  // Xem chi tiết danh mục
     // 'categories-delete' => (new CategoriesController)->delete(),  // Xóa danh mục
-    // HOME CLIENT
-    "productDetail" => (new ProductDetailController)->goToProductDetail()
+    //Review 
+    'review-index' => (new ReviewController)->index(),
+    'review-show' => (new ReviewController)->show(),
+
 };
