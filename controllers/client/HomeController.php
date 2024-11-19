@@ -14,4 +14,9 @@ class HomeController
         $categories = $this->home->renderCategory();
         require_once PATH_VIEW_CLIENT . 'main.php';
     }
+    public function goToCart()
+    {
+        $view = "user/cart";
+        require_once PATH_VIEW_CLIENT . "main.php";
+    }
 }

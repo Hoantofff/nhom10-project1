@@ -103,9 +103,9 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Slider
                             </a>
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=review-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
+                                Đánh Giá SP
                             </a>
                         
                     </div>

@@ -2,7 +2,7 @@
     <!-- MENU  -->
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff]">
         <?php foreach ($categories as $value) { ?>
-        <a href="?action=goToType&id=<?php echo $value['id'] ?>"
+        <a href="?act=goToType&id=<?php echo $value['id'] ?>"
             class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
             <p class="flex items-center gap-[5px]">
                 <i class="  fa-solid <?php echo $value['icon_name'] ?> text-black text-[25px]"></i>
@@ -85,7 +85,8 @@
                     Giảm <?php echo $products['discount'] ?>%
                 </p>
             </div>
-            <a href="?action=productDetails&id=<?= $products['id'] ?>" class="text-[#444]">
+            <a href="?act=productDetail&id=<?= $products['id'] ?>&cateId=<?= $products['category_id']?>"
+                class="text-[#444]">
                 <div class="item-img w-full mt-[25px] flex justify-center">
                     <img class="w-[160px]" src="<?= BASE_ASSETS_UPLOADS ?>/<?php echo $products['image'] ?>" alt="" />
                 </div>

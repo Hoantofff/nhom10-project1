@@ -46,8 +46,8 @@
                         </select>
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="category" class="form-label">Thể loại</label>
-                        <select id="category" class="form-control" name="category_id">
+                        <label for="brand" class="form-label">Nhãn hiệu</label>
+                        <select id="brand" class="form-control" name="brand_id">
                             <?php foreach ($brands as $brand) { ?>
                             <option value="<?= $brand['id'] ?>"
                                 <?= $product['brand_id'] == $brand['id'] ? "selected" : "" ?>>

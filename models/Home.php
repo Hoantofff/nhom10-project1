@@ -16,7 +16,8 @@ class Home extends BaseModel
                          pr.image, 
                          pr.price, 
                          pr.sale_price, 
-                         pr.id 
+                         pr.id,
+                         pr.category_id
                          FROM brands AS br
                          INNER JOIN products AS pr 
                          ON pr.brand_id = br.id
