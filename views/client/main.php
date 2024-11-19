@@ -3,15 +3,15 @@
 <div class="openShowCategories w-screen h-full z-30 absolute top-0 animate-fadeInLogin hidden">
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff] absolute top-[59px] left-[80px]">
         <?php foreach ($category as $value) { ?>
-            <a href="?action=goToType&id=<?php echo $value['id'] ?>"
-                class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
-                <p class="flex items-center gap-[5px]">
-                    <i class="  fa-solid <?php echo $value['icon'] ?> text-black text-[25px]"></i>
-                    <span class="text-[12px] font-bold text-[#343a40]">
-                        <?php echo $value['category_name'] ?></span>
-                </p>
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
+        <a href="?action=goToType&id=<?php echo $value['id'] ?>"
+            class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
+            <p class="flex items-center gap-[5px]">
+                <i class="  fa-solid <?php echo $value['icon'] ?> text-black text-[25px]"></i>
+                <span class="text-[12px] font-bold text-[#343a40]">
+                    <?php echo $value['category_name'] ?></span>
+            </p>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
         <?php  } ?>
     </div>
 </div>
@@ -80,7 +80,7 @@
                         về CellphoneS
                     </p>
                 </a>
-                <a href="?action=test"
+                <a href="?act=goToCart"
                     class="flex justify-center items-center gap-[10px] hover:bg-[#ffffff33] hover:h-[55px] h-[42px] rounded-[10px] px-[8px] py-[5px]">
                     <i class="fa-solid fa-cart-shopping text-[20px] text-white"></i>
                     <p class="text-white text-[12px]">
@@ -90,34 +90,35 @@
                     </p>
                 </a>
                 <?php if (isset($_SESSION['user_client'])) { ?>
-                    <div class="user w-[130px] flex">
-                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
-                            <a class="text-[#fff] text-[12px] underline"
-                                href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài khoản</a>
-                        </span>
-                    </div>
-                    <a href="<?= BASE_URL ?>?act=logout"
-                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
-                        <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
-                        <p class="text-[12px] text-white">Đăng xuất</p>
-                    </a>
+                <div class="user w-[130px] flex">
+                    <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
+                        <a class="text-[#fff] text-[12px] underline"
+                            href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
+                            khoản</a>
+                    </span>
+                </div>
+                <a href="<?= BASE_URL ?>?act=logout"
+                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
+                    <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
+                    <p class="text-[12px] text-white">Đăng xuất</p>
+                </a>
                 <?php  } else if (isset($_SESSION['user_admin'])) { ?>
-                    <a href="<?= BASE_URL_ADMIN ?>"
-                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
-                        <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
-                        <p class="text-[12px] text-white">Đến trang quản trị</p>
-                    </a>
-                    <a href="<?= BASE_URL ?>?act=logout"
-                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
-                        <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
-                        <p class="text-[12px] text-white">Đăng xuất</p>
-                    </a>
+                <a href="<?= BASE_URL_ADMIN ?>"
+                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
+                    <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
+                    <p class="text-[12px] text-white">Đến trang quản trị</p>
+                </a>
+                <a href="<?= BASE_URL ?>?act=logout"
+                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
+                    <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
+                    <p class="text-[12px] text-white">Đăng xuất</p>
+                </a>
                 <?php } else { ?>
-                    <a href="<?= BASE_URL ?>?act=show-form-login"
-                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
-                        <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
-                        <p class="text-[12px] text-white">Đăng nhập</p>
-                    </a> <?php } ?>
+                <a href="<?= BASE_URL ?>?act=show-form-login"
+                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
+                    <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
+                    <p class="text-[12px] text-white">Đăng nhập</p>
+                </a> <?php } ?>
             </nav>
         </header>
         <main class="w-screen px-[100px] mt-[50px] bg-[#fcfcfc]">
@@ -549,5 +550,6 @@
 
 </body>
 
+<script src="<?= BASE_ASSETS_JS ?>cart.js"></script>
 
 </html>
