@@ -49,7 +49,7 @@
                                 <td><?= $slider['p_name'] ?></td>
                                 <td>
                                     <?php if (!empty($slider['s_img_slider'])): ?>
-                                        <img src="<?= BASE_ASSETS_UPLOADS . $slider['s_img_slider'] ?>" width="100px">
+                                        <img src="<?= BASE_ASSETS_UPLOADS . $slider['s_img_slider'] ?>" width="150px">
                                     <?php endif; ?>
                                 </td>
                                 <td><?= $slider['s_content'] ?></td>
