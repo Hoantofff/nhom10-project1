@@ -15,14 +15,14 @@
         }
         ?>
         <?php if (!empty($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <ul>
-                <?php foreach ($_SESSION['error'] as $err):  ?>
-                <li><?= $err ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION['error']) ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $err):  ?>
+                        <li><?= $err ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['error']) ?>
         <?php endif; ?>
 
         <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=products-update&id=' . $product['id'] ?>"
@@ -38,9 +38,9 @@
                         <label for="category" class="form-label">Thể loại</label>
                         <select id="category" class="form-control" name="category_id">
                             <?php foreach ($categories as $category) { ?>
-                            <option value="<?= $category['id'] ?>"
-                                <?= $product['category_id'] == $category['id'] ? "selected" : "" ?>>
-                                <?= $category['name'] ?></option>
+                                <option value="<?= $category['id'] ?>"
+                                    <?= $product['category_id'] == $category['id'] ? "selected" : "" ?>>
+                                    <?= $category['name'] ?></option>
                             <?php } ?>
 
                         </select>
@@ -49,9 +49,9 @@
                         <label for="category" class="form-label">Thể loại</label>
                         <select id="category" class="form-control" name="category_id">
                             <?php foreach ($brands as $brand) { ?>
-                            <option value="<?= $brand['id'] ?>"
-                                <?= $product['brand_id'] == $brand['id'] ? "selected" : "" ?>>
-                                <?= $brand['name'] ?></option>
+                                <option value="<?= $brand['id'] ?>"
+                                    <?= $product['brand_id'] == $brand['id'] ? "selected" : "" ?>>
+                                    <?= $brand['name'] ?></option>
                             <?php } ?>
 
                         </select>
@@ -86,7 +86,7 @@
                     <input type="file" class="form-control" id="image" name="image">
 
                     <?php if (!empty($product['image'])): ?>
-                    <img src="<?= BASE_ASSETS_UPLOADS . $product['image'] ?>" width="100px">
+                        <img src="<?= BASE_ASSETS_UPLOADS . $product['image'] ?>" width="100px">
                     <?php endif; ?>
                 </div>
             </div>
