@@ -16,7 +16,7 @@ class Slider extends BaseModel
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id
-            ORDER BY s.id DESC
+            ORDER BY s.id ASC
         ";
 
         $stmt = $this->pdo->prepare($sql);
