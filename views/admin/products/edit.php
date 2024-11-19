@@ -15,14 +15,14 @@
         }
         ?>
         <?php if (!empty($_SESSION['error'])): ?>
-            <div class="alert alert-danger">
-                <ul>
-                    <?php foreach ($_SESSION['error'] as $err):  ?>
-                        <li><?= $err ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php unset($_SESSION['error']) ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach ($_SESSION['error'] as $err):  ?>
+                <li><?= $err ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php unset($_SESSION['error']) ?>
         <?php endif; ?>
 
         <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=products-update&id=' . $product['id'] ?>"
@@ -38,25 +38,29 @@
                         <label for="category" class="form-label">Thể loại</label>
                         <select id="category" class="form-control" name="category_id">
                             <?php foreach ($categories as $category) { ?>
-                                <option value="<?= $category['id'] ?>"
-                                    <?= $product['category_id'] == $category['id'] ? "selected" : "" ?>>
-                                    <?= $category['name'] ?></option>
+                            <option value="<?= $category['id'] ?>"
+                                <?= $product['category_id'] == $category['id'] ? "selected" : "" ?>>
+                                <?= $category['name'] ?></option>
                             <?php } ?>
 
                         </select>
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="category" class="form-label">Thể loại</label>
-                        <select id="category" class="form-control" name="category_id">
+                        <label for="brand" class="form-label">Nhãn hiệu</label>
+                        <select id="brand" class="form-control" name="brand_id">
                             <?php foreach ($brands as $brand) { ?>
-                                <option value="<?= $brand['id'] ?>"
-                                    <?= $product['brand_id'] == $brand['id'] ? "selected" : "" ?>>
-                                    <?= $brand['name'] ?></option>
+                            <option value="<?= $brand['id'] ?>"
+                                <?= $product['brand_id'] == $brand['id'] ? "selected" : "" ?>>
+                                <?= $brand['name'] ?></option>
                             <?php } ?>
 
                         </select>
                     </div>
-
+                    <div class="mb-3 mt-3">
+                        <label for="description">Mô tả của sản phẩm:</label>
+                        <textarea class="form-control" id="description" name="description"
+                            rows="3"><?= $product['description'] ?></textarea>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
@@ -65,28 +69,30 @@
                             value="<?= $product['price'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
+                        <label for="sale_price" class="form-label">Giá đã giảm:</label>
+                        <input type="text" class="form-control" id="sale_price" name="sale_price"
+                            value="<?= $product['sale_price'] ?? null ?>">
+                    </div>
+                    <div class="mb-3 mt-3">
                         <label for="discount" class="form-label">Phần trăm giảm giá:</label>
                         <input type="text" class="form-control" id="discount" name="discount"
                             value="<?= $product['discount'] ?? null ?>">
                     </div>
+                    <div class="mb-3 mt-3">
+                        <label for="content">Giới thiệu của sản phẩm:</label>
+                        <textarea class="form-control" id="content" name="content"
+                            rows="3"><?= $product['content'] ?></textarea>
 
+                    </div>
                 </div>
-                <div class="mb-3 mt-3">
-                    <label for="content">Giới thiệu của sản phẩm:</label>
-                    <textarea class="form-control" id="content" name="content"
-                        rows="3"><?= $product['content'] ?></textarea>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="description">Mô tả của sản phẩm:</label>
-                    <textarea class="form-control" id="description" name="description"
-                        rows="3"><?= $product['description'] ?></textarea>
-                </div>
+
+
                 <div class="mb-3">
                     <label for="image" class="form-label">Ảnh sản phẩm:</label>
                     <input type="file" class="form-control" id="image" name="image">
 
                     <?php if (!empty($product['image'])): ?>
-                        <img src="<?= BASE_ASSETS_UPLOADS . $product['image'] ?>" width="100px">
+                    <img src="<?= BASE_ASSETS_UPLOADS . $product['image'] ?>" width="100px">
                     <?php endif; ?>
                 </div>
             </div>
