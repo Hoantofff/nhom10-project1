@@ -85,34 +85,29 @@
                             </nav>
                         </div>
 
-                        <!-- Categories -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCategories" aria-expanded="false"
-                            aria-controls="collapseCategories">
-                            <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
-                            Danh Mục Sản phẩm
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">List
-                                    Categories</a>
-                                <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create
-                                    Category</a>
-                            </nav>
-                        </div>
-
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Slider
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
-
+                    <!-- Categories -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                                Danh Mục Sản phẩm
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">List Categories</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create Category</a>
+                                </nav>
+                            </div>
+                           
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Slider
+                            </a>
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=review-index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Đánh Giá SP
+                            </a>
+                        
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
