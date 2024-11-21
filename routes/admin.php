@@ -60,5 +60,5 @@ match ($act) {
     //Review 
     'review-index' => (new ReviewController)->index(),
     'review-show' => (new ReviewController)->show(),
-
+    
 };

@@ -18,4 +18,7 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
+    // Bill
+    'bill-index' => (new BillController)->index(),
+    // 'bill-detail' => (new BillController)->show(),
 };
