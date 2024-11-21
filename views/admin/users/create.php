@@ -34,20 +34,8 @@
                         <input type="text" class="form-control" id="name" name="name"
                             value="<?= $_SESSION['data']['name'] ?? null ?>">
                     </div>
+                    
                     <div class="mb-3 mt-3">
-                        ]
-                        <label for="role_id" class="form-label">Category:</label>
-                        <input type="text" class="form-control" name="role_id">
-
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="role" class="form-label">role:</label>
-                        <select id="role" class="form-control" name="role">
-                            <?php foreach ($rolePluck as $id => $name): ?>
-                            <option value="<?= $id ?>"> <?= $name ?> </option>
-                            <?php endforeach; ?>
-
-
                             <label for="role_id" class="form-label">Role:</label>
                             <select class="form-control" id="role_id" name="role_id">
                                 <option value="<?= $role['id'] ?>"> <?= $role['name'] ?> </option>

@@ -296,12 +296,15 @@
                         <strong>MUA NGAY</strong>
                         <span class="text-[14px]">(Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)</span>
                     </button>
-                    <button
-                        class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
-                        <img class="w-[30px] h-[30px] object-contain"
-                            src="<?= BASE_ASSETS_UPLOADS ?>./img/add-to-cart.webp" alt="">
-                        <span class="text-[#e04040] text-[7.5px] font-semibold">Thêm vào giỏ</span>
-                    </button>
+                    <form method="POST" action="<?= BASE_URL ?>?act=add-to-cart" class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
+                        <button>
+                            <img class="w-[30px] h-[30px] object-contain"
+                                src="<?= BASE_ASSETS_UPLOADS ?>./img/add-to-cart.webp" alt="">
+                            <span class="text-[#e04040] text-[7.5px] font-semibold">Thêm vào giỏ</span>
+                        </button>
+                        <input type="hidden" name="product_id" value="<?= $id ?>">
+                        <input type="hidden" name="quantity" value="1">
+                    </form>
                 </div>
                 <div class="btn-installment flex w-full gap-[10px]">
                     <button class="btn-installment-money w-[50%] flex flex-col justify-center items-center
@@ -394,7 +397,7 @@
                         Giảm <?= $sameProduct['discount'] ?>%
                     </p>
                 </div>
-                <a href="?act=productDetail&id=<?= $sameProduct['id'] ?>&cateId=<?= $sameProduct['category_id']?>" class="text-[#444]">
+                <a href="?act=productDetail&id=<?= $sameProduct['id'] ?>&cateId=<?= $sameProduct['category_id'] ?>" class="text-[#444]">
                     <div class="item-img w-full mt-[25px] flex justify-center">
                         <img class="w-[160px]" src="<?= BASE_ASSETS_UPLOADS . $sameProduct['image'] ?>" alt="" />
                     </div>
