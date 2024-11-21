@@ -7,14 +7,14 @@ class SliderController
     public function __construct()
     {
         $this->slider = new Slider();
-        // $this->product = new Product();
+        $this->product = new Product();
     }
     public function index()
     {
         $view = 'sliders/index';
         $title = 'Danh Sách Slider';
         $data = $this->slider->getAll();
-
+        
         require_once PATH_VIEW_ADMIN_MAIN;
     }
     public function edit()
@@ -25,6 +25,8 @@ class SliderController
             }
             $id = $_GET['id'];
             $slider = $this->slider->getByID($id);
+            $products = $this->product->getLatestProducts();
+            // debug($products);die;
             if (empty($slider)) {
                 throw new Exception("slider có ID = $id KHÔNG TỒN TẠI!");
             }
@@ -62,10 +64,11 @@ class SliderController
 
             // Kiểm tra dữ liệu nhập vào
             if (empty($data['product_id'])) {
-                $_SESSION['error']['product_id'] = 'Trường id sản phẩm bắt buộc';
+                // $_SESSION['error']['product_id'] = 'Phải chọn sản phẩm mới';
+                $data['product_id']=$slider['p_id'];
             }
 
-            if (empty($data['content']) || strlen($data['content']) < 20) {
+            if (empty($data['content']) || strlen($data['content']) < 10) {
                 $_SESSION['error']['content'] = 'Trường "content" bắt buộc và độ dài phải hơn 20 kí tự';
             }
 
@@ -76,7 +79,7 @@ class SliderController
                 }
 
                 $fileType = $data['img_slider']['type'];
-                $allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+                $allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif','image/webp'];
                 if (!in_array($fileType, $allowedTypes)) {
                     $_SESSION['error']['img_slider_type'] = 'Xin lỗi, chỉ chấp nhận các loại file JPG, JPEG, PNG, GIF.';
                 }
@@ -84,7 +87,8 @@ class SliderController
             if ($data['img_slider']['size'] > 0) {
                 $data['img_slider'] = upload_file('sliders', $data['img_slider']);
             } else {
-                $_SESSION['error']['img_slider_null'] = 'Không được phép để ảnh trống';
+                // $_SESSION['error']['img_slider_null'] = 'Phải chọn ảnh mới';
+                $data['img_slider'] = $slider['s_img_slider'];
             }            
             if (!empty($_SESSION['error'])) {
                 $_SESSION['data'] = $data;
@@ -118,11 +122,4 @@ class SliderController
             }
         }
     }
-    // public function getProductList()
-    // {
-    //     $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : null;
-    //     $products = $this->product->getProducts($keyword);
-    //     echo json_encode($products);
-    //     exit;
-    // }
 }

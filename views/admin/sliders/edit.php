@@ -28,34 +28,12 @@
         <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=sliders-update&id=' . $slider['s_id']?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
-                    <!-- <div class="mb-3 mt-3">
-                        <label for="id" class="form-label">id:</label>
-                        <input type="text" class="form-control" id="id" name="id" disabled value="<?= $slider['s_id'] ?? null ?>">
-                    </div> -->
-
-                    <!-- <div class="mb-3">
-                        <label for="productSearch" class="form-label" >Liên kết sản phẩm:</label>
-
-                        <input type="text" id="productSearch" class="form-control" placeholder="Tìm kiếm sản phẩm...">
-
-                        <div id="productList" class="mt-2" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; display: none;">
-
-                        </div>
-
-                        <input type="hidden" name="product_id" id="product_id">
-                        <div class="mt-2" id="selectedProduct" style="font-weight: bold;"></div>
-                    </div> -->
-
                     <div class="mb-3 mt-3">
-                        <label for="name" class="form-label">Product Name:</label>
-                        <input type="text" class="form-control" id="product_id" name="product_id" value="<?= $slider['p_name'] ?? null ?>">
+                        <label for="name" class="form-label">Sản phẩm cũ</label>
+                        <input type="text" class="form-control" id="product_name" name="product_name" value="<?= $slider['p_name'] ?? null ?>" disabled>
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="name" class="form-label">product id:</label>
-                        <input type="text" class="form-control" id="product_id" name="product_id" value="<?= $slider['p_id'] ?? null ?>" required>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="date" class="form-label">created date:</label>
+                        <label for="date" class="form-label">Ngày chỉnh sửa</label>
                         <input 
                         type="datetime-local" 
                         class="form-control" 
@@ -65,13 +43,22 @@
                         disabled>
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="content" class="form-label">content:</label>
+                        <label for="content" class="form-label">Mô tả</label>
                         <input type="text" class="form-control" id="content" name="content" value="<?= $slider['s_content'] ?? null ?>" required>
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="mb-3 mt-3">
+                        <label for="product_id" class="form-label">Sản phẩm mới</label>
+                        <select class="form-control" name="product_id">
+                            <option value="" disabled selected>Chọn sản phẩm liên kết mới</option>
+                        <?php foreach($products as $key => $value): ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="mb-3">
-                            <label for="img_slider" class="form-label">Ảnh slider:</label>
+                            <label for="img_slider" class="form-label">Chọn ảnh mới</label>
                             <input type="file" class="form-control" id="img_slider" name="img_slider">
                             <br/>
                             <!-- Hiển thị ảnh hiện tại nếu có -->
@@ -113,41 +100,4 @@ imageInput.addEventListener('change', (event) => {
         if (currentImage) currentImage.style.display = 'block';
     }
 });
-// danh sach san pham
-// document.addEventListener('DOMContentLoaded', () => {
-//     const productSearch = document.getElementById('productSearch');
-//     const productList = document.getElementById('productList');
-//     const selectedProduct = document.getElementById('selectedProduct');
-//     const productIdInput = document.getElementById('product_id');
-
-//     productSearch.addEventListener('input', () => {
-//         const keyword = productSearch.value.trim();
-//         if (keyword.length > 0) {
-//             fetch(`admin.php?action=getProductList&keyword=${encodeURIComponent(keyword)}`)
-//                 .then(response => response.json())
-//                 .then(data => {
-//                     productList.innerHTML = ''; // Xóa kết quả cũ
-//                     if (data.length > 0) {
-//                         data.forEach(product => {
-//                             const productItem = document.createElement('div');
-//                             productItem.textContent = product.name;
-//                             productItem.style.padding = '5px';
-//                             productItem.style.cursor = 'pointer';
-//                             productItem.addEventListener('click', () => {
-//                                 productIdInput.value = product.id; // Lưu ID sản phẩm
-//                                 selectedProduct.textContent = `Đã chọn: ${product.name}`;
-//                                 productList.style.display = 'none'; // Ẩn danh sách
-//                             });
-//                             productList.appendChild(productItem);
-//                         });
-//                         productList.style.display = 'block'; // Hiển thị danh sách
-//                     } else {
-//                         productList.style.display = 'none';
-//                     }
-//                 });
-//         } else {
-//             productList.style.display = 'none';
-//         }
-//     });
-// });
 </script>
