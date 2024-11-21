@@ -16,7 +16,10 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
-
+    // Bill
+    'bill-index' => (new BillController)->index(),
+    // 'bill-detail' => (new BillController)->show(),
+    
     // CART
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
