@@ -109,7 +109,9 @@
                 if (empty($email) || empty($password)) {
                     throw new Exception('Email và Password không được để trống!');
                 }
-               
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    throw new Exception('Email không hợp lệ!');
+                }
                 $user = $this->user->find(
                     '*',
                     'email = :email',
@@ -119,19 +121,21 @@
                 if (empty($user)) {
                     throw new Exception('Thông tin tài khoản không đúng!');
                 }
+                
                 if (!password_verify($password, $user['password'])) {
                     throw new Exception('Mật khẩu không đúng!');
                 }
                 
                 if ($user['role_id'] == 2) {
-                    header('Location: ' . BASE_URL_ADMIN);
                     $_SESSION['user_admin'] = $user;
+                    header('Location: ' . BASE_URL_ADMIN);
                     exit();
-                }
-                if($user['role_id'] == 1){
-                    header('Location: ' . BASE_URL);
+                } elseif ($user['role_id'] == 1) {
                     $_SESSION['user_client'] = $user;
+                    header('Location: ' . BASE_URL);
                     exit();
+                } else {
+                    throw new Exception('Quyền truy cập không hợp lệ!');
                 }
             } catch (\Throwable $th) {
                 $_SESSION['success'] = false;

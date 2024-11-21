@@ -6,8 +6,6 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => (new HomeController)->index(),
 
-    // CART
-    "goToCart" => (new HomeController)->goToCart(),
     //Authen
     'show-form-login'       => (new AuthenController)->showFormLogin(),
     'login'                 => (new AuthenController)->login(),
@@ -18,4 +16,9 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
-};
+
+    // CART
+    "goToCart" => (new HomeController)->goToCart(),
+    'add-to-cart' => (new CartController)->addProductToCart(),
+    'update-cart' => (new CartController)->updateCart()
+}; 

@@ -48,15 +48,15 @@ const showPayForm = () => {
 const showPayFormCod = () => {
   payFormCod.innerHTML = `
         <div class="">
-                                <label for="address">Địa chỉ nhận hàng:</label>
-                                <input type="text" value="HaNoi, Nam Tu Liem" id="address"
-                                    class="rounded-[10px] p-[5px] border-[#d3d3d3] border-[1px] border-solid">
-                            </div>
-                            <div class="">
-                                <label for="phone">Số điện thoại:</label>
-                                <input type="number" value="012345689" id="phone"
-                                    class="rounded-[10px] p-[5px] border-[#d3d3d3] border-[1px] border-solid">
-                            </div>
+            <label for="address">Địa chỉ nhận hàng:</label>
+            <input type="text" value="HaNoi, Nam Tu Liem" id="address"
+                class="rounded-[10px] p-[5px] border-[#d3d3d3] border-[1px] border-solid">
+        </div>
+        <div class="">
+            <label for="phone">Số điện thoại:</label>
+            <input type="number" value="012345689" id="phone"
+                class="rounded-[10px] p-[5px] border-[#d3d3d3] border-[1px] border-solid">
+        </div>
   `;
 };
 const hidePayFormCod = () => {
