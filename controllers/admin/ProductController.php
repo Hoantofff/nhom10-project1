@@ -65,6 +65,9 @@ class ProductController
             $data = $_POST + $_FILES;
 
             $_SESSION['error'] = [];
+            if ($data['price'] < $data['sale_price']) {
+                $_SESSION['error']['logic_price'] = "Giá ban đầu phải lớn hơn giá đã giảm";
+            }
             if (!empty($_SESSION['error'])) {
                 $_SESSION['data'] = $data;
                 throw new Exception('Dữ Liệu Lỗi');
@@ -77,7 +80,7 @@ class ProductController
 
 
             $data['updated_at'] = date('Y-m-d h:i:s');
-
+            $data['discount'] = 100 - ceil(($data['sale_price'] / $data['price']) * 100);
             $rowcount = $this->product->update($data, 'id = :id', ['id' => $id]);
 
             if ($rowcount > 0) {
@@ -131,10 +134,10 @@ class ProductController
             }
 
             if (empty($data['sale_price'])) {
-                $_SESSION['error']['sale_price'] = 'Trường giá đã giảm bắt buộc';
+                $_SESSION['error']['sale_price'] = 'Trường giá sau khi giảm bắt buộc';
             }
-            if (empty($data['discount'])) {
-                $_SESSION['error']['discount'] = 'Trường phần trăm giảm giá không được bỏ trống';
+            if ($data['price'] < $data['sale_price']) {
+                $_SESSION['error']['logic_price'] = "Giá ban đầu phải lớn hơn giá đã giảm";
             }
             if (empty($data['description'])) {
                 $_SESSION['error']['description'] = 'Trường mô tả sản phẩm không được bỏ trống';
@@ -159,6 +162,7 @@ class ProductController
             } else {
                 $data['image'] = null;
             }
+            $data['discount'] = ceil($data['price'] / $data['sale_price'] * 100) - 100;
             $rowcount = $this->product->insert($data);
 
             if ($rowcount > 0) {
