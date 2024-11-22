@@ -50,9 +50,9 @@ class HomeController
                 foreach ($result as $result) {
                     echo "<div class = 'hover:opacity-50 cursor-pointer'>" . $result['name'] . "</div> <br/>";
                 }
+            } else {
+                echo "<div>Không tìm thấy sản phẩm có tên:" . $productName . "</div>";
             }
-        } else {
-            echo "Not found product";
         }
     }
     public function startSearching()
