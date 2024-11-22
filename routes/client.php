@@ -6,6 +6,10 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     '/' => (new HomeController)->index(),
     'test-show' => (new TestController)->show(),
+    "goToCate" => (new HomeController)->goToCate(),
+    "goToBrand" => (new HomeController)->goToBrand(),
+    "search" => (new HomeController)->renderSuggest(),
+    "startSearching" => (new HomeController)->startSearching(),
     // CART
     "goToCart" => (new HomeController)->goToCart(),
     //Authen
