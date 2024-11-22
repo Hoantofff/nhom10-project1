@@ -16,7 +16,7 @@ class Slider extends BaseModel
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id
-            ORDER BY s.id DESC
+            ORDER BY s.id ASC
         ";
 
         $stmt = $this->pdo->prepare($sql);
@@ -49,17 +49,4 @@ class Slider extends BaseModel
         $result = $stmt->fetch();
         return $result ?: null;
     }
-    // public function getProducts($keyword = null)
-    // {
-    //     $sql = "SELECT id, name FROM products";
-    //     if (!empty($keyword)) {
-    //         $sql .= " WHERE name LIKE :keyword";
-    //         $stmt = $this->pdo->prepare($sql);
-    //         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
-    //         $stmt->execute();
-    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     } else {
-    //         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    //     }
-    // }
 }

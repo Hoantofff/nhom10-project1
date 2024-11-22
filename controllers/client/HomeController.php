@@ -3,9 +3,11 @@
 class HomeController
 {
     private $home;
+    private $card;
     public function __construct()
     {
         $this->home = new Home();
+        $this->card = new Cart();
     }
     public function index()
     {
@@ -16,8 +18,11 @@ class HomeController
     }
     public function goToCart()
     {
-        $view = "user/cart";
-        require_once PATH_VIEW_CLIENT . "main.php";
+        $view = 'user/cart';
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+        $cartItems = $this->card->getCart($userId);
+        // debug($cartItems);die;
+        require_once PATH_VIEW_CLIENT_MAIN;
     }
     public function goToCate()
     {

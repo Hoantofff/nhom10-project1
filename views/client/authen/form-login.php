@@ -37,7 +37,7 @@
                                     ?>
                                     <form action="<?= BASE_URL ?>?act=login" method="POST">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" name="email" type="email"
+                                            <input class="form-control" name="email" type="text"
                                                 placeholder="name@example.com" />
                                             <label for="email">Email address</label>
                                         </div>

@@ -296,12 +296,15 @@
                         <strong>MUA NGAY</strong>
                         <span class="text-[14px]">(Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)</span>
                     </button>
-                    <button
-                        class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
-                        <img class="w-[30px] h-[30px] object-contain"
-                            src="<?= BASE_ASSETS_UPLOADS ?>./img/add-to-cart.webp" alt="">
-                        <span class="text-[#e04040] text-[7.5px] font-semibold">Thêm vào giỏ</span>
-                    </button>
+                    <form method="POST" action="<?= BASE_URL ?>?act=add-to-cart" class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
+                        <button>
+                            <img class="w-[30px] h-[30px] object-contain"
+                                src="<?= BASE_ASSETS_UPLOADS ?>./img/add-to-cart.webp" alt="">
+                            <span class="text-[#e04040] text-[7.5px] font-semibold">Thêm vào giỏ</span>
+                        </button>
+                        <input type="hidden" name="product_id" value="<?= $id ?>">
+                        <input type="hidden" name="quantity" value="1">
+                    </form>
                 </div>
                 <div class="btn-installment flex w-full gap-[10px]">
                     <button class="btn-installment-money w-[50%] flex flex-col justify-center items-center
@@ -386,140 +389,134 @@
     <div class="list-items w-full flex gap-[20px] justify-between overflow-hidden">
         <!-- ITEM IN HERE -->
         <?php foreach ($sameProducts as $sameProduct) { ?>
-        <div class="item px-[15px] w-[224.8px] rounded-[15px] shadow-menu relative">
-            <div class="sale-item-tag absolute top-0 left-0 h-[31px] w-[80px]">
-                <img class="w-full h-full" src="<?= BASE_ASSETS_UPLOADS ?>./img/sale-tag.png" alt="" />
-                <p
-                    class="sale-price absolute top-[50%] translate-y-[-70%] left-[10px] text-[#fff] text-[12px] font-bold">
-                    Giảm <?= $sameProduct['discount'] ?>%
-                </p>
+            <div class="item px-[15px] w-[224.8px] rounded-[15px] shadow-menu relative">
+                <div class="sale-item-tag absolute top-0 left-0 h-[31px] w-[80px]">
+                    <img class="w-full h-full" src="<?= BASE_ASSETS_UPLOADS ?>./img/sale-tag.png" alt="" />
+                    <p
+                        class="sale-price absolute top-[50%] translate-y-[-70%] left-[10px] text-[#fff] text-[12px] font-bold">
+                        Giảm <?= $sameProduct['discount'] ?>%
+                    </p>
+                </div>
+                <a href="?act=productDetail&id=<?= $sameProduct['id'] ?>&cateId=<?= $sameProduct['category_id'] ?>" class="text-[#444]">
+                    <div class="item-img w-full mt-[25px] flex justify-center">
+                        <img class="w-[160px]" src="<?= BASE_ASSETS_UPLOADS . $sameProduct['image'] ?>" alt="" />
+                    </div>
+                    <div class="item-title mb-[5px]">
+                        <h3 class="text-[#444] line-clamp-3 text-[14px] font-semibold h-[65px] mt-[20px]">
+                            <?= $sameProduct['name'] ?>
+                        </h3>
+                    </div>
+                    <div class="item-price text-nowrap mb-[5px]">
+                        <p class="inline-block new-price text-[16px] text-[#d70018] font-bold">
+                            <?= number_format($sameProduct['sale_price'], 0, ',', '.') ?>đ
+                        </p>
+                        <p class="inline-block old-price text-[14px] text-[#707070] line-through font-semibold">
+                            <?= number_format($sameProduct['price'], 0, ',', '.') ?>đ
+                        </p>
+                    </div>
+                    <div class="item-member text-[#444] mb-[5px] text-[11px] flex items-center gap-[3px]">
+                        <span class="text-nowrap">Smember giảm thêm đến</span>
+                        <span class="text-[14px] text-[#d70018] font-bold">300.000đ</span>
+                    </div>
+                    <div
+                        class="item-promotion mb-[50px] border-[1px] border-solid border-[#e5e7eb] bg-[#f3f4f6] rounded-[5px] text-[12px] p-[5px]">
+                        <p class="line-clamp-2">
+                            Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn
+                            3-6 tháng
+                        </p>
+                    </div>
+                </a>
+                <div class="item-bottom flex justify-between mb-[10px]">
+                    <div class="item-rating">
+                        <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
+                        <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
+                        <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
+                        <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
+                        <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
+                    </div>
+                    <div class="item-like">
+                        <span class="inline-block text-[#777] text-[12px]">Yêu thích
+                        </span>
+                        <a href="#">
+                            <i class="fa-regular text-[#777] fa-heart text-[15px] cursor-pointer"></i></a>
+                    </div>
+                </div>
             </div>
-            <a href="?action=productDetail&id=<?= $sameProduct['id'] ?>" class="text-[#444]">
-                <div class="item-img w-full mt-[25px] flex justify-center">
-                    <img class="w-[160px]" src="<?= BASE_ASSETS_UPLOADS . $sameProduct['image'] ?>" alt="" />
-                </div>
-                <div class="item-title mb-[5px]">
-                    <h3 class="text-[#444] line-clamp-3 text-[14px] font-semibold h-[65px] mt-[20px]">
-                        <?= $sameProduct['name'] ?>
-                    </h3>
-                </div>
-                <div class="item-price text-nowrap mb-[5px]">
-                    <p class="inline-block new-price text-[16px] text-[#d70018] font-bold">
-                        <?= number_format($sameProduct['sale_price'], 0, ',', '.') ?>đ
-                    </p>
-                    <p class="inline-block old-price text-[14px] text-[#707070] line-through font-semibold">
-                        <?= number_format($sameProduct['price'], 0, ',', '.') ?>đ
-                    </p>
-                </div>
-                <div class="item-member text-[#444] mb-[5px] text-[11px] flex items-center gap-[3px]">
-                    <span class="text-nowrap">Smember giảm thêm đến</span>
-                    <span class="text-[14px] text-[#d70018] font-bold">300.000đ</span>
-                </div>
-                <div
-                    class="item-promotion mb-[50px] border-[1px] border-solid border-[#e5e7eb] bg-[#f3f4f6] rounded-[5px] text-[12px] p-[5px]">
-                    <p class="line-clamp-2">
-                        Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn
-                        3-6 tháng
-                    </p>
-                </div>
-            </a>
-            <div class="item-bottom flex justify-between mb-[10px]">
-                <div class="item-rating">
-                    <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
-                    <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
-                    <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
-                    <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
-                    <i class="fa-solid fa-star text-[#f59e0b] text-[15px]"></i>
-                </div>
-                <div class="item-like">
-                    <span class="inline-block text-[#777] text-[12px]">Yêu thích
-                    </span>
-                    <a href="#">
-                        <i class="fa-regular text-[#777] fa-heart text-[15px] cursor-pointer"></i></a>
-                </div>
-            </div>
-        </div>
         <?php  } ?>
     </div>
 </section>
 <div
     class="comment-container bg-[#f9fafb] rounder-[10px] shadow-menu mt-[15px] p-[10px] w-[1200px] my-0 mx-auto min-h-[250px]">
     <h2 class="uppercase text-[#444] font-semibold text-[22px] mr-[20px] text-nowrap">Bình luận</h2>
-
-    <form action="?action=sendComment" method="POST" class="relative w-full flex gap-[10px] mt-[10px]">
+    <?php if (!empty($_SESSION['error'])): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <?php
+            if (is_array($_SESSION['error'])) {
+                foreach ($_SESSION['error'] as $err) {
+                    echo "<p>$err</p>";
+                }
+            } else {
+                echo "<p>{$_SESSION['error']}</p>";
+            }
+            ?>
+        </div>
+    <?php endif; ?>
+    <form action="" method="POST" class="relative w-full flex gap-[10px] mt-[10px]">
         <div class="text-area-comment w-[80%]">
             <img class="absolute left-0" src="<?= BASE_ASSETS_UPLOADS ?>./img/imgComment.webp" alt="">
-            <textarea id="message" name="content" rows="6"
+            <textarea id="message" name="comment" rows="6"
                 class="inline-block p-2.5 w-full text-sm text-gray-900 bg-[#fff] rounded-[10px] shadow-formComment pl-[85px] border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Xin mời để lại câu hỏi, CellphoneS sẽ trả lời lại trong 1h, các câu hỏi sau 22h - 8h sẽ được trả lời vào sáng hôm sau"></textarea>
-            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-            <?php if (isset($_SESSION['user_id'])) { ?>
-            <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
-            <?php  } ?>
-        </div>
-        <?php if (isset($_SESSION['user_name'])) { ?>
-        <div class="btn-comment w-[15%]">
-            <button type="submit" name="btn-comment"
-                class="w-[70px] h-[40px] p-[10px] bg-[#d7000e] rounded-[8px] text-[#fff] flex gap-[5px] items-center ">
-                <div class="icon-paper-plane"><svg height="15" fill=#fff xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512">
-                        <path
-                            d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z">
-                        </path>
-                    </svg></div>
 
-                Gửi
-
-            </button>
         </div>
+        <?php if (isset($_SESSION['user_admin']) || isset($_SESSION['user_client'])) { ?>
+            <div class="btn-comment w-[15%]">
+                <button type="submit" id="liveToastBtn"
+                    class="w-[70px] h-[40px] p-[10px] bg-[#d7000e] rounded-[8px] text-[#fff] flex gap-[5px] items-center ">
+                    <div class="icon-paper-plane"><svg height="15" fill=#fff xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512">
+                            <path
+                                d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z">
+                            </path>
+                        </svg></div>
+
+                    Gửi
+                </button>
+            </div>
         <?php } else { ?>
-        <span id="openLoginFromComment"
-            class=" cursor-pointer text-[12px] h-[40px] p-[10px] bg-[#d7000e] rounded-[8px] text-[#fff]   ">
-            Đăng nhập để bình luận
-        </span>
+            <a href="<?= BASE_URL ?>?act=show-form-login"
+                class=" cursor-pointer text-[12px] h-[40px] p-[10px] bg-[#d7000e] rounded-[8px] text-[#fff]   ">
+                Đăng nhập để bình luận
+            </a>
         <?php } ?>
     </form>
     <div class="item-comment">
-        <?php foreach ($allCmt as $cmt) { ?>
-        <div class="item-conmment-box">
-            <div class="cmt-user-infor mb-[15px] mt-[10px]">
-                <div class="user-infor  flex items-center gap-[5px]">
-                    <div class="user-img h-[25px] w-[25px]">
-                        <img class="w-full h-full object-cover rounded-[50%]"
-                            src="<?= BASE_ASSETS_UPLOADS ?>./img/<?= $cmt['avatar'] ?>" alt="">
-                    </div>
-                    <div class="user-name text-[14px] font-bold capitalize text-[#4a4a4a]">
-                        <p>
-                            <?= $cmt['user_name'] ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
-                <?= $cmt['content'] ?>
-            </div>
-        </div>
-        <hr class="mb-[15px] mt-[10px] bg-[#f5f5f5] w-full">
-        <?php } ?>
-        <div class="item-conmment-box">
-            <div class="cmt-user-infor mb-[15px] mt-[10px]">
-                <div class="user-infor  flex items-center gap-[5px]">
-                    <div class="user-img h-[25px] w-[25px]">
-                        <img class="w-full h-full object-cover rounded-[50%]"
-                            src="<?= BASE_ASSETS_UPLOADS ?>./img/user-img-default.png" alt="">
-                    </div>
-                    <div class="user-name text-[14px] font-bold capitalize text-[#4a4a4a]">
-                        <p>
-                            Nguyễn Thu Nga
-                        </p>
+        <?php foreach ($review as $cmt) { ?>
+            <div class="item-conmment-box">
+                <div class="cmt-user-infor mb-[15px] mt-[10px]">
+                    <div class="user-infor  flex items-center gap-[5px]">
+                        <div class="user-img h-[25px] w-[25px]">
+                            <img class="w-full h-full object-cover rounded-[50%]"
+                                src="<?= BASE_ASSETS_UPLOADS ?><?= $cmt['u_avatar'] ?? '/img/user-img-default.png' ?>" alt="">
+                        </div>
+                        <div class="user-name text-[14px] font-bold capitalize text-[#4a4a4a]">
+                            <p>
+                                <?= $cmt['u_name'] ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
+                <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
+                    <?= $cmt['comment'] ?>
+                    <a href="" class="delete-btn text-[#ff0000] ml-[10px]">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
             </div>
-            <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
-                Mình ở Hà Nội, khu vực Cầu Giấy. Mình là sinh viên, đã có tài khoản Smember, mình đang dùng
-                iPhone 11 pro 64gb muốn đổi sang Iphone 15 256gb thì mình bù thêm bao nhiêu ạ?
-            </div>
-        </div>
-        <hr class="mb-[15px] mt-[10px] bg-[#f5f5f5] w-full">
     </div>
+
+    <hr class="mb-[15px] mt-[10px] bg-[#f5f5f5] w-full">
+<?php } ?>
+
+</div>
 </div>
