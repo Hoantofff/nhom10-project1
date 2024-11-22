@@ -80,7 +80,7 @@
                         về CellphoneS
                     </p>
                 </a>
-                <a href="?act=goToCart"
+                <a href="<?= BASE_URL ?>?act=goToCart"
                     class="flex justify-center items-center gap-[10px] hover:bg-[#ffffff33] hover:h-[55px] h-[42px] rounded-[10px] px-[8px] py-[5px]">
                     <i class="fa-solid fa-cart-shopping text-[20px] text-white"></i>
                     <p class="text-white text-[12px]">
