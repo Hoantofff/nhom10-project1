@@ -17,6 +17,7 @@ define('BASE_ASSETS_UPLOADS', BASE_URL  . 'assets/uploads/');
 define('BASE_ASSETS_JS', BASE_URL . 'assets/js/');
 
 define('PATH_ASSETS_UPLOADS', PATH_ROOT  . 'assets/uploads/');
+define('PATH_ASSETS_JS', PATH_ROOT . 'assets/js/');
 
 define('PATH_CONTROLLER_ADMIN', PATH_ROOT  . 'controllers/admin/');
 define('PATH_CONTROLLER_CLIENT', PATH_ROOT  . 'controllers/client/');

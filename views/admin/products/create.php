@@ -55,11 +55,7 @@
 
                         </select>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="price" class="form-label">Giá chưa giảm:</label>
-                        <input type="text" class="form-control" id="price" name="price"
-                            value="<?= $_SESSION['data']['price'] ?? null ?>">
-                    </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
@@ -68,19 +64,11 @@
                             value="<?= $_SESSION['data']['sale_price'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="description">Mô tả của sản phẩm:</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"
-                            value="<?= $_SESSION['data']['description'] ?? null ?>"></textarea>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="content">Giới thiệu của sản phẩm:</label>
-                        <textarea class="form-control" id="content" name="content" rows="3"
-                            value="<?= $_SESSION['data']['content'] ?? null ?>"></textarea>
-
+                        <label for="price" class="form-label">Giá chưa giảm:</label>
+                        <input type="text" class="form-control" id="price" name="price"
+                            value="<?= $_SESSION['data']['price'] ?? null ?>">
                     </div>
                 </div>
-
-
                 <div class="mb-3">
                     <label for="image" class="form-label">Ảnh sản phẩm:</label>
                     <input type="file" class="form-control" id="image" name="image">
@@ -88,6 +76,47 @@
                     <?php if (!empty($user['u_image'])): ?>
                         <img src="<?= BASE_ASSETS_UPLOADS . $user['u_image'] ?>" width="100px">
                     <?php endif; ?>
+                </div>
+                <div class="col-12 border rounded-2 p-2">
+                    <p>Biến thể sản phẩm:</p>
+                    <div id="multi_varian">
+                        <div class="items-varian">
+                            <div class="row p-2 mb-3">
+                                <div class="col-4">
+                                    <label for="size" class="form-label">dung lượng:</label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="color" class="form-label">Màu sắc:</label>
+                                </div>
+                                <div class="col-4">
+                                    <label for="quantity" class="form-label">Số Lượng:</label>
+                                </div>
+                            </div>
+                            <div class="row p-2 mb-3">
+                                <div class="col-6">
+                                    <label for="price-varian" class="form-label">Giá:</label>
+                                    <input type="text" class="form-control" name="price-varian">
+                                </div>
+                                <div class="col-6">
+                                    <label for="price-sale-varian" class="form-label">Giá Sale:</label>
+                                    <input type="text" class="form-control" name="price-sale-varian">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-3 text-end me-2">
+                        <a onclick="createVarian()" class="btn btn-outline-secondary">Thêm Biến Thể</a>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="description">Mô tả của sản phẩm:</label>
+                    <<textarea class="form-control" id="description" name="description"><?= $_SESSION['data']['description'] ?? '' ?></textarea>
+
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="content">Giới thiệu của sản phẩm:</label>
+                    <textarea class="form-control" id="content" name="content"
+                        <?= $_SESSION['data']['content'] ?? '' ?>></textarea>
                 </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=products-index">Quay lại trang danh sách</a>

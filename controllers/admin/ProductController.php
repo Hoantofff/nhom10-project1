@@ -108,6 +108,8 @@ class ProductController
     {
         $title = "Thêm mới sản phẩm";
         $view = "products/create";
+        $script = 'textarea';
+        $script2 = 'createVarian';
         $brands = $this->product->getBrands();
         $categories = $this->product->getCategories();
         return require_once PATH_VIEW_ADMIN_MAIN;

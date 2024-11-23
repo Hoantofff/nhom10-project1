@@ -1,3 +1,4 @@
+<?php if(!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
 <form class="w-[1290px] mt-[100px] pb-[30px]  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
     action="<?= BASE_URL ?>?act=update-cart" method="POST">
     <table class="w-full">
@@ -87,3 +88,8 @@
             hàng</a>
     </div>
 </form>
+<?php else: ?>
+<div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
+    <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">Bạn phải đăng nhập để xem giỏ hàng</a>
+</div>
+<?php endif; ?>
