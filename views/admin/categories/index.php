@@ -49,9 +49,9 @@
                             </td>
                             <td>
                                 <a class="btn btn-success"
-                                    href="<?= BASE_URL_ADMIN . '&act=categories-show&id=' . $category['id'] ?>">Show</a>
+                                    href="<?= BASE_URL_ADMIN . '&act=categories-show&id=' . $category['id'] ?>">Chi tiết</a>
                                 <a class="btn btn-info"
-                                    href="<?= BASE_URL_ADMIN . '&act=categories-edit&id=' . $category['id'] ?>">Update</a>
+                                    href="<?= BASE_URL_ADMIN . '&act=categories-edit&id=' . $category['id'] ?>">Cập nhật</a>
 
                             </td>
                         </tr>

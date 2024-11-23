@@ -56,14 +56,14 @@
                             <td><?= $product['brand_name'] ?></td>
                             <td><?= $product['category_name'] ?></td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <a class="btn btn-success"
-                                        href="<?= BASE_URL_ADMIN . '&act=products-show&id=' . $product['id'] ?>">Show</a>
-                                    <a class="btn btn-info"
-                                        href="<?= BASE_URL_ADMIN . '&act=products-edit&id=' . $product['id'] ?>">Update</a>
-                                    <a class="btn btn-danger"
+                                <div class="d-flex flex-column text-nowrap align-items-center">
+                                    <a class="btn w-100 mb-1 btn-success"
+                                        href="<?= BASE_URL_ADMIN . '&act=products-show&id=' . $product['id'] ?>">Chi tiết</a>
+                                    <a class="btn w-100 mb-1 btn-info"
+                                        href="<?= BASE_URL_ADMIN . '&act=products-edit&id=' . $product['id'] ?>">Cập nhật</a>
+                                    <a class="btn w-100 mb-1 btn-danger"
                                         href="<?= BASE_URL_ADMIN . '&act=products-delete&id=' . $product['id'] ?>"
-                                        onclick="return confirm('Bạn có chắc muốn xóa hay không?')">Delete</a>
+                                        onclick="return confirm('Bạn có chắc muốn xóa hay không?')">Xóa</a>
                                 </div>
 
                             </td>

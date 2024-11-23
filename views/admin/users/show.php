@@ -38,7 +38,43 @@
                     <tbody>
                     <?php foreach ($user as $key => $value): ?>
                             <tr>
-                                <td class="border"><?= $key ?></td>
+                                <td class="border">
+                                <?php switch ($key) {
+                                        case 'name':
+                                            echo "Họ Tên";
+                                            break;
+                                        case 'avatar':
+                                            echo "Ảnh đại diện ";
+                                            break;
+                                        case 'email':
+                                            echo "Email";
+                                            break;
+                                        case 'password':
+                                            echo "password";
+                                            break;
+                                        case 'brand_name':
+                                            echo "Nhãn hiệu";
+                                            break;
+                                        case 'role_id':
+                                            echo "Tài khoản";
+                                            break;
+                                        case 'address':
+                                            echo "Địa chỉ";
+                                            break;
+                                        case 'phone':
+                                            echo "Số điện thoại";
+                                            break;
+                                        case 'created_at':
+                                            echo "Ngày tạo";
+                                            break;
+                                        case 'updated_at':
+                                            echo "Ngày sửa";
+                                            break;
+                                        default:
+                                            echo $key;
+                                            break;
+                                    } ?>
+                                </td>
                                 <td class="border">
                                     <?php
                                     switch ($key) {
@@ -48,8 +84,16 @@
                                                 echo "<img src='$link' width='100px'>";
                                             }
                                             break;
+                                        case 'role_id':
+                                            if($value == 2){
+                                                echo 'Quản Trị';
+                                            }else{
+                                                echo"Người dùng";
+                                            }
+                                            break;
                                         case 'password':
-                                            $value = '*********';
+                                            echo '**********';
+                                            break;
                                         default:
                                             echo $value;
                                             break;

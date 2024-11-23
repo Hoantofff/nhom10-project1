@@ -3,15 +3,15 @@
 <div class="openShowCategories w-screen h-full z-30 absolute top-0 animate-fadeInLogin hidden">
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff] absolute top-[59px] left-[80px]">
         <?php foreach ($category as $value) { ?>
-        <a href="?action=goToType&id=<?php echo $value['id'] ?>"
-            class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
-            <p class="flex items-center gap-[5px]">
-                <i class="  fa-solid <?php echo $value['icon'] ?> text-black text-[25px]"></i>
-                <span class="text-[12px] font-bold text-[#343a40]">
-                    <?php echo $value['category_name'] ?></span>
-            </p>
-            <i class="fa-solid fa-chevron-right"></i>
-        </a>
+            <a href="?action=goToType&id=<?php echo $value['id'] ?>"
+                class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
+                <p class="flex items-center gap-[5px]">
+                    <i class="  fa-solid <?php echo $value['icon'] ?> text-black text-[25px]"></i>
+                    <span class="text-[12px] font-bold text-[#343a40]">
+                        <?php echo $value['category_name'] ?></span>
+                </p>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
         <?php  } ?>
     </div>
 </div>
@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="<?= BASE_ASSETS_CLIENT ?>/build/tailwind.css" />
     <link rel="stylesheet" href="<?= BASE_ASSETS_CLIENT ?>/css/style.css" />
     <script src="https://kit.fontawesome.com/84084c404d.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?= BASE_ASSETS_JS ?>Ajax.js"></script>
 </head>
 
 <body class="scroll-smooth">
@@ -46,12 +48,14 @@
                         <p class="text-[14px]">Hà Nội</p>
                     </div>
                 </a>
-                <form action="?action=searchProduct" method="post" class="w-[300px] h-[34px] relative">
+                <form action="?act=startSearching" method="post" class="w-[300px] h-[34px] relative">
                     <label for="search" class="absolute top-[50%] translate-y-[-50%] left-[10px]">
                         <i class="fa-solid fa-magnifying-glass text-[#707070] cursor-pointer"></i>
                     </label>
-                    <input type="text" name="nameProduct" class="w-full h-full rounded-[10px] px-[30px]"
-                        placeholder="Bạn cần tìm gì ?" />
+                    <input type="text" name="nameProduct" id="inputSearch"
+                        class="w-full h-full rounded-[10px] px-[30px]" placeholder="Bạn cần tìm gì ?" />
+                    <div class="absolute p-[10px] z-50 bg-[#fff] hidden w-full border-[1px] border-solid border-[#ddd] shadow-form"
+                        id="searchResult"></div>
                     <button type="none" id="search"></button>
                 </form>
                 <a href="?action=goToContact"
@@ -80,7 +84,7 @@
                         về CellphoneS
                     </p>
                 </a>
-                <a href="?act=goToCart"
+                <a href="<?= BASE_URL ?>?act=goToCart"
                     class="flex justify-center items-center gap-[10px] hover:bg-[#ffffff33] hover:h-[55px] h-[42px] rounded-[10px] px-[8px] py-[5px]">
                     <i class="fa-solid fa-cart-shopping text-[20px] text-white"></i>
                     <p class="text-white text-[12px]">
@@ -90,35 +94,35 @@
                     </p>
                 </a>
                 <?php if (isset($_SESSION['user_client'])) { ?>
-                <div class="user w-[130px] flex">
-                    <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
-                        <a class="text-[#fff] text-[12px] underline"
-                            href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
-                            khoản</a>
-                    </span>
-                </div>
-                <a href="<?= BASE_URL ?>?act=logout"
-                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
-                    <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
-                    <p class="text-[12px] text-white">Đăng xuất</p>
-                </a>
+                    <div class="user w-[130px] flex">
+                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
+                            <a class="text-[#fff] text-[12px] underline"
+                                href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
+                                khoản</a>
+                        </span>
+                    </div>
+                    <a href="<?= BASE_URL ?>?act=logout"
+                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
+                        <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
+                        <p class="text-[12px] text-white">Đăng xuất</p>
+                    </a>
                 <?php  } else if (isset($_SESSION['user_admin'])) { ?>
-                <a href="<?= BASE_URL_ADMIN ?>"
-                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
-                    <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
-                    <p class="text-[12px] text-white">Đến trang quản trị</p>
-                </a>
-                <a href="<?= BASE_URL ?>?act=logout"
-                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
-                    <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
-                    <p class="text-[12px] text-white">Đăng xuất</p>
-                </a>
+                    <a href="<?= BASE_URL_ADMIN ?>"
+                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
+                        <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
+                        <p class="text-[12px] text-white">Đến trang quản trị</p>
+                    </a>
+                    <a href="<?= BASE_URL ?>?act=logout"
+                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer ">
+                        <i class="fa-solid fa-right-from-bracket text-white text-[20px] w-full text-center"></i>
+                        <p class="text-[12px] text-white">Đăng xuất</p>
+                    </a>
                 <?php } else { ?>
-                <a href="<?= BASE_URL ?>?act=show-form-login"
-                    class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
-                    <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
-                    <p class="text-[12px] text-white">Đăng nhập</p>
-                </a> <?php } ?>
+                    <a href="<?= BASE_URL ?>?act=show-form-login"
+                        class="flex flex-wrap justify-center items-center gap-[5px] bg-[#ffffff33] h-[55px] rounded-[10px] px-[8px] py-[5px] cursor-pointer">
+                        <i class="fa-solid fa-user text-white text-[20px] w-full text-center"></i>
+                        <p class="text-[12px] text-white">Đăng nhập</p>
+                    </a> <?php } ?>
             </nav>
         </header>
         <main class="w-screen px-[100px] mt-[50px] bg-[#fcfcfc]">
@@ -549,7 +553,7 @@
     </div>
 
 </body>
-
 <script src="<?= BASE_ASSETS_JS ?>cart.js"></script>
+
 
 </html>

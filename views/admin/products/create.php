@@ -68,11 +68,6 @@
                             value="<?= $_SESSION['data']['sale_price'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="discount" class="form-label">Phần trăm giảm giá:</label>
-                        <input type="text" class="form-control" id="discount" name="discount"
-                            value="<?= $_SESSION['data']['discount'] ?? null ?>">
-                    </div>
-                    <div class="mb-3 mt-3">
                         <label for="description">Mô tả của sản phẩm:</label>
                         <textarea class="form-control" id="description" name="description" rows="3"
                             value="<?= $_SESSION['data']['description'] ?? null ?>"></textarea>
