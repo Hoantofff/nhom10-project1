@@ -93,8 +93,8 @@
                             </a>
                             <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">List Categories</a>
-                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Create Category</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-index">Danh Sách</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=categories-create">Tạo Mới</a>
                                 </nav>
                             </div>
                            
@@ -102,6 +102,10 @@
                             <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Slider
+                            </a>
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=bills-index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Bill
                             </a>
                             <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=review-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

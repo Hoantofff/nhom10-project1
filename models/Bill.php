@@ -2,7 +2,7 @@
 
 class Bill extends BaseModel
 {
-    protected $table = 'bills';
+    protected $table = 'bill';
 
     public function getAll()
     {
@@ -35,7 +35,6 @@ class Bill extends BaseModel
                 bill_status,
                 payment_type,
                 payment_status,
-                user_id,
                 user_name,
                 user_address,
                 user_phone,
@@ -51,4 +50,41 @@ class Bill extends BaseModel
         $result = $stmt->fetch();
         return $result ?: null;
     }
+    public function getPersonalBillAdmin($id) {
+        $sql="
+        SELECT 
+            id,
+            bill_status,
+            payment_type,
+            payment_status,
+            user_id,
+            user_name,
+            user_address,
+            user_phone,
+            total
+        FROM 
+            bill
+        WHERE id = :id;
+    ";
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute(['id' => $id]);
+
+    $result = $stmt->fetch();
+    return $result ?: null;
+    }
+    public function updateBillStatus($id, $billStatus) {
+        $sql = "
+            UPDATE bill 
+            SET bill_status = :bill_status 
+            WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+    
+        $stmt->execute([
+            'id' => $id,
+            'bill_status' => $billStatus
+        ]);
+        return $stmt->rowCount();
+    }
+    
 }

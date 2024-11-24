@@ -73,7 +73,7 @@
             <?php } ?>
         </div>
         </div>
-        <div class="list-items w-full flex  flex-wrap gap-[20px] overflow-hidden">
+        <div class="list-items w-full flex flex-wrap gap-[20px] overflow-hidden">
             <!-- ITEM IN HERE -->
             <?php foreach ($data['products'] as $products) { ?>
                 <div class="item px-[15px] w-[223px] rounded-[15px] shadow-menu relative">

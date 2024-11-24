@@ -62,8 +62,8 @@
                                 <td><?= $user['u_phone'] ?></td>
                                 <td><?= $user['r_name'] ?></td>
                                 <td>
-                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['u_id'] ?>">Show</a>
-                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=users-edit&id=' . $user['u_id'] ?>">Update</a>
+                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['u_id'] ?>">Chi tiết</a>
+                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=users-edit&id=' . $user['u_id'] ?>">Cập nhật</a>
                                 </td>
                             </tr>
 
@@ -110,7 +110,7 @@
                                 <td><?= $user['u_phone'] ?></td>
                                 <td><?= $user['r_name'] ?></td>
                                 <td>
-                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['u_id'] ?>">Show</a>
+                                    <a class="btn btn-success" href="<?= BASE_URL_ADMIN . '&act=users-show&id=' . $user['u_id'] ?>">Chi tiết</a>
                                 </td>
                             </tr>
 

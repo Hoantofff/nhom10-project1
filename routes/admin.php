@@ -60,5 +60,10 @@ match ($act) {
     //Review 
     'review-index' => (new ReviewController)->index(),
     'review-show' => (new ReviewController)->show(),
-    
+    // Bill
+    'bills-index' => (new BillController)->index(),
+    'bills-show' => (new BillController)->show(),
+    'bills-edit' => (new BillController)->edit(),
+    'bills-update' => (new BillController)->update(),
+    'bills-delete' => (new BillController)->delete(),
 };
