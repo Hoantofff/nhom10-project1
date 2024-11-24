@@ -7,11 +7,11 @@
     }
     public function addProductToCart()
     {
-       
+
         $productId = $_POST['product_id'] ?? null;
         $quantity = $_POST['quantity'] ?? 1;
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
-        
+
         if (!$userId) {
             $_SESSION['success'] = false;
             $_SESSION['msg'] = 'Bạn cần đăng nhập để vào giỏ hàng';
@@ -44,7 +44,7 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $products = $_POST['products'] ?? [];
             $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
-            
+
             if (!$userId) {
                 $_SESSION['error'][] = 'Bạn cần đăng nhập để thực hiện thao tác này.';
                 header("Location: " . BASE_URL . "?act=show-form-login");
@@ -67,7 +67,7 @@
                     } else {
                         $_SESSION['error'][] = 'Sản phẩm không có trong giỏ.';
                     }
-                }else {
+                } else {
                     $_SESSION['error'][] = 'Số lượng không hợp lệ.';
                 }
             }
