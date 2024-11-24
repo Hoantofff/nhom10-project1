@@ -103,6 +103,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Slider
                             </a>
+                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=bills-index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Bill
+                            </a>
                             <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=review-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Đánh Giá SP
