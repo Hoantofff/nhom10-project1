@@ -1,4 +1,4 @@
-<div class="main-container mt-[12px]  w-[1200px] my-[0] mx-[auto] h-[30px]">
+<div class="main-container mt-[70px]  w-[1200px] my-[0] mx-[auto] h-[30px]">
     <ul class="flex h-full items-center">
         <li>
             <a href="?action=index" class="text-[12px] text-[#707070] mr-[10px]  flex gap-[10px] items-center  ">
@@ -296,7 +296,8 @@
                         <strong>MUA NGAY</strong>
                         <span class="text-[14px]">(Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)</span>
                     </button>
-                    <form method="POST" action="<?= BASE_URL ?>?act=add-to-cart" class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
+                    <form method="POST" action="<?= BASE_URL ?>?act=add-to-cart"
+                        class="w-[20%] rounded-[10px] border-[2px] border-solid border-[#e04040] h-[60px] flex flex-col justify-center items-center">
                         <button>
                             <img class="w-[30px] h-[30px] object-contain"
                                 src="<?= BASE_ASSETS_UPLOADS ?>./img/add-to-cart.webp" alt="">
@@ -397,7 +398,8 @@
                         Giảm <?= $sameProduct['discount'] ?>%
                     </p>
                 </div>
-                <a href="?act=productDetail&id=<?= $sameProduct['id'] ?>&cateId=<?= $sameProduct['category_id'] ?>" class="text-[#444]">
+                <a href="?act=productDetail&id=<?= $sameProduct['id'] ?>&cateId=<?= $sameProduct['category_id'] ?>"
+                    class="text-[#444]">
                     <div class="item-img w-full mt-[25px] flex justify-center">
                         <img class="w-[160px]" src="<?= BASE_ASSETS_UPLOADS . $sameProduct['image'] ?>" alt="" />
                     </div>
@@ -497,7 +499,8 @@
                     <div class="user-infor  flex items-center gap-[5px]">
                         <div class="user-img h-[25px] w-[25px]">
                             <img class="w-full h-full object-cover rounded-[50%]"
-                                src="<?= BASE_ASSETS_UPLOADS ?><?= $cmt['u_avatar'] ?? '/img/user-img-default.png' ?>" alt="">
+                                src="<?= BASE_ASSETS_UPLOADS ?><?= $cmt['u_avatar'] ?? '/img/user-img-default.png' ?>"
+                                alt="">
                         </div>
                         <div class="user-name text-[14px] font-bold capitalize text-[#4a4a4a]">
                             <p>

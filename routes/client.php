@@ -23,12 +23,13 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
-    // Bill
-    'bill-index' => (new BillController)->index(),
-    // 'bill-detail' => (new BillController)->show(),
-
-    // CART
+    // BILL CLIENT
+    'goToBill' => (new BillClientController)->billList(),
+    'bills-detail' => (new BillClientController)->billDetail(),
+    'bills-delete' => (new BillClientController)->deleteClientBill(),
+    // CART 
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
-    'update-cart' => (new CartController)->updateCart()
+    'update-cart' => (new CartController)->updateCart(),
+    'addToBill' => (new BillClientController)->AddBill()
 };
