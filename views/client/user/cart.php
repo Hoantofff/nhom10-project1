@@ -39,7 +39,6 @@
             </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
             <?php
             $total=0;
             $count=0;
@@ -72,33 +71,6 @@
             $count=$item['c_quantity'] * $item['pd_sale_price'];
             $total+=$count;
             endforeach ?>
-=======
-            <?php foreach ($cartItems as $item): ?>
-                <tr class="flex justify-between font-bold">
-                    <td class="p-[10px] w-[10%]">
-                        <img class="w-[140px] object-cover" src="<?= BASE_ASSETS_UPLOADS . $item['pd_image'] ?>" alt="">
-                    </td>
-                    <td class="p-[10px] w-[10%] text-center"><?= number_format($item['pd_sale_price'], 0, ',', '.') ?>đ</td>
-                    <td class="p-[10px] w-[10%] text-center">Đen</td>
-                    <td class="p-[10px] w-[15%] text-nowrap text-center">256GB/8GB RAM</td>
-                    <td class="p-[10px] w-[10%] text-center">
-                        <input class="w-[40px] h-[40px] border-[1px] border-[#ccc] rounded-[5px] text-center" type="number"
-                            name="products[<?= $item['pd_id'] ?>][quantity]" value="<?= $item['c_quantity'] ?>" min="1">
-                        <input type="hidden" name="products[<?= $item['pd_id'] ?>][product_id]"
-                            value="<?= $item['pd_id'] ?>">
-                    </td>
-                    <td class="p-[10px] w-[10%] text-center">
-                        <?= number_format($item['c_quantity'] * $item['pd_sale_price'], 0, ',', '.') ?>đ
-
-                    </td>
-                    <td class="p-[10px] w-[5%] text-nowrap">
-                        <a href="#"><i class="fa-solid fa-trash text-[35px] text-[#e1042b]"></i></a>
-                    </td>
-                </tr>
-                <tr class="w-full border-b-[3px] border-solid border-[#222]"></tr>
-                <input type="hidden" name="product_id" value="<?= $item['pd_id'] ?>">
-            <?php endforeach ?>
->>>>>>> 424d68f91cc98ffd2afb3f45ac3c5a246fc52752
 
         </tbody>
     </table>
@@ -160,18 +132,4 @@
             <div class="payForm">
             </div>
         </div>
-<<<<<<< HEAD
     </div> -->
-=======
-    </div>
-    <div class="w-full flex flex-row-reverse mt-[20px]">
-        <button type="submit"
-            class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">
-            Cập nhật giỏ hàng
-        </button>
-        <a href="?action=cartStatus"
-            class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">Đặt
-            hàng</a>
-    </div>
-</form>
->>>>>>> 424d68f91cc98ffd2afb3f45ac3c5a246fc52752
