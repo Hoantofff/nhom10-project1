@@ -144,7 +144,7 @@ class BillAdminController
             $_SESSION['success'] = false;
             $_SESSION['msg'] = $th->getMessage();
     
-            // Điều hướng đến trang phù hợp
+            // Check
             if ($th->getCode() == 99) {
                 header('location: ' . BASE_URL_ADMIN . '&act=bills-index');
             } else {
