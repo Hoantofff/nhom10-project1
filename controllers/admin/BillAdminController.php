@@ -1,6 +1,6 @@
 <?php
 
-class BillController
+class BillAdminController
 {
     private $bill;
     private $cart;
