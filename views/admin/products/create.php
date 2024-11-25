@@ -84,22 +84,35 @@
                             <div class="row p-2 mb-3">
                                 <div class="col-4">
                                     <label for="size" class="form-label">dung lượng:</label>
+                                    <div class="btn-group" >
+                                        <?php foreach ($variant_size as $size): ?>
+                                            <input type="radio" class="btn-check" name="data_variant[0][size_id]" value="<?= $size['id'] ?>" id="size_0_<?= $size['id'] ?>" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="size_0_<?= $size['id'] ?>"><?= $size['size_value'] ?></label>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <label for="color" class="form-label">Màu sắc:</label>
+                                    <div class="btn-group" >
+                                        <?php foreach ($variant_color as $color): ?>
+                                            <input type="radio" class="btn-check" name="data_variant[0][color_id]" value="<?= $color['id'] ?>" id="color_0_<?= $color['id'] ?>" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="color_0_<?= $color['id'] ?>"><?= $color['color_value'] ?></label>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <label for="quantity" class="form-label">Số Lượng:</label>
+                                    <input type="number" class="form-control" name="data_variant[0][quantity]" value="<?= $_SESSION['data_variant']['0']['quantity'] ?? null ?>">
                                 </div>
                             </div>
                             <div class="row p-2 mb-3">
                                 <div class="col-6">
                                     <label for="price-varian" class="form-label">Giá:</label>
-                                    <input type="text" class="form-control" name="price-varian">
+                                    <input type="text" class="form-control" name="data_variant[0][price-varian]" value="<?= $_SESSION['data_variant']['0']['price-varian'] ?? null ?>">
                                 </div>
                                 <div class="col-6">
                                     <label for="price-sale-varian" class="form-label">Giá Sale:</label>
-                                    <input type="text" class="form-control" name="price-sale-varian">
+                                    <input type="text" class="form-control" name="data_variant[0][price-sale-varian]" value="<?= $_SESSION['data_variant']['0']['price-sale-varian'] ?? null ?>">
                                 </div>
                             </div>
                         </div>
@@ -110,13 +123,12 @@
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="description">Mô tả của sản phẩm:</label>
-                    <<textarea class="form-control" id="description" name="description"><?= $_SESSION['data']['description'] ?? '' ?></textarea>
+                    <textarea class="form-control" id="description" name="description"><?= $_SESSION['data']['description'] ?? '' ?></textarea>
 
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="content">Giới thiệu của sản phẩm:</label>
-                    <textarea class="form-control" id="content" name="content"
-                        <?= $_SESSION['data']['content'] ?? '' ?>></textarea>
+                    <textarea class="form-control" id="content" name="content" <?= $_SESSION['data']['content'] ?? '' ?>></textarea>
                 </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=products-index">Quay lại trang danh sách</a>
@@ -125,6 +137,7 @@
         </form>
 
         <?php unset($_SESSION['data']) ?>
+        <?php unset($_SESSION['data_variant']) ?>
     </div>
     </div>
     </div>
