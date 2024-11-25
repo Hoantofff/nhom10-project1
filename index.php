@@ -20,6 +20,7 @@ spl_autoload_register(function ($class) {
 });
 require_once "./configs/env.php";
 require_once "./configs/helper.php";
+// debug(BASE_ASSETS_JS);die;
 
 // debug($_SESSION);die;
 

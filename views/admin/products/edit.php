@@ -56,11 +56,6 @@
 
                         </select>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="description">Mô tả của sản phẩm:</label>
-                        <textarea class="form-control" id="description" name="description"
-                            rows="3"><?= $product['description'] ?></textarea>
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
@@ -73,12 +68,6 @@
                         <input type="text" class="form-control" id="sale_price" name="sale_price"
                             value="<?= $product['sale_price'] ?? null ?>">
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="content">Giới thiệu của sản phẩm:</label>
-                        <textarea class="form-control" id="content" name="content"
-                            rows="3"><?= $product['content'] ?></textarea>
-
-                    </div>
                 </div>
 
 
@@ -89,6 +78,85 @@
                     <?php if (!empty($product['image'])): ?>
                         <img src="<?= BASE_ASSETS_UPLOADS . $product['image'] ?>" width="100px">
                     <?php endif; ?>
+                </div>
+                <div class="col-12 border rounded-2 p-2">
+                    <p>Biến thể sản phẩm:</p>
+                    <div id="multi_varian">
+                        <div class="items-varian">
+                            <?php foreach ($variantGetProduct as $key => $variant): ?>
+                                <div class="variant-item" data-index="<?= $key ?>">
+                                    <div class="row p-2 mb-3">
+                                        <div class="col-4">
+                                            <label for="size" class="form-label">dung lượng:</label>
+                                            <div class="btn-group">
+                                                <?php foreach ($variant_size as $size): ?>
+                                                    <input
+                                                        type="radio"
+                                                        class="btn-check"
+                                                        name="data_variant[<?= $key ?>][size_id]"
+                                                        value="<?= $size['id'] ?>"
+                                                        id="size_<?= $key ?>_<?= $size['id'] ?>"
+                                                        <?= $variant['vr_size_id'] == $size['id'] ? 'checked' : '' ?>
+                                                        autocomplete="off">
+                                                    <label class="btn btn-outline-primary" for="size_<?= $key ?>_<?= $size['id'] ?>">
+                                                        <?= $size['size_value'] ?>
+                                                    </label>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="color" class="form-label">Màu sắc:</label>
+                                            <div class="btn-group">
+                                                <?php foreach ($variant_color as $color): ?>
+                                                    <input
+                                                        type="radio"
+                                                        class="btn-check"
+                                                        name="data_variant[<?= $key ?>][color_id]"
+                                                        value="<?= $color['id'] ?>"
+                                                        id="color_<?= $key ?>_<?= $color['id'] ?>"
+                                                        <?= $variant['vr_color_id'] == $color['id'] ? 'checked' : '' ?>
+                                                        autocomplete="off">
+                                                    <label class="btn btn-outline-primary" for="color_<?= $key ?>_<?= $color['id'] ?>">
+                                                        <?= $color['color_value'] ?>
+                                                    </label>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="quantity" class="form-label">Số Lượng:</label>
+                                            <input type="number" class="form-control" name="data_variant[<?= $key ?>][quantity]" value="<?= $variant['vr_variant_quantity'] ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row p-2 mb-3">
+                                        <div class="col-6">
+                                            <label for="price-varian" class="form-label">Giá:</label>
+                                            <input type="text" class="form-control" name="data_variant[<?= $key ?>][price-varian]" value="<?= $variant['vr_variant_price'] ?>">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="price-sale-varian" class="form-label">Giá Sale:</label>
+                                            <input type="text" class="form-control" name="data_variant[<?= $key ?>][price-sale-varian]" value="<?= $variant['vr_variant_price_sale'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 mt-3 text-end me-2 ">
+                                        <a onclick="deleteVariant(this, <?= $key ?>)" class="btn btn-outline-danger">Xóa</a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-3 text-end me-2">
+                        <a onclick="createVarian()" class="btn btn-outline-secondary">Thêm Biến Thể</a>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="description">Mô tả của sản phẩm:</label>
+                    <textarea class="form-control" id="description" name="description"><?= $product['description'] ?></textarea>
+
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="content">Giới thiệu của sản phẩm:</label>
+                    <textarea class="form-control" id="content" name="content"><?= $product['content'] ?></textarea>
                 </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=products-index">Quay lại trang danh sách</a>
