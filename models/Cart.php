@@ -54,4 +54,10 @@ class Cart extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function clearCart($userId) {
+        // Xóa tất cả sản phẩm trong giỏ hàng sau khi đặt hàng
+        $sql = "DELETE FROM cart WHERE user_id = :user_id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['user_id' => $userId]);
+    }
 }

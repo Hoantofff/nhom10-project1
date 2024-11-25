@@ -24,6 +24,22 @@ class HomeController
         // debug($cartItems);die;
         require_once PATH_VIEW_CLIENT_MAIN;
     }
+    public function goToBill()
+    {
+        $view = 'user/billList';
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+        $cartItems = $this->card->getCart($userId);
+        // debug($cartItems);die;
+        require_once PATH_VIEW_CLIENT_MAIN;
+    }
+    public function goToBillDetail()
+    {
+        $view = 'user/billDetail';
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+        $cartItems = $this->card->getCart($userId);
+        // debug($cartItems);die;
+        require_once PATH_VIEW_CLIENT_MAIN;
+    }
     public function goToCate()
     {
         $view = "user/productType";
