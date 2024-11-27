@@ -27,7 +27,7 @@
                     <p class="text-[13px]">
                         <?= $slider['slider_product_name'] ?>
                         <br />
-                        <?= $slider['content'] ?>
+                        <?= $slider['content'] ?> 
                     </p>
                 </div>
             <?php  } ?>

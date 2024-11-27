@@ -2,35 +2,33 @@
     const variantSizes = <?= json_encode($variant_size) ?>;
     const variantColors = <?= json_encode($variant_color) ?>;
 
+    let variantCounter = <?= count($variantGetProduct) ?>;
     const createVarian = () => {
-        let count_items = document.querySelectorAll('.items-varian').length;
         console.log("Bắt đầu thêm biến thể");
-
+        
         const newVarian = document.getElementById('multi_varian');
         if (!newVarian) {
             console.error("Không tồn tại ID `multi_varian`");
             return;
         }
-
         const newElm = document.createElement('div');
         newElm.classList.add("items-varian", "border-top");
 
         let sizeOptions = '';
         variantSizes.forEach(size => {
             sizeOptions += `
-                <input type="radio" class="btn-check" name="data_variant[${count_items}][size_id]" value="${size.id}" id="size_${count_items}_${size.id}" autocomplete="off">
-                <label class="btn btn-outline-primary" for="size_${count_items}_${size.id}">${size.size_value}</label>
+                <input type="radio" class="btn-check" name="data_variant[${variantCounter}][size_id]" value="${size.id}" id="size_${variantCounter}_${size.id}" autocomplete="off">
+                <label class="btn btn-outline-primary" for="size_${variantCounter}_${size.id}">${size.size_value}</label>
             `;
         });
 
         let colorOptions = '';
         variantColors.forEach(color => {
             colorOptions += `
-                <input type="radio" class="btn-check" name="data_variant[${count_items}][color_id]" value="${color.id}" id="color_${count_items}_${color.id}" autocomplete="off">
-                <label class="btn btn-outline-primary" for="color_${count_items}_${color.id}">${color.color_value}</label>
+                <input type="radio" class="btn-check" name="data_variant[${variantCounter}][color_id]" value="${color.id}" id="color_${variantCounter}_${color.id}" autocomplete="off">
+                <label class="btn btn-outline-primary" for="color_${variantCounter}_${color.id}">${color.color_value}</label>
             `;
         });
-
         newElm.innerHTML = `
             <div class="row p-2 mb-3">
                 <div class="col-4">
@@ -47,25 +45,26 @@
                 </div>
                 <div class="col-4">
                     <label class="form-label">Số lượng:</label>
-                    <input type="number" class="form-control" name="data_variant[${count_items}][quantity]" value="">
+                    <input type="number" class="form-control" name="data_variant[${variantCounter}][quantity]" value="$_SESSION['data_variant'][${variantCounter}]['quantity'] ?? null">
                 </div>
             </div>
             <div class="row p-2 mb-3">
                 <div class="col-6">
                     <label class="form-label">Giá:</label>
-                    <input type="text" class="form-control" name="data_variant[${count_items}][price-varian]">
+                    <input type="text" class="form-control" name="data_variant[${variantCounter}][price-varian]">
                 </div>
                 <div class="col-6">
                     <label class="form-label">Giá Sale:</label>
-                    <input type="text" class="form-control" name="data_variant[${count_items}][price-sale-varian]">
+                    <input type="text" class="form-control" name="data_variant[${variantCounter}][price-sale-varian]">
                 </div>
             </div>
             <div class="text-end mb-3">
                 <button type="button" class="btn btn-outline-danger" onclick="removeVarian(this)">Xóa</button>
             </div>
         `;
+        newVarian.appendChild(newElm);
 
-        newVarian.append(newElm);
+        variantCounter++;
     };
 
     const removeVarian = (btn) => {
@@ -74,4 +73,21 @@
             parent.remove();
         }
     };
+
+
+    function deleteVariant(element, key) {
+        const allVariants = document.querySelectorAll('.variant-item');
+
+        if (allVariants.length === 1) {
+            alert('Không được phép xóa biến thể cuối cùng!');
+            return;
+        }
+    const variantItem = element.closest('.variant-item');
+    if (variantItem) {
+        variantItem.remove();
+    }
+
+
+}
+
 </script>
