@@ -12,7 +12,7 @@ class BillDetail extends BaseModel
         $payment_type = 0; // Hình thức thanh toán (0: Thanh toán khi nhận hàng)
 
         // Câu lệnh SQL để thêm hóa đơn vào bảng `bill`
-        $sql = "INSERT INTO bill (create_at, bill_status, payment_type, user_id, user_name, user_address, user_phone, total)
+        $sql = "INSERT INTO bill (bill_status, payment_type, user_id, user_name, user_address, user_phone, total)
                 VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :user_id, :user_name, :user_address, :user_phone, :total)";
 
         // Chuẩn bị câu lệnh SQL
@@ -55,5 +55,16 @@ class BillDetail extends BaseModel
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['bill_id' => $bill_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function deleteBillDetailByBillId($bill_id) {
+        $sql = "DELETE FROM bill_detail WHERE bill_id = :bill_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['bill_id' => $bill_id]);
+    }
+    public function deleteBillItem($bill_id) {
+        $sql = "DELETE FROM bill_detail WHERE id = :bill_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['bill_id' => $bill_id]);
     }
 }

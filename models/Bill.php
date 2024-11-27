@@ -113,13 +113,15 @@ class Bill extends BaseModel
     public function addBill($user_name, $user_address, $user_phone, $total, $user_id) {
         $bill_status = 1;
         $payment_type = 1;
-        $sql = "INSERT INTO bill (create_at, bill_status, payment_type, user_id, user_name, user_address, user_phone, total)
-                VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :user_id, :user_name, :user_address, :user_phone, :total)";
+        $payment_status = "DA_DAT_HANG";
+        $sql = "INSERT INTO bill (create_at, bill_status, payment_type, payment_status, user_id, user_name, user_address, user_phone, total)
+                VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :payment_status, :user_id, :user_name, :user_address, :user_phone, :total)";
         $stmt = $this->pdo->prepare($sql);
 
         if ($stmt->execute([
             'bill_status' => $bill_status,
             'payment_type' => $payment_type,
+            'payment_status' => $payment_status,
             'user_id' => $user_id,
             'user_name' => $user_name,
             'user_address' => $user_address,

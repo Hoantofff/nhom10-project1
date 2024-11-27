@@ -19,11 +19,11 @@ class BillClientController
     public function billList()
     {
         $statusLabels = [
-            1 => 'Pending',
-            2 => 'Processing',
-            3 => 'Shipping',
-            4 => 'Delivered',
-            5 => 'Cancelled'
+            1 => 'Đang chờ xử lý',
+            2 => 'Đang xử lý',
+            3 => 'Vận chuyển',
+            4 => 'Đã giao',
+            5 => 'Đã hủy'
             ];
         $paymentLabels = [
             1 => 'COD',
@@ -37,6 +37,17 @@ class BillClientController
     public function billDetail()
     {
         $id=$_GET['id'];
+        $statusLabels = [
+            1 => 'Đang chờ xử lý',
+            2 => 'Đang xử lý',
+            3 => 'Vận chuyển',
+            4 => 'Đã giao',
+            5 => 'Đã hủy'
+            ];
+        $paymentLabels = [
+            1 => 'COD',
+            2 => 'Online'
+        ];
         // $title="Chi tiết bill";
         $billData= $this->bill->getByID($id);
         $client_id = $_SESSION['user_client']['id'];

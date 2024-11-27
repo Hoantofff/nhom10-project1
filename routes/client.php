@@ -27,9 +27,10 @@ match ($act) {
     'goToBill' => (new BillClientController)->billList(),
     'bills-detail' => (new BillClientController)->billDetail(),
     'bills-delete' => (new BillClientController)->deleteClientBill(),
+    'bill-item-delete' => (new BillClientController)->deleteBillItem(),
     // CART 
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
     'update-cart' => (new CartController)->updateCart(),
-    'addToBill' => (new BillClientController)->AddBill()
+    'addToBill' => (new BillClientController)->addBill()
 };
