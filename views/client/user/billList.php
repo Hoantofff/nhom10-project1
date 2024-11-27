@@ -6,9 +6,9 @@
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
                     Mã đơn</td>
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
-                Ngày đặt</td>
+                    Ngày đặt</td>
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
-                Trạng thái</td>
+                    Trạng thái</td>
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
                     Hình thức TT
                 </td>
@@ -32,23 +32,24 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($data as $item) : ?>
+            <?php foreach ($data as $item) : ?>
                 <tr class="flex justify-between font-bold ">
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['id']?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['create_at']?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['id'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['create_at'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $statusLabels[$item['bill_status']] ?? 'Unknown' ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $paymentLabels[$item['payment_type']] ?? 'Unknown' ?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['user_name']?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['user_address']?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['user_phone']?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?=$item['total']?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['user_name'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['user_address'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['user_phone'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= $item['total'] ?></td>
                     <td class="p-[10px] w-[5%]  text-nowrap">
-                        <a href="?act=bills-detail&id=<?=$item['id']?>">Xem chi tiết</i></a>
+                        <a href="?act=bills-detail&id=<?= $item['id'] ?>">Xem chi tiết</i></a>
                     </td>
                 </tr>
                 <tr class="w-full border-b-[3px] border-solid border-[#222]"></tr>
 
-            <?php  endforeach; ?>
+
+            <?php endforeach; ?>
         </tbody>
     </table>
 </form>

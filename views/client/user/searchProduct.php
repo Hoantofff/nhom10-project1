@@ -1,58 +1,19 @@
-<section class="flex justify-between gap-[20px]">
-    <!-- MENU  -->
-    <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff]">
-        <?php foreach ($categories as $category) { ?>
-            <a href="?act=goToCate&idCate=<?php echo $category['category_id'] ?>"
-                class="menu-item flex justify-between items-center hover:bg-[#ddd] py-[10px] px-[10px] rounded-[5px]">
-                <p class="flex items-center gap-[5px]">
-                    <i class="  fa-solid <?php echo $category['icon_name'] ?> text-black text-[25px]"></i>
-                    <span class="text-[12px] font-bold text-[#343a40]">
-                        <?php echo $category['category_name'] ?></span>
-                </p>
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
-        <?php  } ?>
-    </div>
-    <!-- SLIDER -->
-    <div class="slider w-[767.5px] h-[450px] mt-[20px] rounded-b-[10px] shadow-menu bg-[#ffffff]">
-        <div id="slider-container-img" class=" w-full h-[75%] relative overflow-hidden">
-            <?php foreach ($sliders as $slider) { ?>
-                <img src="<?= BASE_ASSETS_UPLOADS ?>/img/<?= $slider['img'] ?>"
-                    class="w-full h-full object-cover absolute first:left-[0%] left-[-100%]" alt="" />
-            <?php } ?>
-        </div>
-        <div class="slider-title w-full h-[25%] flex">
-            <?php foreach ($sliders as $slider) { ?>
-                <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
-                    <p class="text-[13px]">
-                        <?= $slider['slider_product_name'] ?>
-                        <br />
-                        <?= $slider['content'] ?>
-                    </p>
-                </div>
-            <?php  } ?>
-        </div>
-    </div>
-    <script src="./assets/js/slider.js"></script>
-    <!-- RIGHT BANNER -->
-    <div class="right-banner w-[265px] h-[450px] flex flex-wrap justify-between flex-col mt-[20px]">
-        <a href="#" class="shadow-menu h-[25%] block w-full rounded-[10px]">
-            <img src="<?= BASE_ASSETS_UPLOADS ?>/img/right-banner-1.webp"
-                class="w-full h-full object-cover rounded-[10px]" alt="" />
+<ul class="flex mt-[100px] h-full items-center">
+    <li>
+        <a href="?action=index" class="text-[12px] text-[#707070] mr-[10px]  flex gap-[10px] items-center  ">
+            <i class="fa-solid fa-house"></i>
+            <p>Trang chủ</p>
         </a>
-        <a href="#" class="shadow-menu h-[25%] block w-full rounded-[10px]">
-            <img src="<?= BASE_ASSETS_UPLOADS ?>/img/right-banner-2.webp"
-                class="w-full h-full object-cover rounded-[10px]" alt="" />
+    </li>
+    <li>
+        <a href="#" class="text-[12px] text-[#707070] mr-[10px]  flex gap-[10px] items-center  ">
+            <i class="fa-solid fa-chevron-right"></i>
+            <p>
+                Tìm kiếm sản phẩm
+            </p>
         </a>
-        <a href="#" class="shadow-menu h-[25%] block w-full rounded-[10px]">
-            <img src="<?= BASE_ASSETS_UPLOADS ?>/img/right-banner-3.webp"
-                class="w-full h-full object-cover rounded-[10px]" alt="" />
-        </a>
-    </div>
-</section>
-<a href="#" class="banner w-full mt-[15px] block">
-    <img class="w-full rounded-[10px] shadow-menu" src="<?= BASE_ASSETS_UPLOADS ?>/img/banner.gif" alt="" />
-</a>
+    </li>
+</ul>
 <section class="flex flex-wrap mt-[20px] min-h-[250px] mb-[10px]">
     <div class="list-items w-full flex  flex-wrap gap-[20px] overflow-hidden">
         <!-- ITEM IN HERE -->
