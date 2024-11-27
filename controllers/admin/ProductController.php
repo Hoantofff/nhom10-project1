@@ -31,7 +31,7 @@ class ProductController
             $view = 'products/edit';
             $title = "Cập nhật sản phẩm";
             $script = 'textarea';
-            $script2 = 'createVarian';
+            $script2 = 'updateVarian';
             $id = $_GET['id'];
             $brands = $this->product->getBrands();
             $categories = $this->product->getCategories();
@@ -179,7 +179,7 @@ class ProductController
                 throw new Exception('Phương Thức Phải Là POST');
             }
             $data = $_POST + $_FILES;
-            debug($data);die;
+            // debug($data);die;
             $_SESSION['error'] = [];
 
             // Validate dữ liệu

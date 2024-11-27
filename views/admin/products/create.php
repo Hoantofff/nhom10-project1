@@ -8,7 +8,9 @@
         if (isset($_SESSION['success'])) {
             $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
 
-            echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
+            $msg = is_array($_SESSION['msg']) ? implode(", ", $_SESSION['msg']) : $_SESSION['msg'];
+    
+            echo "<div class='alert $class'>$msg</div>";
 
             unset($_SESSION['success']);
             unset($_SESSION['msg']);

@@ -31,5 +31,6 @@ match ($act) {
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
     'update-cart' => (new CartController)->updateCart(),
+    "remove-item-from-cart" => (new CartController)->removeProductFromCart(),
     'addToBill' => (new BillClientController)->AddBill()
 };
