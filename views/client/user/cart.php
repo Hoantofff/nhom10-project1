@@ -57,33 +57,13 @@
 
         </tbody>
     </table>
-    <div class="mt-[20px]">
-        <h3 class=" font-bold">Chọn hình thức thanh toán</h3>
-        <div class="payCodBox flex flex-wrap items-center gap-[15px] mb-[15px]">
-            <div class="inputPayCod w-full flex items-center gap-[15px]">
-                <input class="" type="radio" name="paymentMethod" id="payCod">
-                <label for="payCod">Thanh toán khi nhận được hàng</label>
-            </div>
-            <div class="payFormCod flex flex-wrap gap-[20px]">
-
-            </div>
-        </div>
-        <div class="payOnlineBox flex items-center gap-[15px] flex-wrap">
-            <div class="inputPayOnline w-full flex items-center gap-[15px]">
-                <input class="" type="radio" name="paymentMethod" id="payOnline">
-                <label for="payOnline">Thanh toán Online</label>
-            </div>
-            <div class="payForm">
-            </div>
-        </div>
-    </div>
     <div class="w-full flex flex-row-reverse mt-[20px]">
         <button type="submit"
             class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">
             Cập nhật giỏ hàng
         </button>
-        <a href="?action=cartStatus"
-            class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">Đặt
-            hàng</a>
+        <a href="?act=goToPayment"
+            class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">Thanh
+            toán</a>
     </div>
 </form>
