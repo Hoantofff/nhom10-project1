@@ -25,7 +25,8 @@ class CartController
         }
 
         if (!$productId || !$variantId) {
-            header("Location: " . BASE_URL);
+            $_SESSION['error'] = 'Thêm không thành công, sản phẩm tồn tại.';
+            header("Location: " . BASE_URL . "?act=goToCart");
             exit();
         }
 

@@ -221,7 +221,7 @@
                 <?php foreach ($variantsByColor as $color): ?>
                     <a href="javascript:void(0);"
                         class="color-option border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]"
-                        data-color="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?? null ?>" onclick="selectVariant(<?= $color['vr_id'] ?? null ?>, 'color')">
+                        data-color="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?>" onclick="selectVariant(<?= $color['vr_id'] ?>, 'color')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
                             <strong><?= $color['cl_color_value'] ?></strong>
                         </div>

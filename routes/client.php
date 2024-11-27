@@ -11,7 +11,7 @@ match ($act) {
     "startSearching" => (new HomeController)->startSearching(),
     // CART
     "goToCart" => (new HomeController)->goToCart(),
-
+    "goToPayment" => (new HomeController)->goToPayment(),
 
     //Authen
     'show-form-login'       => (new AuthenController)->showFormLogin(),
