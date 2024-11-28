@@ -31,7 +31,7 @@
     <div class="container relative h-auto" id="showHere">
         <header class="h-[64px] pl-[50px] w-screen bg-[#e1042b] fixed top-[0] z-10">
             <nav class="w-full h-full flex items-center gap-[5px]">
-                <a href="?action=index"><img src="<?= BASE_ASSETS_UPLOADS ?>/img/Logo.png"
+                <a href="<?= BASE_URL ?>"><img src="<?= BASE_ASSETS_UPLOADS ?>/img/Logo.png"
                         class="h-full w-[161px] object-cover" alt="" /></a>
                 <div id="showCategories"
                     class="flex gap-[5px] justify-between items-center h-[42px] rounded-[10px] px-[3px] py-[5px] bg-[#ffffff33] text-white cursor-pointer">
