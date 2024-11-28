@@ -134,7 +134,7 @@ class UserController
             $_SESSION['success'] = false;
             $_SESSION['msg'] = $th->getMessage();
 
-            header('Location: ' . BASE_URL_ADMIN . '&action=users-index');
+            header('Location: ' . BASE_URL_ADMIN . '&act=users-index');
             exit();
         }
     }

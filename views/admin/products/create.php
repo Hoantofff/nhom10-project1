@@ -8,7 +8,9 @@
         if (isset($_SESSION['success'])) {
             $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
 
-            echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
+            $msg = is_array($_SESSION['msg']) ? implode(", ", $_SESSION['msg']) : $_SESSION['msg'];
+    
+            echo "<div class='alert $class'>$msg</div>";
 
             unset($_SESSION['success']);
             unset($_SESSION['msg']);
@@ -55,11 +57,7 @@
 
                         </select>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="price" class="form-label">Giá chưa giảm:</label>
-                        <input type="text" class="form-control" id="price" name="price"
-                            value="<?= $_SESSION['data']['price'] ?? null ?>">
-                    </div>
+
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
@@ -68,19 +66,11 @@
                             value="<?= $_SESSION['data']['sale_price'] ?? null ?>">
                     </div>
                     <div class="mb-3 mt-3">
-                        <label for="description">Mô tả của sản phẩm:</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"
-                            value="<?= $_SESSION['data']['description'] ?? null ?>"></textarea>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="content">Giới thiệu của sản phẩm:</label>
-                        <textarea class="form-control" id="content" name="content" rows="3"
-                            value="<?= $_SESSION['data']['content'] ?? null ?>"></textarea>
-
+                        <label for="price" class="form-label">Giá chưa giảm:</label>
+                        <input type="text" class="form-control" id="price" name="price"
+                            value="<?= $_SESSION['data']['price'] ?? null ?>">
                     </div>
                 </div>
-
-
                 <div class="mb-3">
                     <label for="image" class="form-label">Ảnh sản phẩm:</label>
                     <input type="file" class="form-control" id="image" name="image">
@@ -89,6 +79,59 @@
                         <img src="<?= BASE_ASSETS_UPLOADS . $user['u_image'] ?>" width="100px">
                     <?php endif; ?>
                 </div>
+                <div class="col-12 border rounded-2 p-2">
+                    <p>Biến thể sản phẩm:</p>
+                    <div id="multi_varian">
+                        <div class="items-varian">
+                            <div class="row p-2 mb-3">
+                                <div class="col-4">
+                                    <label for="size" class="form-label">dung lượng:</label>
+                                    <div class="btn-group" >
+                                        <?php foreach ($variant_size as $size): ?>
+                                            <input type="radio" class="btn-check" name="data_variant[0][size_id]" value="<?= $size['id'] ?>" id="size_0_<?= $size['id'] ?>" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="size_0_<?= $size['id'] ?>"><?= $size['size_value'] ?></label>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="color" class="form-label">Màu sắc:</label>
+                                    <div class="btn-group" >
+                                        <?php foreach ($variant_color as $color): ?>
+                                            <input type="radio" class="btn-check" name="data_variant[0][color_id]" value="<?= $color['id'] ?>" id="color_0_<?= $color['id'] ?>" autocomplete="off">
+                                            <label class="btn btn-outline-primary" for="color_0_<?= $color['id'] ?>"><?= $color['color_value'] ?></label>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="quantity" class="form-label">Số Lượng:</label>
+                                    <input type="number" class="form-control" name="data_variant[0][quantity]" value="<?= $_SESSION['data_variant']['0']['quantity'] ?? null ?>">
+                                </div>
+                            </div>
+                            <div class="row p-2 mb-3">
+                                <div class="col-6">
+                                    <label for="price-varian" class="form-label">Giá:</label>
+                                    <input type="text" class="form-control" name="data_variant[0][price-varian]" value="<?= $_SESSION['data_variant']['0']['price-varian'] ?? null ?>">
+                                </div>
+                                <div class="col-6">
+                                    <label for="price-sale-varian" class="form-label">Giá Sale:</label>
+                                    <input type="text" class="form-control" name="data_variant[0][price-sale-varian]" value="<?= $_SESSION['data_variant']['0']['price-sale-varian'] ?? null ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-3 text-end me-2">
+                        <a onclick="createVarian()" class="btn btn-outline-secondary">Thêm Biến Thể</a>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="description">Mô tả của sản phẩm:</label>
+                    <textarea class="form-control" id="description" name="description"><?= $_SESSION['data']['description'] ?? '' ?></textarea>
+
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="content">Giới thiệu của sản phẩm:</label>
+                    <textarea class="form-control" id="content" name="content" <?= $_SESSION['data']['content'] ?? '' ?>></textarea>
+                </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=products-index">Quay lại trang danh sách</a>
             <button class="btn btn-success " type="submit">Tạo Mới</button>
@@ -96,6 +139,7 @@
         </form>
 
         <?php unset($_SESSION['data']) ?>
+        <?php unset($_SESSION['data_variant']) ?>
     </div>
     </div>
     </div>

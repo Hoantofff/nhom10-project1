@@ -83,4 +83,9 @@ class HomeController
         $products = $this->home->findProduct($productName);
         require_once PATH_VIEW_CLIENT . 'main.php';
     }
+    public function goToPayment()
+    {
+        $view = "user/billDetail";
+        require_once PATH_VIEW_CLIENT . "main.php";
+    }
 }
