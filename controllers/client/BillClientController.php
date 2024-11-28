@@ -1,6 +1,6 @@
 <?php
 
-class BillClientController
+class BillClientController 
 {
     private $bill;
     private $cart;
@@ -40,7 +40,7 @@ class BillClientController
         // $title="Chi tiết bill";
         $billData= $this->bill->getByID($id);
         $client_id = $_SESSION['user_client']['id'];
-        $cartItems = $this->billDetail->getBillDetailsByBillId($id);
+        $cartItems = $this->billDetail->getBillDetails($id);
         $view = "user/billDetail";
         require_once PATH_VIEW_CLIENT . "main.php";
     }
@@ -179,6 +179,7 @@ class BillClientController
     
             // Lấy thông tin từ form và kiểm tra tính hợp lệ
             $user_name = isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
+            $user_email = isset($_POST['user_email']) ? trim($_POST['user_email']) : '';
             $user_address = isset($_POST['user_address']) ? trim($_POST['user_address']) : '';
             $user_phone = isset($_POST['user_phone']) ? trim($_POST['user_phone']) : '';
             $total = isset($_POST['total']) ? floatval($_POST['total']) : 0;
@@ -202,7 +203,7 @@ class BillClientController
             }
     
             // 1. Thêm hóa đơn vào bảng `bill`
-            $billId = $this->bill->addBill($user_name, $user_address, $user_phone, $total, $user_id);
+            $billId = $this->bill->addBill($user_name, $user_email, $user_address, $user_phone, $total, $user_id);
     
             if (!$billId) {
                 throw new Exception('Đã có lỗi xảy ra khi thêm hóa đơn. Vui lòng thử lại.');
@@ -218,7 +219,7 @@ class BillClientController
     
             // 3. Thêm chi tiết hóa đơn vào bảng `bill_detail`
             foreach ($cartItems as $item) {
-                $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['c_quantity']);
+                $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
             }
     
             // 4. Xóa giỏ hàng sau khi đặt hàng thành công (optional)

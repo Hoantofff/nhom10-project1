@@ -1,6 +1,6 @@
 <?php 
 
-?>
+?> 
 <section class="flex justify-between gap-[20px]"> 
     <!-- MENU  -->
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff]">

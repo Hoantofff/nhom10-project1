@@ -5,12 +5,15 @@ class HomeController
     private $home;
     private $card;
     private $slider;
+    private $bill;
+    private $billDetail;
     public function __construct() 
     {
         $this->home = new Home();
         $this->card = new Cart();
         $this->slider = new Slider();
-
+        $this->bill = new Bill();
+        $this->billDetail = new BillDetail();
     }
     public function index()
     {
@@ -85,6 +88,17 @@ class HomeController
     }
     public function goToPayment()
     {
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+        $view = "user/payment";
+        $cartItems = $this->card->getCart($userId);
+        require_once PATH_VIEW_CLIENT . "main.php";
+    }
+    public function billDetail()
+    {
+        $id=$_GET['id'];
+        $billData= $this->bill->getByID($id);
+        $client_id = $_SESSION['user_client']['id'];
+        $cartItems = $this->billDetail->getBillDetails($id);
         $view = "user/billDetail";
         require_once PATH_VIEW_CLIENT . "main.php";
     }

@@ -1,6 +1,6 @@
 <?php
 
-class Bill extends BaseModel
+class Bill extends BaseModel 
 {
     protected $table = 'bill';
 
@@ -14,6 +14,7 @@ class Bill extends BaseModel
                 payment_type,
                 user_id,
                 user_name,
+                user_email,
                 user_address,
                 user_phone,
                 total
@@ -36,6 +37,7 @@ class Bill extends BaseModel
                 bill_status,
                 payment_type,
                 user_name,
+                user_email,
                 user_address,
                 user_phone,
                 total
@@ -60,6 +62,7 @@ class Bill extends BaseModel
                 payment_type,
                 user_id,
                 user_name,
+                user_email,
                 user_address,
                 user_phone,
                 total
@@ -83,6 +86,7 @@ class Bill extends BaseModel
             payment_type,
             user_id,
             user_name,
+            user_email,
             user_address,
             user_phone,
             total
@@ -110,11 +114,11 @@ class Bill extends BaseModel
         ]);
         return $stmt->rowCount();
     }
-    public function addBill($user_name, $user_address, $user_phone, $total, $user_id) {
+    public function addBill($user_name, $user_email, $user_address, $user_phone, $total, $user_id) {
         $bill_status = 1;
         $payment_type = 1;
-        $sql = "INSERT INTO bill (create_at, bill_status, payment_type, user_id, user_name, user_address, user_phone, total)
-                VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :user_id, :user_name, :user_address, :user_phone, :total)";
+        $sql = "INSERT INTO bill (create_at, bill_status, payment_type, user_id, user_name, user_email, user_address, user_phone, total)
+                VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :user_id, :user_name, :user_email, :user_address, :user_phone, :total)";
         $stmt = $this->pdo->prepare($sql);
 
         if ($stmt->execute([
@@ -122,6 +126,7 @@ class Bill extends BaseModel
             'payment_type' => $payment_type,
             'user_id' => $user_id,
             'user_name' => $user_name,
+            'user_email' => $user_email,
             'user_address' => $user_address,
             'user_phone' => $user_phone,
             'total' => $total

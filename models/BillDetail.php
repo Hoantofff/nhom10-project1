@@ -35,9 +35,9 @@ class BillDetail extends BaseModel
         return false;
     }
     // Phương thức thêm các chi tiết hóa đơn vào bảng bill_detail
-    public function addBillDetail($billId, $productId, $productPrice, $productName, $productImg, $quantity) {
-        $sql = "INSERT INTO bill_detail (bill_id, product_id, product_price, product_name, product_img, quantity)
-                VALUES (:bill_id, :product_id, :product_price, :product_name, :product_img, :quantity)";
+    public function addBillDetail($billId, $productId, $productPrice, $productName, $productImg, $variant_id, $quantity) {
+        $sql = "INSERT INTO bill_detail (bill_id, product_id, product_price, product_name, product_img, variant_id, quantity)
+                VALUES (:bill_id, :product_id, :product_price, :product_name, :product_img, :variant_id, :quantity)";
     
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -46,6 +46,7 @@ class BillDetail extends BaseModel
             'product_price' => $productPrice,
             'product_name' => $productName,
             'product_img' => $productImg,
+            'variant_id' => $variant_id,
             'quantity' => $quantity
         ]);
     }
@@ -56,4 +57,27 @@ class BillDetail extends BaseModel
         $stmt->execute(['bill_id' => $bill_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getBillDetails($billId)
+{
+    $sql = "SELECT 
+            bd.id as bill_detail_id,
+            bd.bill_id as bill_id,
+            bd.product_id as product_id,
+            bd.product_price as product_price,
+            bd.product_name as product_name,
+            bd.product_img as product_img,
+            bd.variant_id as variant_id,
+            bd.quantity as quantity,
+            sz.size_value as size_value, 
+            cl.color_value as color_value
+        FROM bill_detail AS bd
+        INNER JOIN variant AS v ON v.id = bd.variant_id  
+        LEFT JOIN size AS sz ON sz.id = v.size_id
+        LEFT JOIN color AS cl ON cl.id = v.color_id
+        WHERE bd.bill_id = :bill_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':bill_id', $billId);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
