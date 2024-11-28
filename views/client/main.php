@@ -95,9 +95,9 @@
                 </a>
                 <?php if (isset($_SESSION['user_client'])) { ?>
                     <div class="user w-[130px] flex">
-                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
+                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?><br>
                             <a class="text-[#fff] text-[12px] underline"
-                                href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
+                                href="<?= BASE_URL ?>?act=info-user&id=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
                                 khoản</a>
                         </span>
                     </div>

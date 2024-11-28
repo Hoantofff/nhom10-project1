@@ -23,6 +23,8 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
+    "info-user" => (new InfoUserController)->gotoInfoUser(),
+    "update-info-user" => (new InfoUserController)->updateInfoUser(),
     // BILL CLIENT
     'goToBill' => (new BillClientController)->billList(),
     'bills-detail' => (new BillClientController)->billDetail(),
