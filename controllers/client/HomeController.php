@@ -4,14 +4,18 @@ class HomeController
 {
     private $home;
     private $card;
-    public function __construct()
+    private $slider;
+    public function __construct() 
     {
         $this->home = new Home();
         $this->card = new Cart();
+        $this->slider = new Slider();
+
     }
     public function index()
     {
         $view = "user/home";
+        $sliders= $this->slider->getAll();
         $data = $this->home->renderProductsAndTypes();
         $categories = $this->home->renderCategory();
         require_once PATH_VIEW_CLIENT . 'main.php';
@@ -64,7 +68,7 @@ class HomeController
             $result = $this->home->findProduct($productName);
             if (!empty($result)) {
                 foreach ($result as $result) {
-                    echo "<div class = 'hover:opacity-50 cursor-pointer'>" . $result['name'] . "</div> <br/>";
+                    echo "<div class='hover:opacity-50 cursor-pointer' data-id='" . $result['id'] . "'>" . $result['name'] . "</div><br/>";
                 }
             } else {
                 echo "<div>Không tìm thấy sản phẩm có tên:" . $productName . "</div>";

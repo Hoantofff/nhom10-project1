@@ -76,7 +76,6 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php var_dump($billData); ?>
             </div>
         </div>
     </div>
@@ -109,8 +108,8 @@
                     Thành
                     tiền
                 </td>
-                <td class="p-[10px] w-[5%]  text-nowrap"></td>
-                </td>
+                <!-- <td class="p-[10px] w-[5%]  text-nowrap"></td>
+                </td> -->
             </tr>
         </thead>
         <tbody>
@@ -130,9 +129,9 @@
                         <td class="p-[10px] w-[10%] text-center">
                             <?= number_format($item['product_price'] * $item['quantity']) ?>đ
                         </td>
-                        <td class="p-[10px] w-[5%] text-nowrap">
+                        <!-- <td class="p-[10px] w-[5%] text-nowrap">
                             <a href="#"><i class="fa-solid fa-trash text-[35px] text-[#e1042b]"></i></a>
-                        </td>
+                        </td> -->
                     </tr>
                     <tr class="w-full border-b-[3px] border-solid border-[#222]"></tr>
             <?php 
