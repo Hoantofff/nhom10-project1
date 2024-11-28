@@ -45,14 +45,14 @@ class Variant extends BaseModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function deleteProductId($id){
-        $sql = "DELETE FROM `variant`
-                WHERE vr.product_id = :product_id
-        ";
+    
+    public function getById($variantId)
+    {
+        $sql = "SELECT * FROM variant WHERE id = :variant_id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':productId', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':variant_id', $variantId);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function getSize()
     {
@@ -68,4 +68,33 @@ class Variant extends BaseModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllSizes($id) {
+        $sql = "SELECT DISTINCT vr.id as vr_id, sz.id AS size_id, sz.size_value as sz_size_value, vr.variant_price_sale as vr_variant_price_sale
+                FROM variant AS vr
+                INNER JOIN size AS sz ON sz.id = vr.size_id
+                WHERE vr.product_id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        
+        $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $sizes;
+    }
+    
+    public function getAllColors($id) {
+        $sql = "SELECT DISTINCT vr.id as vr_id, cl.id AS color_id, cl.color_value as cl_color_value, vr.variant_price_sale as vr_variant_price_sale
+                FROM variant AS vr
+                INNER JOIN color AS cl ON cl.id = vr.color_id
+                WHERE vr.product_id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        
+        $colors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $colors;
+    }
+    
+
 }

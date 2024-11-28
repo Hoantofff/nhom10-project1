@@ -554,6 +554,8 @@
 
 </body>
 <script src="<?= BASE_ASSETS_JS ?>cart.js"></script>
-
+<?php if (isset($script)) {
+    require_once PATH_ASSETS_JS . $script . '.php';
+} ?>
 
 </html>

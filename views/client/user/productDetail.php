@@ -200,55 +200,39 @@
         </div>
         <div class="section-right w-[40%] box-border pl-[30px]">
             <div class="list-price-memory w-full flex justify-center">
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center "><strong>12GB
-                            1TB</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center "><strong>12GB
-                            1TB</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center "><strong>12GB
-                            1TB</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
+                <?php foreach ($variantsBySize as $size): ?>
+                    <a href="javascript:void(0);"
+                        class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%] size-option"
+                        data-size="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>" onclick="selectVariant(<?= $size['vr_id'] ?>, 'size')">
+                        <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
+                            <strong><?= $size['sz_size_value'] ?></strong>
+                        </div>
+                        <div class="price-memory">
+                            <?= number_format($size['vr_variant_price_sale'], 0, ',', '.') ?>đ
+                        </div>
+                    </a>
+                <?php endforeach; ?>
             </div>
-            <div class="list-color-price flex flex-wrap w-full justify-center">
-                <p class="text-[14px] text-[#444] font-bold mb-[10px] w-full">Chọn màu để xem giá và chi
-                    nhánh có
-                    hàng</p>
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center ">
-                        <strong>Xám</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center ">
-                        <strong>Vàng</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
-                <a href="#"
-                    class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.333%]">
-                    <div class="phone-memory line-clamp-3 w-full font-semibold text-center ">
-                        <strong>Đen</strong>
-                    </div>
-                    <div class="price-memory">38.490.000 đ</div>
-                </a>
 
+            <div class="list-color-price flex flex-wrap w-full justify-center">
+                <p class="text-[14px] text-[#444] font-bold mb-[10px] w-full">
+                    Chọn màu để xem giá và chi nhánh có hàng
+                </p>
+                <?php foreach ($variantsByColor as $color): ?>
+                    <a href="javascript:void(0);"
+                        class="color-option border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]"
+                        data-color="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?>" onclick="selectVariant(<?= $color['vr_id'] ?>, 'color')">
+                        <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
+                            <strong><?= $color['cl_color_value'] ?></strong>
+                        </div>
+                        <div class="price-memory">
+                            <?= number_format($color['vr_variant_price_sale'], 0, ',', '.') ?>đ
+                        </div>
+                    </a>
+                <?php endforeach; ?>
             </div>
+
+
             <div class="right-price w-full bg-[#eeeeef] rounded-[5px] mb-[10px] min-h-[65px] flex p-[5px]">
                 <div class="col-6 w-[50%] flex items-center justify-center p-[5px]">
                     <div class="icon-trade h-[33px] w-[35px]">
@@ -305,6 +289,7 @@
                         </button>
                         <input type="hidden" name="product_id" value="<?= $id ?>">
                         <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="variant_id" id="variant">
                     </form>
                 </div>
                 <div class="btn-installment flex w-full gap-[10px]">
@@ -523,3 +508,4 @@
 
 </div>
 </div>
+<?php unset($_SESSION['error']) ?>

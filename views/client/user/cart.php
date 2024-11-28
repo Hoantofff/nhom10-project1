@@ -3,11 +3,17 @@
     // if (isset($_SESSION['success'])) {
     //     $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
 
-    //     echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
 
-    //     unset($_SESSION['success']);
-    //     unset($_SESSION['msg']);
-    // }
+    echo '
+        <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">' . $_SESSION["error"] . '</span> 
+        </div>
+      </div>
+       ';
+    unset($_SESSION["error"]);
+
     ?>
     <form class="w-[1290px] mt-[100px] pb-[30px]  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
         action="<?= BASE_URL ?>?act=update-cart" method="POST">
@@ -69,9 +75,11 @@
                 <?php
                     $count = $item['c_quantity'] * $item['pd_sale_price'];
                     $total += $count;
-                endforeach ?>
-
+                endforeach; ?>
             </tbody>
+        </table>
+
+        </tbody>
         </table>
         <div class="w-full flex flex-row-reverse mt-[20px]">
             <button type="submit"

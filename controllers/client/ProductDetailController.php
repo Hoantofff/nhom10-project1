@@ -2,22 +2,30 @@
 {
     private $product;
     private $review;
+    private $variant;
     public function __construct()
     {
         $this->product = new Product();
         $this->review = new Review();
+        $this->variant = new Variant();
     }
     public function goToProductDetail()
     {
         $view = 'user/productDetail';
+        $script = 'variantProductDetail';
         $id = $_GET['id'];
         $cateId = $_GET['cateId'];
         $product = $this->product->getById($id);
         $sameProducts = $this->product->sameProduct($id, $cateId);
         $review = $this->review->getReviewById($id);
+        $variantsBySize = $this->variant->getAllSizes($id);
+        $variantsByColor = $this->variant->getAllColors($id); 
+        $variants = $this->variant->getProductId($id);
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->handleComment($id, $cateId);
         }
+
         return require_once PATH_VIEW_CLIENT . 'main.php';
     }
     private function handleComment($productId, $cateId)
