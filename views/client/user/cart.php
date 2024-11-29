@@ -1,8 +1,5 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
     <?php
-    // if (isset($_SESSION['success'])) {
-    //     $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
-
     if (isset($_SESSION['error'])) {
 
 
@@ -61,15 +58,20 @@
                         <td class="p-[10px] w-[15%] text-nowrap text-center">256GB/8GB RAM</td>
                         <td class="p-[10px] w-[10%] text-center">
                             <input class="w-[40px] h-[40px] border-[1px] border-[#ccc] rounded-[5px] text-center" type="number"
-                                name="products[<?= $item['pd_id'] ?>][quantity]" value="<?= $item['c_quantity'] ?>" min="1">
-                            <input type="hidden" name="products[<?= $item['pd_id'] ?>][product_id]"
+                                name="products[<?= $item['variant_id'] ?>][quantity]" value="<?= $item['c_quantity'] ?>"
+                                min="1">
+                            <input type="hidden" name="products[<?= $item['variant_id'] ?>][product_id]"
                                 value="<?= $item['pd_id'] ?>">
+                            <input type="hidden" name="products[<?= $item['variant_id'] ?>][variant_id]"
+                                value="<?= $item['variant_id'] ?>">
                         </td>
                         <td class="p-[10px] w-[10%] text-center">
-                            <?= number_format($item['c_quantity'] * $item['pd_sale_price']) ?>đ
-                        </td>
-                        <td class="p-[10px] w-[5%] text-nowrap">
-                            <a href="#"><i class="fa-solid fa-trash text-[35px] text-[#e1042b]"></i></a>
+                            <?= number_format($item['c_quantity'] * $item['pd_sale_price']) ?>đ</td>
+                        <td class="p-[10px] w-[5%] text-center">
+                            <a href="<?= BASE_URL ?>?act=remove-item-from-cart&user_id=<?= $userId ?>&product_id=<?= $item['pd_id'] ?>&variant_id=<?= $item['variant_id'] ?>"
+                                class="text-[#e1042b]">
+                                <i class="fa-solid fa-trash text-[35px]"></i>
+                            </a>
                         </td>
                     </tr>
                     <tr class="w-full border-b-[3px] border-solid border-[#222]"></tr>
@@ -95,9 +97,25 @@
                 toán</a>
         </div>
 
+        <div class="w-full flex flex-row-reverse mt-[20px]">
+            <button type="submit"
+                class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-[#fff] font-bold">
+                Lưu và Cập nhật giỏ hàng
+            </button>
+            <a class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-[#fff] font-bold"
+                href="<?= BASE_URL ?>?act=goToPayment">Đặt Hàng</a>
+        </div>
+    </form>
+<?php else: ?>
+    <div
+        class="w-[1290px] mt-[100px] pb-[30px] text-center border border-[#ccc] rounded-2xl px-5 mx-auto shadow-lg bg-gradient-to-r from-blue-50 to-white">
+        <p class="text-lg font-medium text-gray-700 mb-5">
+            Bạn phải đăng nhập để xem giỏ hàng
+        </p>
+        <a class="inline-block px-[100px] py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 transition-all"
+            href="<?= BASE_URL ?>?act=show-form-login">
+            Đăng nhập ngay
+        </a>
+    </div>
 
-
-
-
-
-    <?php endif; ?>
+<?php endif; ?>

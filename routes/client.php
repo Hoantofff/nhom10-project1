@@ -23,11 +23,14 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
+    "info-user" => (new InfoUserController)->gotoInfoUser(),
+    "update-info-user" => (new InfoUserController)->updateInfoUser(),
     // BILL CLIENT
     'goToBill' => (new BillClientController)->billList(),
-    'bills-detail' => (new BillClientController)->billDetail(),
+    'bills-detail' => (new HomeController)->billDetail(),
     'bills-delete' => (new BillClientController)->deleteClientBill(),
-    "startPay" => (new onlinePaymentController)->startPayOnline(),
+    "addToBill" => (new onlinePaymentController)->startPayOnline(),
+    'cancel-bill' => (new BillClientController)->deleteClientBill(),
     // CART 
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
