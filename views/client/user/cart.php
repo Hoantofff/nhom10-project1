@@ -83,7 +83,9 @@
 
         </tbody>
         </table>
-        <div class="w-full flex flex-row-reverse mt-[20px]">
+        <h2 class=" font-bold float-right mt-[30px]">
+            Tổng thành tiền: <?= number_format($total, 0, ',', '.')  ?>đ</h2>
+        <div class="w-full flex flex-row-reverse mt-[100px]">
             <button type="submit"
                 class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">
                 Cập nhật giỏ hàng

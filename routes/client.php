@@ -27,6 +27,7 @@ match ($act) {
     'goToBill' => (new BillClientController)->billList(),
     'bills-detail' => (new BillClientController)->billDetail(),
     'bills-delete' => (new BillClientController)->deleteClientBill(),
+    "startPay" => (new onlinePaymentController)->startPayOnline(),
     // CART 
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),
