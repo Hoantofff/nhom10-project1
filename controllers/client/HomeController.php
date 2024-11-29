@@ -91,6 +91,7 @@ class HomeController
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         $view = "user/payment";
         $cartItems = $this->card->getCart($userId);
+        // debug($cartItems);die;
         require_once PATH_VIEW_CLIENT . "main.php";
     }
     public function billDetail()
