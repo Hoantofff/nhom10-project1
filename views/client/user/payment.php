@@ -11,23 +11,23 @@
                             foreach ($cartItems as $item): ?>
                              <div class="flex items-start gap-4">
                                  <div class="w-32 h-full max-lg:w-24 max-lg:h-24 flex p-3 shrink-0 bg-[#fff] rounded-md">
-                                     <img src=<?= BASE_ASSETS_UPLOADS . $item['product_img'] ?>
+                                     <img src=<?= BASE_ASSETS_UPLOADS . $item['pd_image'] ?>
                                          class="w-full object-contain"
-                                         alt="<?= $item['product_name'] ?>" />
+                                         alt="<?= $item['pd_name'] ?>" />
                                  </div>
                                  <div class="w-full">
-                                     <h3 class="text-base text-white"><?= $item['product_name'] ?></h3>
+                                     <h3 class="text-base text-white"><?= $item['pd_name'] ?></h3>
                                      <ul class="text-xs text-gray-300 space-y-2 mt-2">
                                          <li class="flex flex-wrap gap-4">Màu sắc <span class="ml-auto"><?= $item['color_value'] ?></span></li>
                                          <li class="flex flex-wrap gap-4">Dung lượng <span class="ml-auto"><?= $item['size_value'] ?></span>
                                          </li>
-                                         <li class="flex flex-wrap gap-4">Số lượng <span class="ml-auto"><?= $item['quantity'] ?></span></li>
-                                         <li class="flex flex-wrap gap-4">Giá <span class="ml-auto"><?= number_format($item['quantity'] * $item['product_price']) ?>đ</span></li>
+                                         <li class="flex flex-wrap gap-4">Số lượng <span class="ml-auto"><?= $item['c_quantity'] ?></span></li>
+                                         <li class="flex flex-wrap gap-4">Giá <span class="ml-auto"><?= number_format($item['c_quantity'] * $item['pd_sale_price']) ?>đ</span></li>
                                      </ul>
                                  </div>
                              </div>
                          <?php
-                         $count = $item['quantity'] * $item['product_price'];
+                         $count = $item['c_quantity'] * $item['pd_sale_price'];
                          $total += $count;
                         endforeach; ?>
                      </div>
@@ -70,12 +70,9 @@
                      </div>
                  </div>
                  <div class="flex gap-4 max-md:flex-col mt-8">
-                    <a href="?act=cancel-bill&id=<?= $item['bill_id'] ?>">
-                        <button type="button" 
+                     <button type="button"
                          class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-800 max-md:order-1">Huỷ
-                         thanh toán</button>   
-                    </a>
-
+                         thanh toán</button>
                      <button type="submit"
                          class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Hoàn
                          tất thanh toán

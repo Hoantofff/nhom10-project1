@@ -4,7 +4,7 @@ class Slider extends BaseModel
 {
     protected $table = 'sliders';
 
-    public function getAll()
+    public function getAll() 
     {
         $sql = "
             SELECT 

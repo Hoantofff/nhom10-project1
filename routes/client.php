@@ -27,8 +27,9 @@ match ($act) {
     "update-info-user" => (new InfoUserController)->updateInfoUser(),
     // BILL CLIENT
     'goToBill' => (new BillClientController)->billList(),
-    'bills-detail' => (new BillClientController)->billDetail(),
+    'bills-detail' => (new HomeController)->billDetail(),
     'bills-delete' => (new BillClientController)->deleteClientBill(),
+    'cancel-bill' => (new BillClientController)->deleteClientBill(),
     // CART 
     "goToCart" => (new HomeController)->goToCart(),
     'add-to-cart' => (new CartController)->addProductToCart(),

@@ -1,11 +1,10 @@
 <?php if(!empty($_SESSION['user_client']) || !empty($_SESSION['user_admin'])): ?>
-<div class="mt-[50px]">
+<div class="mt-[100px]">
     <p class=" font-bold text-[#000]">Tài khoản: <?= $user['u_name'] ?> <a href="<?= BASE_URL ?>" class=" underline text-blue-600">Thoát</a></p>
     <?php
     if (isset($_SESSION['success'])) {
-        $class = $_SESSION['success'] ? 'alert-success' : 'alert-danger';
 
-        echo "<div class='alert $class'>{$_SESSION['msg']}</div>";
+        echo "<div class='p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-green-800 dark:text-red-400'>{$_SESSION['msg']}</div>";
 
         unset($_SESSION['success']);
         unset($_SESSION['msg']);

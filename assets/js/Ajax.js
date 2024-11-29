@@ -14,7 +14,9 @@ $(document).ready(function () {
 
           $("#searchResult div").click(function () {
             const selectedProduct = $(this).text();
+            const productId = $(this).data("id");  // Id sản phẩm
             $("#inputSearch").val(selectedProduct);
+            $("#selectedProductId").val(productId);  // Lưu vào hidden field
             $("#searchResult").css("display", "none");
           });
         },

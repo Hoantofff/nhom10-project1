@@ -1,4 +1,7 @@
-<section class="flex justify-between gap-[20px]">
+<?php 
+
+?> 
+<section class="flex justify-between gap-[20px]"> 
     <!-- MENU  -->
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff]">
         <?php foreach ($categories as $category) { ?>
@@ -17,7 +20,7 @@
     <div class="slider w-[767.5px] h-[450px] mt-[20px] rounded-b-[10px] shadow-menu bg-[#ffffff]">
         <div id="slider-container-img" class=" w-full h-[75%] relative overflow-hidden">
             <?php foreach ($sliders as $slider) { ?>
-                <img src="<?= BASE_ASSETS_UPLOADS ?>/img/<?= $slider['img'] ?>"
+                <img src="<?= BASE_ASSETS_UPLOADS ?><?= $slider['s_img_slider'] ?>"
                     class="w-full h-full object-cover absolute first:left-[0%] left-[-100%]" alt="" />
             <?php } ?>
         </div>
@@ -25,9 +28,7 @@
             <?php foreach ($sliders as $slider) { ?>
                 <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
                     <p class="text-[13px]">
-                        <?= $slider['slider_product_name'] ?>
-                        <br />
-                        <?= $slider['content'] ?> 
+                        <?= $slider['s_content'] ?>
                     </p>
                 </div>
             <?php  } ?>

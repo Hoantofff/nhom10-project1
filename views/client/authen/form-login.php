@@ -34,12 +34,6 @@
                                         unset($_SESSION['success']);
                                         unset($_SESSION['msg']);
                                     }
-                                    if (isset($_SESSION['error'])) {
-
-                                        echo "<div class='alert alert-danger'> {$_SESSION['error']} </div>";
-
-                                        unset($_SESSION['error']);
-                                    }
                                     ?>
                                     <form action="<?= BASE_URL ?>?act=login" method="POST">
                                         <div class="form-floating mb-3">
