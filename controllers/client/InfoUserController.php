@@ -88,14 +88,11 @@ class InfoUserController
                 if ($_FILES['avatar']['size'] > 0 && !empty($user['avatar']) && file_exists(PATH_ASSETS_UPLOADS . $user['avatar'])) {
                     unlink(PATH_ASSETS_UPLOADS . $user['avatar']);
                 }
-                $_SESSION['success'] = true;
-                $_SESSION['msg'] = 'Thao Tác Thành Công';
+                $_SESSION['success'] = 'Thao Tác Thành Công';
             } else {
                 throw new Exception('Thao Tác Không Thành Công');
             }
         } catch (\Throwable $th) {
-            $_SESSION['success'] = false;
-            $_SESSION['msg'] = $th->getMessage();
 
             if ($th->getCode() == 99) {
                 header('location: ' . BASE_URL. '&act=update-info-user&id=' . $id);

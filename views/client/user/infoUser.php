@@ -4,10 +4,9 @@
     <?php
     if (isset($_SESSION['success'])) {
 
-        echo "<div class='p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-green-800 dark:text-red-400'>{$_SESSION['msg']}</div>";
+        echo "<div class='p-4 text-sm text-white rounded-lg bg-red-50 dark:bg-green-800'>{$_SESSION['success']}</div>";
 
         unset($_SESSION['success']);
-        unset($_SESSION['msg']);
     }
     ?>
     <form action="<?= BASE_URL ?>?act=update-info-user&id=<?= $user['u_id'] ?>" method="POST" enctype="multipart/form-data"
@@ -21,9 +20,9 @@
                 <span class=" mb-2 text-sm font-medium text-gray-900">Đổi ảnh đại diện:</span>
                 <input type="file" id="avatar" name="avatar" class="" value="" />
             </div>
-            <?php if (isset($_SESSION['error']['email'])): ?>
+            <?php if (isset($_SESSION['error']['avatar_type'])): ?>
                 <div class="p-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                    <span class="font-medium"><?= $_SESSION['error']['email'] ?></span>
+                    <span class="font-medium"><?= $_SESSION['error']['avatar_type'] ?></span>
                 </div>
             <?php endif; ?>
         </div>
