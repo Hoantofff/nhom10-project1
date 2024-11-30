@@ -155,7 +155,7 @@ class Bill extends BaseModel
             $deleteSql = "DELETE FROM bill WHERE id = :bill_id";
             $stmt = $this->pdo->prepare($deleteSql);
             $result = $stmt->execute(['bill_id' => $bill_id]);
-            if ($result) {return 3;}
+            if ($result) {return 4;}
         }
     }
     public function deleteBillCheck($bill_id)

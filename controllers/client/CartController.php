@@ -17,28 +17,29 @@ class CartController
         $quantity = $_POST['quantity'] ?? 1;
         $variantId = $_POST['variant_id'] ?? null;
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+        $successes = [];
 
         if (!$userId) {
-            $_SESSION['error'] = 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.';
+            $_SESSION['error'][] = 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.';
             header("Location: " . BASE_URL . "?act=show-form-login");
             exit();
         }
 
         if (!$productId || !$variantId) {
-            $_SESSION['error'] = 'Thêm không thành công, sản phẩm tồn tại.';
+            $_SESSION['error'][] = 'Thêm không thành công, sản phẩm tồn tại.';
             header("Location: " . BASE_URL . "?act=goToCart");
             exit();
         }
 
         $variant = $this->variant->getById($variantId);
         if (!$variant) {
-            $_SESSION['error'] = 'Biến thể sản phẩm không hợp lệ.';
+            $_SESSION['error'][] = 'Biến thể sản phẩm không hợp lệ.';
             header("Location: " . BASE_URL);
             exit();
         }
 
         if ($variant['variant_quantity'] < $quantity) {
-            $_SESSION['error'] = 'Số lượng sản phẩm trong kho không đủ.';
+            $_SESSION['error'][] = 'Số lượng sản phẩm trong kho không đủ.';
             header("Location: " . BASE_URL);
             exit();
         }
@@ -48,17 +49,20 @@ class CartController
         if ($existingItem) {
             $newQuantity = $existingItem['quantity'] + $quantity;
             if ($newQuantity > $variant['variant_quantity']) {
-                $_SESSION['error'] = 'Số lượng sản phẩm trong giỏ đã đạt giới hạn tồn kho.';
+                $_SESSION['error'][] = 'Số lượng sản phẩm trong giỏ đã đạt giới hạn tồn kho.';
                 header("Location: " . BASE_URL . "?act=goToCart");
                 exit();
             }
             $this->cart->updateQuantity($userId, $newQuantity, $variantId);
-            $_SESSION['error'] = 'Số lượng sản phẩm trong giỏ đã được cập nhật.';
+            $successes[] = 'Số lượng sản phẩm trong giỏ đã được cập nhật.';
         } else {
             $this->cart->addToCart($productId, $userId, $quantity, $variantId);
-            $_SESSION['error'] = 'Sản phẩm đã được thêm vào giỏ hàng.';
+            $successes[] = 'Sản phẩm đã được thêm vào giỏ hàng.';
         }
 
+        if (!empty($successes)) {
+            $_SESSION['success'] = $successes;
+        }
         header("Location: " . BASE_URL . "?act=goToCart");
         exit();
     }
@@ -108,8 +112,7 @@ class CartController
             }
 
             if (!empty($successes)) {
-                $_SESSION['success'] = true;
-                $_SESSION['msg'] = $successes;
+                $_SESSION['success'] = $successes;
             }
             if (!empty($errors)) {
                 $_SESSION['error'] = $errors;
@@ -125,12 +128,16 @@ class CartController
         $productId = $_GET['product_id'];
         $variantId = $_GET['variant_id']; 
         $result = $this->cart->removeProduct($userId, $productId, $variantId);
-
+        $errors = [];
         if ($result) {
             header('Location: ' . BASE_URL . '?act=goToCart');
             exit;
         } else {
-            echo "Không thể xóa sản phẩm khỏi giỏ hàng.";
+            $errors[] = "Không thể xóa sản phẩm khỏi giỏ hàng.";
+        }
+
+        if (!empty($errors)) {
+            $_SESSION['error'] = $errors;
         }
     }
 }
