@@ -43,6 +43,30 @@
                                         case 'id':
                                             echo "ID hóa đơn";
                                             break;
+                                        case 'create_at':
+                                            echo "Thời gian đặt";
+                                            break;
+                                        case 'bill_status':
+                                            echo "Trạng thái đơn";
+                                            break;
+                                        case 'payment_type':
+                                            echo "Hình thức thanh toán";
+                                            break;
+                                        case 'user_id':
+                                            echo "ID người mua";
+                                            break;
+                                        case 'user_name':
+                                            echo "Tên người mua";
+                                            break;
+                                        case 'user_email':
+                                            echo "Email";
+                                            break;
+                                        case 'user_address':
+                                            echo "Địa chỉ giao hàng";
+                                            break;
+                                        case 'user_phone':
+                                            echo "Điện thoại liên hệ";
+                                            break;
                                         case 'total':
                                             echo "Tổng tiền";
                                             break;

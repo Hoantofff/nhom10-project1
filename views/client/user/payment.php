@@ -1,3 +1,14 @@
+<?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
+<?php if (!empty($_SESSION['error'])): ?>
+        <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
+            <ul>
+                <?php foreach ($_SESSION['error'] as $err):  ?>
+                    <li><?= $err ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php unset($_SESSION['error']) ?>
+    <?php endif; ?>
 <div class="font-[sans-serif] bg-white">
      <div class="flex max-sm:flex-col gap-12 max-lg:gap-4  mt-[100px] mb-[50px]">
          <div class="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 lg:min-w-[370px] sm:min-w-[300px]">
@@ -46,22 +57,22 @@
                      <h3 class="text-base text-gray-800 mb-4">Thông tin người mua hàng</h3>
                      <div class="grid md:grid-cols-2 gap-4">
                          <div>
-                             <input type="text" placeholder="Tên người nhận" name="user_name"
+                             <input type="text" placeholder="Tên người nhận" name="user_name" value="<?=$user['u_name']?>"
                                  class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
                          </div>
 
 
                          <div>
-                             <input type="email" placeholder="Email" name="user_email"
+                             <input type="email" placeholder="Email" name="user_email" value="<?=$user['u_email']?>"
                                  class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
                          </div>
 
                          <div>
-                             <input type="number" placeholder="Số điện thoại nhận hàng" name="user_phone"
+                             <input type="number" placeholder="Số điện thoại nhận hàng" name="user_phone" value="<?=$user['u_phone']?>"
                                  class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
                          </div>
                          <div>
-                             <input type="text" placeholder="Địa chỉ giao hàng" name="user_address"
+                             <input type="text" placeholder="Địa chỉ giao hàng" name="user_address" value="<?=$user['u_address']?>"
                                  class="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
                          </div>
                          <div>
@@ -70,10 +81,11 @@
                      </div>
                  </div>
                  <div class="flex gap-4 max-md:flex-col mt-8">
+                    <a href="<?= BASE_URL ?>?act=goToCart" class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-800 max-md:order-1">
                      <button type="button"
-                         class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-800 max-md:order-1">Huỷ
-                         thanh toán</button>
-                     <button type="submit"
+                         class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-transparent hover:bg-gray-100  text-gray-800 max-md:order-1">Quay lại</button>
+                    </a>
+                     <button type="submit" onclick="return confirm('Bạn có muốn đặt hàng?')"
                          class="rounded-md px-6 py-3 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Hoàn
                          tất thanh toán
                      </button>
@@ -83,4 +95,9 @@
          </div>
      </div>
  </div>
+ <?php else: ?>
+    <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
+        <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">Bạn phải đăng nhập để thao tác</a>
+    </div>
+<?php endif; ?>
 

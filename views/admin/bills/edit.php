@@ -35,18 +35,18 @@
                             <option value="" disabled>Chọn trạng thái đơn hàng</option>
                             <option value="$bill['bill_status']" selected disabled <?=$status?>>
                                 <?php
-                                if($bill['bill_status']==1) {echo "Pending";}
-                                else if($bill['bill_status']==2) {echo "Processing";}
-                                else if($bill['bill_status']==3) {echo "Shipping";}
-                                else if($bill['bill_status']==4) {echo "Delivered";}
-                                else if($bill['bill_status']==5) {echo "Canceled";}
+                                if($bill['bill_status']==1) {echo "Chờ xử lí";}
+                                else if($bill['bill_status']==2) {echo "Đã xử lí";}
+                                else if($bill['bill_status']==3) {echo "Đang giao hàng";}
+                                else if($bill['bill_status']==4) {echo "Đã thanh toán";}
+                                else if($bill['bill_status']==5) {echo "Hủy đơn";}
                                 ?>
                             </option>
-                            <option value="1">Pending</option>
-                            <option value="2">Processing</option>
-                            <option value="3">Shipping</option>
-                            <option value="4">Delivered</option>
-                            <option value="5">Canceled</option>
+                            <option value="1">Chờ xử lí</option>
+                            <option value="2">Đã xử lí</option>
+                            <option value="3">Đang giao hàng</option>
+                            <option value="4">Đã thanh toán"</option>
+                            <option value="5">Hủy đơn</option>
                         </select>
                     </div>
                 </div>
