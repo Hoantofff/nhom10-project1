@@ -40,7 +40,9 @@
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
                     Tổng tiền
                 </td>
-                <td class="p-[10px] w-[5%]  text-nowrap"></td>
+                <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
+                    Chức Năng
+                </td>
                 </td>
             </tr>
         </thead>
@@ -55,7 +57,7 @@
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_address'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_phone'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['total'] ?></td>
-                    <td class="p-[10px] w-[5%]  text-nowrap">
+                    <td class="p-[10px] w-[10%]  text-center">
                         <a href="?act=bills-detail&id=<?= $item['id'] ?>">Xem chi tiết</i></a>
                     </td>
                 </tr>

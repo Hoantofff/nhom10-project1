@@ -19,9 +19,9 @@
         $sameProducts = $this->product->sameProduct($id, $cateId);
         $review = $this->review->getReviewById($id);
         $variantsBySize = $this->variant->getAllSizes($id);
-        $variantsByColor = $this->variant->getAllColors($id); 
+        $variantsByColor = $this->variant->getAllColors($id);
         $variants = $this->variant->getProductId($id);
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->handleComment($id, $cateId);
         }
@@ -34,7 +34,11 @@
             $_SESSION['error'][] = 'Bạn cần đăng nhập để bình luận.';
             $this->redirectToDetail($productId, $cateId);
         }
-
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'];
+        if (!$this->review->hasPurchasedProduct($userId, $productId)) {
+            $_SESSION['error'][] = 'Bạn chỉ có thể bình luận sau khi mua sản phẩm.';
+            $this->redirectToDetail($productId, $cateId);
+        }
         $data = $_POST;
         $errors = $this->validateComment($data);
 
@@ -43,7 +47,7 @@
             $this->redirectToDetail($productId, $cateId);
         }
 
-        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'];
+
         $commentData = [
             'user_id' => $userId,
             'product_id' => $productId,
@@ -68,6 +72,34 @@
     private function redirectToDetail($productId, $cateId)
     {
         header('Location: ' . BASE_URL . '?act=productDetail&id=' . $productId . '&cateId=' . $cateId);
+        exit;
+    }
+
+    public function deleteComment()
+    {
+        if (empty($_SESSION['user_admin'])) {
+            $_SESSION['error'][] = 'Bạn không có quyền xóa bình luận.';
+            header('Location: ' . BASE_URL); 
+            exit;
+        }
+
+        $reviewId = $_GET['id'] ?? null;
+
+        if (!$reviewId) {
+            $_SESSION['error'][] = 'Không tìm thấy bình luận cần xóa.';
+            header('Location: ' . BASE_URL);
+            exit;
+        }
+
+        $isDeleted = $this->review->delete('id = :id', ['id' => $reviewId]);
+
+        if ($isDeleted) {
+            $_SESSION['success'] = "Xóa bình luận thành công";
+        } else {
+            $_SESSION['error'][] = 'Có lỗi xảy ra khi xóa bình luận.';
+        }
+
+        header('Location: ' . BASE_URL );
         exit;
     }
 }

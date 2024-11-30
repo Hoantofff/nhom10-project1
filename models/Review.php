@@ -26,7 +26,7 @@ class Review extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getReviewById( $productId)
+    public function getReviewById($productId)
     {
         $sql = "SELECT  r.id,
                         r.user_id,
@@ -48,5 +48,19 @@ class Review extends BaseModel
         $stmt->bindParam(":product_id", $productId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function hasPurchasedProduct($userId, $productId)
+    {
+        $sql = "SELECT COUNT(*) as count
+            FROM bill_detail bd
+            INNER JOIN bill b ON b.id = bd.bill_id
+            WHERE b.user_id = :user_id AND bd.product_id = :product_id AND b.bill_status = 4";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(":user_id", $userId);
+        $stmt->bindParam(":product_id", $productId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] > 0;
     }
 }
