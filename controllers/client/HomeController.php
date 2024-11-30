@@ -7,6 +7,7 @@ class HomeController
     private $slider;
     private $bill;
     private $billDetail;
+    private $user;
     public function __construct() 
     {
         $this->home = new Home();
@@ -14,6 +15,7 @@ class HomeController
         $this->slider = new Slider();
         $this->bill = new Bill();
         $this->billDetail = new BillDetail();
+        $this->user = new User();
     }
     public function index()
     {
@@ -90,14 +92,26 @@ class HomeController
     {
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         $view = "user/payment";
+        $user=$this->user->getByID($userId);
         $cartItems = $this->card->getCart($userId);
         require_once PATH_VIEW_CLIENT . "main.php";
     }
     public function billDetail()
-    {
+    {           
+        $statusLabels = [
+            1 => 'Chờ xử lí',
+            2 => 'Đã xử lí',
+            3 => 'Đang giao hàng',
+            4 => 'Đã thanh toán',
+            5 => 'Hủy đơn'
+        ];
+        $paymentLabels = [
+            1 => 'COD',
+            2 => 'Online'
+        ];
         $id=$_GET['id'];
         $billData= $this->bill->getByID($id);
-        $client_id = $_SESSION['user_client']['id'];
+        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         $cartItems = $this->billDetail->getBillDetails($id);
         $view = "user/billDetail";
         require_once PATH_VIEW_CLIENT . "main.php";

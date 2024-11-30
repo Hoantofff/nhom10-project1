@@ -19,11 +19,11 @@ class BillAdminController
         $view = "user/billList";
         $data = $this->bill->getAll();
         $statusLabels = [
-            1 => 'Pending',
-            2 => 'Processing',
-            3 => 'Shipped',
-            4 => 'Delivered',
-            5 => 'Cancelled'
+            1 => 'Chờ xử lí',
+            2 => 'Đã xử lí',
+            3 => 'Đang giao hàng',
+            4 => 'Đã thanh toán',
+            5 => 'Hủy đơn'
         ];
         // $client_id = $_SESSION['user-client']['id'];
         // $data = $this->bill->getByID($client_id);
@@ -39,12 +39,12 @@ class BillAdminController
     public function index()
     {   
         $statusLabels = [
-        1 => 'Pending',
-        2 => 'Processing',
-        3 => 'Shipping',
-        4 => 'Delivered',
-        5 => 'Cancelled'
-        ];
+            1 => 'Chờ xử lí',
+            2 => 'Đã xử lí',
+            3 => 'Đang giao hàng',
+            4 => 'Đã thanh toán',
+            5 => 'Hủy đơn'
+            ];
         $paymentLabels = [
             1 => 'COD',
             2 => 'Online'
@@ -61,11 +61,11 @@ class BillAdminController
                 throw new Exception('Thiếu tham số "id"', 99);
             }
             $statusLabels = [
-                1 => 'Pending',
-                2 => 'Processing',
-                3 => 'Shipped',
-                4 => 'Delivered',
-                5 => 'Cancelled'
+                1 => 'Chờ xử lí',
+                2 => 'Đã xử lí',
+                3 => 'Đang giao hàng',
+                4 => 'Đã thanh toán',
+                5 => 'Hủy đơn'
                 ];
                 $paymentLabels = [
                     1 => 'COD',
@@ -90,11 +90,11 @@ class BillAdminController
     }
     public function show() {
         $statusLabels = [
-            1 => 'Pending',
-            2 => 'Processing',
-            3 => 'Shipping',
-            4 => 'Delivered',
-            5 => 'Cancelled'
+            1 => 'Chờ xử lí',
+            2 => 'Đã xử lí',
+            3 => 'Đang giao hàng',
+            4 => 'Đã thanh toán',
+            5 => 'Hủy đơn'
             ];
         $paymentLabels = [
             1 => 'COD',
