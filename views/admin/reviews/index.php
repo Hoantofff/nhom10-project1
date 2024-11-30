@@ -52,6 +52,7 @@
                                 <td><?= $comment['created_at'] ?></td>
                                 <td>
                                     <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=review-show&id=' . $comment['id'] ?>">Chi Tiết</a>
+                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '&act=review-delete&id=' . $comment['id'] ?>" onclick="confirm('Bạn Có chắc muốn xóa hay không?')">Xóa</a>
                                 </td>
                             </tr>
 

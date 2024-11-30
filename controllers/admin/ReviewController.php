@@ -26,5 +26,32 @@ class ReviewController
         
         return require_once PATH_VIEW_ADMIN_MAIN;
     }
+    public function delete(){
+        try {
+            if (empty($_SESSION['user_admin'])) {
+                $_SESSION['error'][] = 'Bạn không có quyền xóa bình luận.';
+                header('Location: ' . BASE_URL_ADMIN . '&act=review-index'); 
+                exit;
+            }
+    
+            $reviewId = $_GET['id'] ?? null;
+    
+            if (!$reviewId) {
+                $_SESSION['error'][] = 'Không tìm thấy bình luận cần xóa.';
+                header('Location: ' . BASE_URL_ADMIN . '&act=review-index');
+                exit;
+            }
+            $this->comment->delete('id = :id', ['id' => $reviewId]);
+            $_SESSION['success'] = true;
+            $_SESSION['msg'] = 'Thao Tác Thành công';
+        
+        } catch (\Throwable $th) {
+            $_SESSION['success'] = false;
+            $_SESSION['msg'] = $th->getMessage();
+        }
+
+        header('location: ' . BASE_URL_ADMIN . '&act=review-index');
+        exit();
+    }
     
 }
