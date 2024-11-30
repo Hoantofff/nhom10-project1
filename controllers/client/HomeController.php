@@ -94,6 +94,7 @@ class HomeController
         $view = "user/payment";
         $user=$this->user->getByID($userId);
         $cartItems = $this->card->getCart($userId);
+        // debug($cartItems);die;
         require_once PATH_VIEW_CLIENT . "main.php";
     }
     public function billDetail()

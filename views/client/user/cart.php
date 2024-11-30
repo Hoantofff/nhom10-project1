@@ -1,9 +1,9 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
-<?php
+    <?php
     if (isset($_SESSION['error'])) {
 
-        
-     echo'
+
+        echo '
         <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
         <span class="sr-only">Info</span>
         <div>
@@ -11,7 +11,7 @@
         </div>
       </div>
        ';
-       unset($_SESSION["error"]);
+        unset($_SESSION["error"]);
     }
     ?>
     <form
@@ -49,15 +49,15 @@
                             <input
                                 class="w-[40px] h-[40px] border-[1px] border-[#ccc] rounded-[5px] text-center"
                                 type="number"
-                                name="products[<?= $item['variant_id'] ?>][quantity]" 
-                            value="<?= $item['c_quantity'] ?>"
-                            min="1">
+                                name="products[<?= $item['variant_id'] ?>][quantity]"
+                                value="<?= $item['c_quantity'] ?>"
+                                min="1">
                             <input type="hidden" name="products[<?= $item['variant_id'] ?>][product_id]" value="<?= $item['pd_id'] ?>">
-                            <input type="hidden" name="products[<?= $item['variant_id'] ?>][variant_id]" value="<?= $item['variant_id'] ?>"> 
+                            <input type="hidden" name="products[<?= $item['variant_id'] ?>][variant_id]" value="<?= $item['variant_id'] ?>">
                         </td>
                         <td class="p-[10px] w-[10%] text-center"><?= number_format($item['c_quantity'] * $item['pd_sale_price']) ?>đ</td>
                         <td class="p-[10px] w-[5%] text-center">
-                            <a href="<?= BASE_URL ?>?act=remove-item-from-cart&user_id=<?= $userId ?>&product_id=<?= $item['pd_id'] ?>&variant_id=<?= $item['variant_id'] ?>" 
+                            <a href="<?= BASE_URL ?>?act=remove-item-from-cart&user_id=<?= $userId ?>&product_id=<?= $item['pd_id'] ?>&variant_id=<?= $item['variant_id'] ?>"
                                 class="text-[#e1042b]">
                                 <i class="fa-solid fa-trash text-[35px]"></i>
                             </a>
@@ -87,7 +87,13 @@
         </div>
     </form>
 <?php else: ?>
-    <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
-        <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">Bạn phải đăng nhập để xem giỏ hàng</a>
+    <div class="w-[1290px] mt-[100px] pb-[30px] text-center border border-[#ccc] rounded-2xl px-5 mx-auto shadow-lg bg-gradient-to-r from-blue-50 to-white">
+        <p class="text-lg font-medium text-gray-700 mb-5">
+            Bạn phải đăng nhập để xem giỏ hàng
+        </p>
+        <a class="inline-block px-[100px] py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">
+            Đăng nhập ngay
+        </a>
     </div>
+
 <?php endif; ?>
