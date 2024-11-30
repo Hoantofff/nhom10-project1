@@ -1,3 +1,19 @@
+<?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
+<?php
+    if (isset($_SESSION['error'])) {
+
+        
+     echo'
+        <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">' . $_SESSION["error"] . '</span> 
+        </div>
+      </div>
+       ';
+       unset($_SESSION["error"]);
+    }
+    ?>
 <form class="w-[1290px] mt-[100px] pb-[30px]  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
     action="">
     <table class="w-full">
@@ -24,9 +40,6 @@
                 <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
                     Tổng tiền
                 </td>
-                <!-- <td class="border-b-[3px] border-solid border-[#e1042b] p-[10px] w-[10%] text-center  text-nowrap">
-                    Chức năng
-                </td> -->
                 <td class="p-[10px] w-[5%]  text-nowrap"></td>
                 </td>
             </tr>
@@ -53,3 +66,8 @@
         </tbody>
     </table>
 </form>
+<?php else: ?>
+    <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
+        <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">Bạn phải đăng nhập để thao tác</a>
+    </div>
+<?php endif; ?>

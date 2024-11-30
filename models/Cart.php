@@ -51,7 +51,7 @@ class Cart extends BaseModel
                    pd.sale_price as pd_sale_price, 
                    u.name AS u_name,
                    u.id as u_id,
-                   c.quantity as c_quantity,
+                   c.quantity as c_quantity, 
                    v.id as variant_id,  
                    v.size_id as size_id, 
                    v.color_id as color_id,
