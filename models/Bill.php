@@ -137,62 +137,15 @@ class Bill extends BaseModel
         }
         return false;
     }
-    public function deleteClientBillCheck($bill_id)
-    {   
-        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
-        if(!$userId) {
-            return 1;
-        }
-        $checkBillStatus = "SELECT bill_status,user_id FROM bill WHERE id = :bill_id";
-        $stmt = $this->pdo->prepare($checkBillStatus);
+    public function getBillStatusAndOwner($bill_id)
+    {
+        $sql = "
+            SELECT bill_status, user_id 
+            FROM bill 
+            WHERE id = :bill_id
+        ";
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['bill_id' => $bill_id]);
-        $bill = $stmt->fetch();
-        if (!$bill || $userId!=$bill['user_id']) {
-            return 2;
-        } else if($bill['bill_status'] != 1) {
-            return 3;
-        } else {
-            $deleteSql = "DELETE FROM bill WHERE id = :bill_id";
-            $stmt = $this->pdo->prepare($deleteSql);
-            $result = $stmt->execute(['bill_id' => $bill_id]);
-            if ($result) {return 4;}
-        }
-    }
-    public function deleteBillCheck($bill_id)
-    {   
-        $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
-        if(!$userId) {
-            return [
-                'success' => false,
-                'message' => 'Không xác định được người dùng. Vui lòng đăng nhập lại.'
-            ];
-        }
-            $checkBillStatus = "SELECT bill_status,user_id FROM bill WHERE id = :bill_id";
-            $stmt = $this->pdo->prepare($checkBillStatus);
-            $stmt->execute(['bill_id' => $bill_id]);
-            $bill = $stmt->fetch();
-
-            if (!$bill || $bill['bill_status'] != 1 || $userId!=$bill['user_id']) {
-                return [
-                    'success' => false,
-                    'message' => 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa thanh toán thuộc quyền sở hữu của bạn.'
-                ];
-            }
-
-            $deleteSql = "DELETE FROM bill WHERE id = :bill_id";
-            $stmt = $this->pdo->prepare($deleteSql);
-            $deleteSuccess = $stmt->execute(['bill_id' => $bill_id]);
-
-            if ($deleteSuccess) {
-                return [
-                    'success' => true,
-                    'message' => 'Hóa đơn đã được xóa thành công.'
-                ];
-            } else {
-                return [
-                    'success' => false,
-                    'message' => 'Có lỗi xảy ra khi xóa hóa đơn. Vui lòng thử lại sau.'
-                ];
-            }
+        return $stmt->fetch();
     }
 }
