@@ -12,10 +12,35 @@ class Slider extends BaseModel
                 s.img_slider AS s_img_slider,
                 s.content AS s_content,
                 s.created_at AS s_created_at,
+                s.status AS s_status,
                 p.id AS p_id,
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id
+            ORDER BY s.id ASC
+        ";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        return $result ?: [];
+    }
+    public function getActiveSlider() 
+    {
+        $sql = "
+            SELECT 
+                s.id AS s_id,
+                s.img_slider AS s_img_slider,
+                s.content AS s_content,
+                s.created_at AS s_created_at,
+                s.status AS s_status,
+                p.id AS p_id,
+                p.name AS p_name
+            FROM sliders s
+            JOIN products p ON p.id = s.product_id
+            WHERE s.status=1
             ORDER BY s.id ASC
         ";
 
@@ -35,6 +60,7 @@ class Slider extends BaseModel
                 s.img_slider AS s_img_slider,
                 s.content AS s_content,
                 s.created_at AS s_created_at,
+                s.status AS s_status,
                 p.id AS p_id,
                 p.name AS p_name
             FROM sliders s
@@ -46,6 +72,18 @@ class Slider extends BaseModel
 
         $stmt->execute(['id' => $id]);
 
+        $result = $stmt->fetch();
+        return $result ?: null;
+    }
+    public function getCountStatus() 
+    {
+        $sql = "
+            SELECT COUNT(id) AS active_sliders
+            FROM sliders
+            WHERE status = 1;
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
         $result = $stmt->fetch();
         return $result ?: null;
     }

@@ -95,6 +95,16 @@ class Variant extends BaseModel{
         
         return $colors;
     }
-    
-
+    public function decreaseVariantQuantity($variantId,$quantity) {
+        $sql="UPDATE variant SET variant_quantity = variant_quantity - :quantity WHERE id= :variantId AND variant_quantity >= :quantity";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['variantId'=>$variantId,'quantity'=>$quantity]);
+        return $stmt->rowCount()>0;
+    }
+    public function increaseVariantQuantity($variantId, $quantity) {
+        $sql = "UPDATE variant SET variant_quantity = variant_quantity + :quantity WHERE id = :variantId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['variantId' => $variantId, 'quantity' => $quantity]);
+        return $stmt->rowCount() > 0;
+    }
 }

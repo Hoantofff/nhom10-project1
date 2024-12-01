@@ -5,12 +5,14 @@ class BillClientController
     private $bill;
     private $cart;
     private $billDetail;
+    private $variant;
     protected $table;
     public function __construct()
     {
         $this->bill = new Bill();
         $this->billDetail = new BillDetail();
         $this->cart = new Cart();
+        $this->variant = new Variant();
     }
     public function billList()
     {
@@ -95,6 +97,11 @@ class BillClientController
         // Thêm chi tiết hóa đơn vào bảng `bill_detail`
         foreach ($cartItems as $item) {
             $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
+            $result=$this->variant->decreaseVariantQuantity($item['variant_id'],$item['c_quantity']);
+            if(!$result) {
+                $_SESSION['error'][]="Không thể giảm số lượng cho biến thể ID:{$item['variant_id']}.";
+                header('location:' . BASE_URL . '?act=goToPayment');
+            }
         }
 
         // Xóa giỏ hàng sau khi đặt hàng thành công (optional)
@@ -104,24 +111,39 @@ class BillClientController
         exit();
     }
     public function deleteClientBill() {
-            $id=$_GET['id'];
-            $result=$this->bill->deleteClientBillCheck($id);
-            if($result==1) {
+            $bill_id=$_GET['id'] ?? null;
+            $userId=$_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
+            // kiểm tra id người dùng
+            if(!$userId) {
                 $_SESSION['error']='Không xác định được người dùng. Vui lòng đăng nhập lại.';
                 header("Location: " . BASE_URL . "?act=goToBill");
                 exit;
-            } else if($result==2) {
+            }
+            // lấy thông tin hóa đơn
+            $bill=$this->bill->getBillStatusAndOwner($bill_id);
+            // kiểm tra trạng thái hóa đơn và quyền sở hữu
+            if(!$bill || $userId != $bill['user_id']) {
                 $_SESSION['error']='Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa thanh toán thuộc quyền sở hữu của bạn.';
                 header("Location: " . BASE_URL . "?act=goToBill");
                 exit;
-            } else if($result==3) {
+            } elseif ($bill['bill_status']!=1) {
                 $_SESSION['error']='Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa được xử lí';
                 header("Location: " . BASE_URL . "?act=goToBill");
                 exit;
-            } else if ($result==4) {
+            }
+            $billDetails = $this->billDetail->getBillDetailsByBillId($bill_id);
+            // hoàn trả số lượng
+            foreach($billDetails as $detail) {
+                $this->variant->increaseVariantQuantity($detail['variant_id'],$detail['quantity']);
+            }
+            // xóa
+            $result=$this->bill->delete("id = :id",['id'=>$bill_id]);
+            if ($result>0) {
                 $_SESSION['error']='Hóa đơn đã được hủy thành công.';
-                header("Location: " . BASE_URL . "?act=goToBill");
-                exit;
-            } 
+            } else {
+                $_SESSION['error']='Đã có lỗi.';
+            }
+            header("Location: " . BASE_URL . "?act=goToBill");
+            exit();
     }
 }
