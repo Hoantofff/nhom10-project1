@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +34,16 @@
                                         unset($_SESSION['msg']);
                                     }
                                     ?>
+                                    <?php if (!empty($_SESSION['error'])): ?>
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                <?php foreach ($_SESSION['error'] as $err):  ?>
+                                                    <li><?= $err ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                        <?php unset($_SESSION['error']) ?>
+                                    <?php endif; ?>
                                     <form action="<?= BASE_URL ?>?act=login" method="POST">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" name="email" type="text"
