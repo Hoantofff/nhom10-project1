@@ -16,7 +16,7 @@ class onlinePaymentController
             $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này 
             $vnp_OrderInfo = "Noi dung thanh toan";
             $vnp_OrderType = "billpayment";
-            $vnp_Amount = 2000000 * 100;
+            $vnp_Amount = $_POST['total'] * 100;
             $vnp_Locale = "vn";
             $vnp_BankCode = "NCB";
             $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

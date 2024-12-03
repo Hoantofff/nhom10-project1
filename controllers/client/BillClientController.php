@@ -174,70 +174,73 @@ class BillClientController
     // Phương thức để thêm hóa đơn và chi tiết hóa đơn
     public function addBill()
     {
-        try {
-            // Kiểm tra nếu người dùng đã đăng nhập
-            if (!isset($_SESSION['user_client']['id'])) {
-                throw new Exception('Vui lòng đăng nhập để tiếp tục.');
+        if (isset($_POST['paymentCod'])) {
+
+            try {
+                // Kiểm tra nếu người dùng đã đăng nhập
+                if (!isset($_SESSION['user_client']['id'])) {
+                    throw new Exception('Vui lòng đăng nhập để tiếp tục.');
+                }
+
+                // Lấy thông tin từ form và kiểm tra tính hợp lệ
+                $user_name = isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
+                $user_email = isset($_POST['user_email']) ? trim($_POST['user_email']) : '';
+                $user_address = isset($_POST['user_address']) ? trim($_POST['user_address']) : '';
+                $user_phone = isset($_POST['user_phone']) ? trim($_POST['user_phone']) : '';
+                $total = isset($_POST['total']) ? floatval($_POST['total']) : 0;
+                $user_id = $_SESSION['user_client']['id'];
+
+                // Kiểm tra các trường hợp bắt buộc
+                if (empty($user_name)) {
+                    throw new Exception('Tên người nhận không được để trống.');
+                }
+
+                if (empty($user_address)) {
+                    throw new Exception('Địa chỉ nhận hàng không được để trống.');
+                }
+
+                if (empty($user_phone) || !preg_match('/^\d{9,10}$/', $user_phone)) {
+                    throw new Exception('Số điện thoại không hợp lệ. Vui lòng nhập lại.');
+                }
+
+                if ($total <= 0) {
+                    throw new Exception('Tổng tiền không hợp lệ.');
+                }
+
+                // 1. Thêm hóa đơn vào bảng `bill`
+                $billId = $this->bill->addBill($user_name, $user_email, $user_address, $user_phone, $total, $user_id);
+
+                if (!$billId) {
+                    throw new Exception('Đã có lỗi xảy ra khi thêm hóa đơn. Vui lòng thử lại.');
+                }
+
+                // 2. Lấy thông tin giỏ hàng của người dùng
+                $cartItems = $this->cart->getCart($user_id);
+
+                // Kiểm tra nếu giỏ hàng rỗng
+                if (empty($cartItems)) {
+                    throw new Exception('Giỏ hàng của bạn hiện tại không có sản phẩm.');
+                }
+
+                // 3. Thêm chi tiết hóa đơn vào bảng `bill_detail`
+                foreach ($cartItems as $item) {
+                    $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
+                }
+
+                // 4. Xóa giỏ hàng sau khi đặt hàng thành công (optional)
+                $this->cart->clearCart($user_id);
+                // Chuyển hướng về trang khác (ví dụ: trang cảm ơn hoặc đơn hàng của người dùng)
+                header('Location: ' . BASE_URL . '?act=goToBill');
+                exit();
+            } catch (Exception $e) {
+                // Nếu có lỗi, thiết lập thông báo lỗi
+                $_SESSION['success'] = false;
+                $_SESSION['msg'] = $e->getMessage();
+
+                // Chuyển hướng lại về trang trước đó hoặc trang giỏ hàng
+                header('Location: ' . BASE_URL . '?act=goToCart');
+                exit();
             }
-
-            // Lấy thông tin từ form và kiểm tra tính hợp lệ
-            $user_name = isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
-            $user_email = isset($_POST['user_email']) ? trim($_POST['user_email']) : '';
-            $user_address = isset($_POST['user_address']) ? trim($_POST['user_address']) : '';
-            $user_phone = isset($_POST['user_phone']) ? trim($_POST['user_phone']) : '';
-            $total = isset($_POST['total']) ? floatval($_POST['total']) : 0;
-            $user_id = $_SESSION['user_client']['id'];
-
-            // Kiểm tra các trường hợp bắt buộc
-            if (empty($user_name)) {
-                throw new Exception('Tên người nhận không được để trống.');
-            }
-
-            if (empty($user_address)) {
-                throw new Exception('Địa chỉ nhận hàng không được để trống.');
-            }
-
-            if (empty($user_phone) || !preg_match('/^\d{9,10}$/', $user_phone)) {
-                throw new Exception('Số điện thoại không hợp lệ. Vui lòng nhập lại.');
-            }
-
-            if ($total <= 0) {
-                throw new Exception('Tổng tiền không hợp lệ.');
-            }
-
-            // 1. Thêm hóa đơn vào bảng `bill`
-            $billId = $this->bill->addBill($user_name, $user_email, $user_address, $user_phone, $total, $user_id);
-
-            if (!$billId) {
-                throw new Exception('Đã có lỗi xảy ra khi thêm hóa đơn. Vui lòng thử lại.');
-            }
-
-            // 2. Lấy thông tin giỏ hàng của người dùng
-            $cartItems = $this->cart->getCart($user_id);
-
-            // Kiểm tra nếu giỏ hàng rỗng
-            if (empty($cartItems)) {
-                throw new Exception('Giỏ hàng của bạn hiện tại không có sản phẩm.');
-            }
-
-            // 3. Thêm chi tiết hóa đơn vào bảng `bill_detail`
-            foreach ($cartItems as $item) {
-                $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
-            }
-
-            // 4. Xóa giỏ hàng sau khi đặt hàng thành công (optional)
-            $this->cart->clearCart($user_id);
-            // Chuyển hướng về trang khác (ví dụ: trang cảm ơn hoặc đơn hàng của người dùng)
-            header('Location: ' . BASE_URL . '?act=goToBill');
-            exit();
-        } catch (Exception $e) {
-            // Nếu có lỗi, thiết lập thông báo lỗi
-            $_SESSION['success'] = false;
-            $_SESSION['msg'] = $e->getMessage();
-
-            // Chuyển hướng lại về trang trước đó hoặc trang giỏ hàng
-            header('Location: ' . BASE_URL . '?act=goToCart');
-            exit();
         }
     }
     public function deleteClientBill()

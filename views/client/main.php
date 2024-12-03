@@ -95,9 +95,9 @@
                 </a>
                 <?php if (isset($_SESSION['user_client'])) { ?>
                     <div class="user w-[130px] flex">
-                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?><br>
+                        <span class="text-[#fff] text-[12px]">Xin chào: <?= $_SESSION['user_client']['name'] ?>
                             <a class="text-[#fff] text-[12px] underline"
-                                href="<?= BASE_URL ?>?act=info-user&id=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
+                                href="?action=infoUser&userName=<?= $_SESSION['user_client']['id'] ?>">Thông tin tài
                                 khoản</a>
                         </span>
                     </div>
@@ -554,6 +554,7 @@
 
 </body>
 <script src="<?= BASE_ASSETS_JS ?>cart.js"></script>
+<script src="<?= BASE_ASSETS_JS ?>slider.js"></script>
 <?php if (isset($script)) {
     require_once PATH_ASSETS_JS . $script . '.php';
 } ?>
