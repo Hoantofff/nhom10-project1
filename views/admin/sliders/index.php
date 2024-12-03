@@ -24,22 +24,24 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>name</th>
-                            <th>img_slider</th>
-                            <th>content</th>
-                            <th>created_at</th>
-                            <th>Action</th>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Nội dung</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>id</th>
-                            <th>name</th>
-                            <th>img_slider</th>
-                            <th>content</th>
-                            <th>created_at</th>
-                            <th>Action</th>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Nội dung</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Chức năng</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -55,7 +57,13 @@
                                 <td><?= $slider['s_content'] ?></td>
                                 <td><?= $slider['s_created_at'] ?></td>
                                 <td>
-                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=sliders-edit&id=' . $slider['s_id'] ?>">Update</a>
+                                <a class="btn <?=$slider['s_status']==1 ? 'btn-success' : 'btn-warning'?>" href="<?= BASE_URL_ADMIN . '&act=sliders-status&id=' . $slider['s_id'] ?>">
+                                    <?=$slider['s_status']==1 ? 'Hiện' : 'Ẩn'?>
+                                </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="<?= BASE_URL_ADMIN . '&act=sliders-edit&id=' . $slider['s_id'] ?>">Cập nhật</a>
+                                    <a class="btn btn-danger" href="<?= BASE_URL_ADMIN . '&act=sliders-delete&id=' . $slider['s_id'] ?>">Xóa</a>
                                 </td>
                             </tr>
 

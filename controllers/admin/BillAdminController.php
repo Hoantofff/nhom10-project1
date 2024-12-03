@@ -5,12 +5,14 @@ class BillAdminController
     private $bill;
     private $cart;
     protected $table;
+    private $billDetail;
     // protected $db;
     public function __construct()
     {
         // $this->home = new Home();
         $this->bill = new Bill();
         $this->cart = new Cart();
+        $this->billDetail = new BillDetail();
         // $this->db = new PDO("mysql:host=localhost;dbname=my_database", "username", "password");
         // $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Bật chế độ báo lỗi
     }
@@ -103,6 +105,7 @@ class BillAdminController
         $view = 'bills/show';
         $title = 'Bill chi tiết';
         $data = $this->bill->getPersonalBillAdmin($_GET['id']);
+        $itemDetail = $this->billDetail->getBillDetails($_GET['id']);
         require_once PATH_VIEW_ADMIN_MAIN;
     }
     public function update() {
@@ -119,17 +122,15 @@ class BillAdminController
                 throw new Exception("Bill có Id = $id Không Tồn Tại");
             }
             $data = $_POST;
-            $_SESSION['error'] = [];
-    
             if (empty($data['bill_status'])) {
-                $_SESSION['error']['status']="Không thể chọn trùng trạng thái";
+                header('location: ' . BASE_URL_ADMIN . '&act=bills-show&id=' . $id);
+                throw new Exception('Không thể chọn trùng trạng thái');
+                exit();
             }
             if($data['bill_status'] <= $bill['bill_status']) {
-                $_SESSION['error']['status']="Không thể quay ngược hay giữ nguyên trạng thái";
-            }
-            if (!empty($_SESSION['error'])) {
-                header('location: ' . BASE_URL_ADMIN . '&act=bills-edit&id=' . $id);
-                throw new Exception('Dữ Liệu Lỗi');
+                header('location: ' . BASE_URL_ADMIN . '&act=bills-show&id=' . $id);
+                throw new Exception('Không thể quay ngược hay giữ nguyên trạng thái');
+                exit();
             }
             $rowcount = $this->bill->updateBillStatus($id, $data['bill_status']);
             if ($rowcount > 0) {
@@ -148,7 +149,7 @@ class BillAdminController
             if ($th->getCode() == 99) {
                 header('location: ' . BASE_URL_ADMIN . '&act=bills-index');
             } else {
-                header('location: ' . BASE_URL_ADMIN . '&act=bills-edit&id=' . $_GET['id']);
+                header('location: ' . BASE_URL_ADMIN . '&act=bills-show&id=' . $_GET['id']);
             }
             exit();
         }

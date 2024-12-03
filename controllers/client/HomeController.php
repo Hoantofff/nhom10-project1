@@ -20,7 +20,7 @@ class HomeController
     public function index()
     {
         $view = "user/home";
-        $sliders= $this->slider->getAll();
+        $sliders= $this->slider->getActiveSlider();
         $data = $this->home->renderProductsAndTypes();
         $categories = $this->home->renderCategory();
         require_once PATH_VIEW_CLIENT . 'main.php';
@@ -52,6 +52,7 @@ class HomeController
     public function goToCate()
     {
         $view = "user/productType";
+        $sliders= $this->slider->getActiveSlider();
         $idCate = $_GET['idCate'];
         $data = $this->home->getProductsAndTypes($idCate);
         $categories = $this->home->renderCategory();

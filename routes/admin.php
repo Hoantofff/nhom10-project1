@@ -40,6 +40,10 @@ match ($act) {
     'sliders-index' => (new SliderController)->index(),
     'sliders-edit' => (new SliderController)->edit(),
     'sliders-update' => (new SliderController)->update(),
+    'sliders-create' => (new SliderController)->create(),
+    'sliders-add' => (new SliderController)->addSlider(),
+    'sliders-delete' => (new SliderController)->deleteSlider(),
+    'sliders-status' => (new SliderController)->statusSlider(),
 
     // CRUD Product 
     'products-index' => (new ProductController)->index(),
@@ -64,7 +68,6 @@ match ($act) {
     // Bill
     'bills-index' => (new BillAdminController)->index(),
     'bills-show' => (new BillAdminController)->show(),
-    'bills-edit' => (new BillAdminController)->edit(),
     'bills-update' => (new BillAdminController)->update(),
     'bills-delete' => (new BillAdminController)->delete(),
 };

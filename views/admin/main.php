@@ -101,10 +101,18 @@
                             </div>
                            
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Slider
+                    <!-- Slider -->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSliders" aria-expanded="false" aria-controls="collapseCategories">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                                Sliders
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="collapseSliders" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">Danh Sách</a>
+                                    <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=sliders-create">Tạo Mới</a>
+                                </nav>
+                            </div>
                             <a class="nav-link" href="<?= BASE_URL_ADMIN ?>&act=bills-index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Bill

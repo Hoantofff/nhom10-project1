@@ -25,26 +25,20 @@
             <?php unset($_SESSION['error']) ?>
         <?php endif; ?>
 
-        <form class="border p-4" action="<?= BASE_URL_ADMIN . '&act=sliders-update&id=' . $slider['s_id']?>" method="POST" enctype="multipart/form-data">
+        <form class="border p-4" action="<?= BASE_URL_ADMIN?>&act=sliders-add" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3 mt-3">
-                        <label for="name" class="form-label">Sản phẩm cũ</label>
-                        <input type="text" class="form-control" id="product_name" name="product_name" value="<?= $slider['p_name'] ?? null ?>" disabled>
+                        <label for="inputSearch" class="form-label">Sản phẩm liên kết</label> <br>
+                        <input type="text" name="nameProduct" id="inputSearch"
+                        class="w-full h-full rounded-[10px] px-[30px]" placeholder="Bạn cần tìm gì ?" />
+                    <div class="absolute p-[10px] z-50 bg-[#fff] hidden w-full border-[1px] border-solid border-[#ddd] shadow-form"
+                        id="searchResult"></div>
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="date" class="form-label">Ngày chỉnh sửa</label>
-                        <input 
-                        type="datetime-local" 
-                        class="form-control" 
-                        id="created_at" 
-                        name="created_at" 
-                        value="<?= isset($slider['s_created_at']) ? date('Y-m-d\TH:i', strtotime($slider['s_created_at'])) : '' ?>" 
-                        disabled>
-                    </div>
+                    <input type="hidden" name="selectedProductId" id="selectedProductId" />
                     <div class="mb-3 mt-3">
                         <label for="content" class="form-label">Mô tả</label>
-                        <input type="text" class="form-control" id="content" name="content" value="<?= $slider['s_content'] ?? null ?>" required>
+                        <input type="text" class="form-control" id="content" name="content">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -52,18 +46,13 @@
                             <label for="img_slider" class="form-label">Chọn ảnh mới</label>
                             <input type="file" class="form-control" id="img_slider" name="img_slider">
                             <br/>
-                            <!-- Hiển thị ảnh hiện tại nếu có -->
-                            <?php if (!empty($slider['s_img_slider'])): ?>
-                                <img id="currentImage" src="<?= BASE_ASSETS_UPLOADS .  $slider['s_img_slider'] ?>" class="img-fluid w-100 mx-auto" id="img_slider">
-                            <?php endif; ?>
-
                             <!-- Thêm thẻ img để xem trước ảnh mới -->
                             <img id="previewImage" class="img-fluid w-100 mx-auto" style="display: none; margin-top: 10px;">
                         </div>
                 </div>
             </div>
             <a class="btn btn-dark" href="<?= BASE_URL_ADMIN ?>&act=sliders-index">Quay lại trang danh sách</a>
-            <button class="btn btn-success " type="submit">Update</button> 
+            <button class="btn btn-success " type="submit">Thêm mới</button> 
         </form>
         <?php unset($_SESSION['data']) ?>
     </div>
