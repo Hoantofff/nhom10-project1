@@ -1,20 +1,25 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
-    <?php
-    if (isset($_SESSION['error'])) {
-
-
-        echo '
+    <?php if (!empty($_SESSION['error'])): ?>
         <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
-        <span class="sr-only">Info</span>
-        <div>
-          <span class="font-medium">' . $_SESSION["error"] . '</span> 
+            <ul>
+                <?php foreach ($_SESSION['error'] as $err):  ?>
+                    <li><?= $err ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-      </div>
-       ';
-        unset($_SESSION["error"]);
-    }
-    ?>
-    <form class="w-[1290px] mt-[100px] pb-[30px]  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
+        <?php unset($_SESSION['error']) ?>
+    <?php endif; ?>
+    <?php if (!empty($_SESSION['success']) && is_array($_SESSION['success'])): ?>
+        <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg bg-[#2ce347] mt-[100px]">
+            <ul>
+                <?php foreach ($_SESSION['success'] as $msg): ?>
+                    <li><?= htmlspecialchars($msg) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    <form class="w-[1290px] mt-[100px] pb-[30px] border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
         action="<?= BASE_URL ?>?act=update-cart" method="POST">
         <table class="w-full">
             <thead>

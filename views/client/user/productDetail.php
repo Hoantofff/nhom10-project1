@@ -498,7 +498,7 @@
                 </div>
                 <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
                     <?= $cmt['comment'] ?>
-                    <a href="" class="delete-btn text-[#ff0000] ml-[10px]">
+                    <a onclick="confirm('Bạn Có Chắc Muốn Xóa Hay Không?')" href="<?= BASE_URL ?>?act=deleteReview&id=<?= $cmt['id'] ?>" class="delete-btn text-[#ff0000] ml-[10px]">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </div>

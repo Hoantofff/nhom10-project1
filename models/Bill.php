@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\elementType;
+
 class Bill extends BaseModel 
 {
     protected $table = 'bill';
@@ -135,27 +137,15 @@ class Bill extends BaseModel
         }
         return false;
     }
-    public function deleteClientBillCheck($bill_id)
-{
-    $checkSql = "SELECT bill_status FROM bill WHERE id = :bill_id";
-    $stmt = $this->pdo->prepare($checkSql);
-    $stmt->execute(['bill_id' => $bill_id]);
-    $bill = $stmt->fetch();
-    if (!$bill || $bill['bill_status'] != 1) {
-        return [
-            'success' => false,
-            'message' => 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa thanh toán.'
-        ];
+    public function getBillStatusAndOwner($bill_id)
+    {
+        $sql = "
+            SELECT bill_status, user_id 
+            FROM bill 
+            WHERE id = :bill_id
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['bill_id' => $bill_id]);
+        return $stmt->fetch();
     }
-    
-    $deleteSql = "DELETE FROM bill WHERE id = :bill_id";
-    $stmt = $this->pdo->prepare($deleteSql);
-    $result = $stmt->execute(['bill_id' => $bill_id]);
-
-    if ($result) {
-        return true;
-    } else {
-        return false;
-    }
-}
 }

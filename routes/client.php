@@ -23,6 +23,7 @@ match ($act) {
 
     // HOME CLIENT
     "productDetail" => (new ProductDetailController)->goToProductDetail(),
+    "deleteReview" => (new ProductDetailController)->deleteComment(),
     "info-user" => (new InfoUserController)->gotoInfoUser(),
     "update-info-user" => (new InfoUserController)->updateInfoUser(),
     // BILL CLIENT
@@ -36,5 +37,5 @@ match ($act) {
     'add-to-cart' => (new CartController)->addProductToCart(),
     'update-cart' => (new CartController)->updateCart(),
     "remove-item-from-cart" => (new CartController)->removeProductFromCart(),
-    'addToBill' => (new BillClientController)->AddBill()
+    'addToBill' => (new BillClientController)->addBill()
 };

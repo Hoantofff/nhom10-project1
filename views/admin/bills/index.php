@@ -48,7 +48,7 @@
                         <?php foreach ($data as $bill): ?>
                             <tr>
                                 <td><?= $bill['id'] ?></td>
-                                <td></td>
+                                <td><?= $bill['create_at'] ?></td>
                                 <td><?= $bill['user_name'] ?></td>
                                 <td><?= $bill['total'] ?></td>
                                 <td><?= $statusLabels[$bill['bill_status']] ?? 'Unknown' ?></td>
