@@ -1,6 +1,7 @@
 <?php
 
-class Variant extends BaseModel{
+class Variant extends BaseModel
+{
     protected $table = 'variant';
 
     public function getAll()
@@ -23,7 +24,8 @@ class Variant extends BaseModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getProductId($id){
+    public function getProductId($id)
+    {
         $sql = "SELECT  vr.id as v_id,
                         vr.product_id as vr_product_id,
                         vr.color_id as vr_color_id,
@@ -41,11 +43,11 @@ class Variant extends BaseModel{
                 WHERE vr.product_id = :id
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function getById($variantId)
     {
         $sql = "SELECT * FROM variant WHERE id = :variant_id";
@@ -68,7 +70,8 @@ class Variant extends BaseModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getAllSizes($id) {
+    public function getAllSizes($id)
+    {
         $sql = "SELECT DISTINCT vr.id as vr_id, sz.id AS size_id, sz.size_value as sz_size_value, vr.variant_price_sale as vr_variant_price_sale
                 FROM variant AS vr
                 INNER JOIN size AS sz ON sz.id = vr.size_id
@@ -76,25 +79,34 @@ class Variant extends BaseModel{
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        
+
         $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $sizes;
+
+        $uniqueSizes = [];
+        foreach ($sizes as $size) {
+            $uniqueSizes[$size['size_id']] = $size;
+        }
+
+        return array_values($uniqueSizes);
     }
-    
-    public function getAllColors($id) {
-        $sql = "SELECT DISTINCT vr.id as vr_id, cl.id AS color_id, cl.color_value as cl_color_value, vr.variant_price_sale as vr_variant_price_sale
+
+    public function getAllColors($id)
+    {
+        $sql = "SELECT DISTINCT vr.id as vr_id, cl.id as color_id, cl.color_value as cl_color_value,vr.size_id as size_id, vr.variant_price_sale as vr_variant_price_sale
                 FROM variant AS vr
                 INNER JOIN color AS cl ON cl.id = vr.color_id
                 WHERE vr.product_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        
+
         $colors = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        return $colors;
-    }
-    
+        $uniqueColor = [];
+        foreach ($colors as $color) {
+            $uniqueColor[$color['color_id']] = $color;
+        }
 
+        return array_values($uniqueColor);
+    }
 }

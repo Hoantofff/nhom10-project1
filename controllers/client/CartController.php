@@ -34,13 +34,13 @@ class CartController
         $variant = $this->variant->getById($variantId);
         if (!$variant) {
             $_SESSION['error'][] = 'Biến thể sản phẩm không hợp lệ.';
-            header("Location: " . BASE_URL);
+            header("Location: " . BASE_URL . "?act=goToCart");
             exit();
         }
 
         if ($variant['variant_quantity'] < $quantity) {
             $_SESSION['error'][] = 'Số lượng sản phẩm trong kho không đủ.';
-            header("Location: " . BASE_URL);
+            header("Location: " . BASE_URL . "?act=goToCart");
             exit();
         }
 
