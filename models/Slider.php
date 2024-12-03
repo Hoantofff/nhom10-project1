@@ -40,7 +40,7 @@ class Slider extends BaseModel
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id
-            WHERE s.status=1
+            WHERE s.status = 1
             ORDER BY s.id ASC
         ";
 
