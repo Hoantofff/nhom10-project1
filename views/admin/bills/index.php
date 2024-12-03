@@ -57,11 +57,6 @@
                                 <div class="d-flex gap-2">
                                     <a class="btn btn-success"
                                         href="<?= BASE_URL_ADMIN . '&act=bills-show&id=' . $bill['id'] ?>">Show</a>
-                                    <a class="btn btn-info"
-                                        href="<?= BASE_URL_ADMIN . '&act=bills-edit&id=' . $bill['id'] ?>">Update</a>
-                                    <a class="btn btn-danger"
-                                        href="<?= BASE_URL_ADMIN . '&act=bills-delete&id=' . $bill['id'] ?>"
-                                        onclick="return confirm('Bạn có chắc muốn xóa hay không?')">Delete</a>
                                 </div>
                                 </td>
                             </tr>

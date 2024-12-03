@@ -1,14 +1,15 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
-<?php if (!empty($_SESSION['error'])): ?>
-        <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
-            <ul>
-                <?php foreach ($_SESSION['error'] as $err):  ?>
-                    <li><?= $err ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php unset($_SESSION['error']) ?>
-    <?php endif; ?>
+    <?php if (!empty($cartItems)): ?>
+        <?php if (!empty($_SESSION['error'])): ?>
+            <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $err):  ?>
+                        <li><?= $err ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php unset($_SESSION['error']) ?>
+        <?php endif; ?>
 <div class="font-[sans-serif] bg-white">
      <div class="flex max-sm:flex-col gap-12 max-lg:gap-4  mt-[100px] mb-[50px]">
          <div class="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 lg:min-w-[370px] sm:min-w-[300px]">
@@ -95,6 +96,11 @@
          </div>
      </div>
  </div>
+    <?php else: ?>
+        <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
+            <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?action=index">Bạn phải thêm vào giỏ hàng để thanh toán</a>
+        </div>
+    <?php endif; ?>
  <?php else: ?>
     <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
         <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?act=show-form-login">Bạn phải đăng nhập để thao tác</a>
