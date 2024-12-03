@@ -1,4 +1,5 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
+    <?php if (!empty($cartItems)): ?>
     <?php if (!empty($_SESSION['error'])): ?>
         <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
             <ul>
@@ -91,6 +92,11 @@
             <a class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-[#fff] font-bold" href="<?= BASE_URL ?>?act=goToPayment">Đặt Hàng</a>
         </div>
     </form>
+    <?php else: ?>
+        <div class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
+            <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all" href="<?= BASE_URL ?>?action=index">Bạn phải thêm sản phẩm để vào giỏ hàng</a>
+        </div>
+    <?php endif; ?>
 <?php else: ?>
     <div class="w-[1290px] mt-[100px] pb-[30px] text-center border border-[#ccc] rounded-2xl px-5 mx-auto shadow-lg bg-gradient-to-r from-blue-50 to-white">
         <p class="text-lg font-medium text-gray-700 mb-5">
