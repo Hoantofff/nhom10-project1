@@ -42,7 +42,7 @@ class BillClientController
         require_once PATH_VIEW_CLIENT . "main.php";
     }
     public function addBill()
-    {
+    {   
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             // Lấy thông tin từ form và kiểm tra tính hợp lệ
@@ -238,7 +238,7 @@ class BillClientController
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         // kiểm tra id người dùng
         if (!$userId) {
-            $_SESSION['error'] = 'Không xác định được người dùng. Vui lòng đăng nhập lại.';
+            $_SESSION['error'][] = 'Không xác định được người dùng. Vui lòng đăng nhập lại.';
             header("Location: " . BASE_URL . "?act=goToBill");
             exit;
         }
@@ -246,11 +246,11 @@ class BillClientController
         $bill = $this->bill->getBillStatusAndOwner($bill_id);
         // kiểm tra trạng thái hóa đơn và quyền sở hữu
         if (!$bill || $userId != $bill['user_id']) {
-            $_SESSION['error'] = 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa thanh toán thuộc quyền sở hữu của bạn.';
+            $_SESSION['error'][] = 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa thanh toán thuộc quyền sở hữu của bạn.';
             header("Location: " . BASE_URL . "?act=goToBill");
             exit;
         } elseif ($bill['bill_status'] != 1) {
-            $_SESSION['error'] = 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa được xử lí';
+            $_SESSION['error'][] = 'Hóa đơn không thể xóa. Chỉ xóa được hóa đơn chưa được xử lí';
             header("Location: " . BASE_URL . "?act=goToBill");
             exit;
         }
@@ -262,9 +262,9 @@ class BillClientController
         // xóa
         $result = $this->bill->delete("id = :id", ['id' => $bill_id]);
         if ($result > 0) {
-            $_SESSION['error'] = 'Hóa đơn đã được hủy thành công.';
+            $_SESSION['error'][] = 'Hóa đơn đã được hủy thành công.';
         } else {
-            $_SESSION['error'] = 'Đã có lỗi.';
+            $_SESSION['error'][] = 'Đã có lỗi.';
         }
         header("Location: " . BASE_URL . "?act=goToBill");
         exit();

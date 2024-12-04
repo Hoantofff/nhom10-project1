@@ -20,17 +20,21 @@
     <div class="slider w-[767.5px] h-[450px] mt-[20px] rounded-b-[10px] shadow-menu bg-[#ffffff]">
         <div id="slider-container-img" class=" w-full h-[75%] relative overflow-hidden">
             <?php foreach ($sliders as $slider) { ?>
-                <img src="<?= BASE_ASSETS_UPLOADS ?><?= $slider['s_img_slider'] ?>"
+                <a href="<?= BASE_URL . "?act=productDetail&id=" . $slider['p_id'] . "&cateId=" . $slider['p_brand_id'] ?>" class="w-full h-full object-cover absolute first:left-[0%] left-[-100%]" >
+                    <img src="<?= BASE_ASSETS_UPLOADS ?><?= $slider['s_img_slider'] ?>" 
                     class="w-full h-full object-cover absolute first:left-[0%] left-[-100%]" alt="" />
+                </a>
             <?php } ?>
         </div>
         <div class="slider-title w-full h-[25%] flex">
             <?php foreach ($sliders as $slider) { ?>
-                <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
-                    <p class="text-[13px]">
-                        <?= $slider['s_content'] ?>
-                    </p>
-                </div>
+                <a href="<?= BASE_URL . "?act=productDetail&id=" . $slider['p_id'] . "&cateId=" . $slider['p_brand_id'] ?>"? class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
+                    <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
+                        <p class="text-[13px]">
+                            <?= $slider['s_content'] ?>
+                        </p>
+                    </div>
+                </a>
             <?php  } ?>
         </div>
     </div>

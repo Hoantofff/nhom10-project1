@@ -110,7 +110,7 @@ if (isset($_GET['vnp_ResponseCode'])) {
                         gần bạn
                     </p>
                 </a>
-                <a href="?action=goToInfoWeb"
+                <a href="<?= BASE_URL ?>?act=goToBill"
                     class="flex justify-center items-center gap-[10px] hover:bg-[#ffffff33] hover:h-[55px] h-[42px] rounded-[10px] px-[8px] py-[5px]">
                     <i class="fa-solid fa-table-list text-[20px] text-white"></i>
                     <p class="text-white text-[12px]">
