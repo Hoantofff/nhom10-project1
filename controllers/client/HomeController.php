@@ -52,6 +52,7 @@ class HomeController
     public function goToCate()
     {
         $view = "user/productType";
+        $sliders= $this->slider->getActiveSlider();
         $idCate = $_GET['idCate'];
         $sliders = $this->slider->getActiveSlider();
         $data = $this->home->getProductsAndTypes($idCate);

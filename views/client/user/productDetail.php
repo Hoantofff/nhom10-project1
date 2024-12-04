@@ -199,12 +199,12 @@
             </div>
         </div>
         <div class="section-right w-[40%] box-border pl-[30px]">
-            <div class="list-price-memory w-full flex ">
+            <div class="list-price-memory w-full flex justify-center">
                 <?php foreach ($variantsBySize as $size): ?>
                     <a href="javascript:void(0);"
-                        class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%] size-option"
-                        data-size="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>"
-                        onclick="selectVariant(<?= $size['vr_id'] ?>, 'size')">
+                        class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%] size-option"
+                        data-size-id="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>"
+                        onclick="selectVariant(<?= $size['size_id'] ?>, 'size')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
                             <strong><?= $size['sz_size_value'] ?></strong>
                         </div>
@@ -215,15 +215,15 @@
                 <?php endforeach; ?>
             </div>
 
-            <div class="list-color-price flex flex-wrap w-full ">
+            <div class="list-color-price flex flex-wrap w-full justify-center">
                 <p class="text-[14px] text-[#444] font-bold mb-[10px] w-full">
                     Chọn màu để xem giá và chi nhánh có hàng
                 </p>
                 <?php foreach ($variantsByColor as $color): ?>
                     <a href="javascript:void(0);"
                         class="color-option border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]"
-                        data-color="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?>"
-                        onclick="selectVariant(<?= $color['vr_id'] ?>, 'color')">
+                        data-color-id="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?>"
+                        onclick="selectVariant(<?= $color['color_id'] ?>, 'color')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
                             <strong><?= $color['cl_color_value'] ?></strong>
                         </div>
