@@ -8,7 +8,7 @@ class HomeController
     private $bill;
     private $billDetail;
     private $user;
-    public function __construct() 
+    public function __construct()
     {
         $this->home = new Home();
         $this->card = new Cart();
@@ -20,7 +20,7 @@ class HomeController
     public function index()
     {
         $view = "user/home";
-        $sliders= $this->slider->getActiveSlider();
+        $sliders = $this->slider->getActiveSlider();
         $data = $this->home->renderProductsAndTypes();
         $categories = $this->home->renderCategory();
         require_once PATH_VIEW_CLIENT . 'main.php';
@@ -53,6 +53,7 @@ class HomeController
     {
         $view = "user/productType";
         $idCate = $_GET['idCate'];
+        $sliders = $this->slider->getActiveSlider();
         $data = $this->home->getProductsAndTypes($idCate);
         $categories = $this->home->renderCategory();
         require_once PATH_VIEW_CLIENT . 'main.php';
@@ -61,6 +62,7 @@ class HomeController
     {
         $view = "user/productType";
         $idCate = $_GET['idCate'];
+        $sliders = $this->slider->getActiveSlider();
         $idBrand = $_GET['idBrand'];
         $data = $this->home->getByBrand($idBrand, $idCate);
         $categories = $this->home->renderCategory();
@@ -92,13 +94,17 @@ class HomeController
     {
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         $view = "user/payment";
-        $user=$this->user->getByID($userId);
+        $user = $this->user->getByID($userId);
         $cartItems = $this->card->getCart($userId);
-        // debug($cartItems);die;
-        require_once PATH_VIEW_CLIENT . "main.php";
+        if (!empty($cartItems)) {
+            require_once PATH_VIEW_CLIENT . "main.php";
+        } else {
+            $_SESSION['error'][] = "Giỏ hàng của bạn đang trống không thể sang trang thanh toán";
+            return header("Location:?act=goToCart");
+        }
     }
     public function billDetail()
-    {           
+    {
         $statusLabels = [
             1 => 'Chờ xử lí',
             2 => 'Đã xử lí',
@@ -110,8 +116,8 @@ class HomeController
             1 => 'COD',
             2 => 'Online'
         ];
-        $id=$_GET['id'];
-        $billData= $this->bill->getByID($id);
+        $id = $_GET['id'];
+        $billData = $this->bill->getByID($id);
         $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
         $cartItems = $this->billDetail->getBillDetails($id);
         $view = "user/billDetail";

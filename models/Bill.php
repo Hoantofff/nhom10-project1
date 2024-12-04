@@ -2,7 +2,7 @@
 
 use function PHPSTORM_META\elementType;
 
-class Bill extends BaseModel 
+class Bill extends BaseModel
 {
     protected $table = 'bill';
 
@@ -71,16 +71,17 @@ class Bill extends BaseModel
             FROM bill
             WHERE bill.user_id = :id;
         ";
-    
+
         $stmt = $this->pdo->prepare($sql);
-    
+
         $stmt->execute(['id' => $id]);
-    
+
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // Luôn trả về danh sách mảng
         return $result ?: []; // Trả về mảng rỗng nếu không có bản ghi
     }
-    public function getPersonalBillAdmin($id) {
-        $sql="
+    public function getPersonalBillAdmin($id)
+    {
+        $sql = "
         SELECT 
             id,
             create_at,
@@ -96,29 +97,29 @@ class Bill extends BaseModel
             bill
         WHERE id = :id;
     ";
-    $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
-    $stmt->execute(['id' => $id]);
+        $stmt->execute(['id' => $id]);
 
-    $result = $stmt->fetch();
-    return $result ?: null;
+        $result = $stmt->fetch();
+        return $result ?: null;
     }
-    public function updateBillStatus($id, $billStatus) {
+    public function updateBillStatus($id, $billStatus)
+    {
         $sql = "
             UPDATE bill 
             SET bill_status = :bill_status 
             WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-    
+
         $stmt->execute([
             'id' => $id,
             'bill_status' => $billStatus
         ]);
         return $stmt->rowCount();
     }
-    public function addBill($user_name, $user_email, $user_address, $user_phone, $total, $user_id) {
-        $bill_status = 1;
-        $payment_type = 1;
+    public function addBill($bill_status, $payment_type, $user_name, $user_email, $user_address, $user_phone, $total, $user_id)
+    {
         $sql = "INSERT INTO bill (create_at, bill_status, payment_type, user_id, user_name, user_email, user_address, user_phone, total)
                 VALUES (CURRENT_TIMESTAMP, :bill_status, :payment_type, :user_id, :user_name, :user_email, :user_address, :user_phone, :total)";
         $stmt = $this->pdo->prepare($sql);

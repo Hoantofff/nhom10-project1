@@ -1,3 +1,38 @@
+<?php
+$bill = new Bill();
+$billDetail = new BillDetail();
+$variant = new Variant();
+$cart = new Cart();
+if (isset($_GET['vnp_ResponseCode'])) {
+    if ($_GET['vnp_ResponseCode'] == 24) {
+        echo "<script>alert('Bạn đã huỷ giao dịch thanh toán không thành công')</script>";
+    } else if ($_GET['vnp_ResponseCode'] == 00) {
+        $cartItems = $_SESSION['cartItems'];
+        $user_name = $_SESSION['user_data_online']['user_name'];
+        $user_email = $_SESSION['user_data_online']['user_email'];
+        $user_address = $_SESSION['user_data_online']['user_address'];
+        $user_phone = $_SESSION['user_data_online']['user_phone'];
+        $total = $_SESSION['user_data_online']['total'];
+        $user_id = $_SESSION['user_data_online']['user_id'];
+        $bill_status = 4;
+        $payment_type = 2;
+        $billId = $bill->addBill($bill_status, $payment_type, $user_name, $user_email, $user_address, $user_phone, $total, $user_id);
+        // Thêm chi tiết hóa đơn vào bảng `bill_detail`
+        foreach ($cartItems as $item) {
+            $billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
+            $result = $variant->decreaseVariantQuantity($item['variant_id'], $item['c_quantity']);
+            if (!$result) {
+                $_SESSION['error'][] = "Không thể giảm số lượng cho biến thể ID:{$item['variant_id']}.";
+            }
+        }
+        // Xóa giỏ hàng sau khi đặt hàng thành công (optional)
+        $cart->clearCart($user_id);
+        unset($_SESSION['cartItems']);
+        unset($_SESSION['user_data_online']);
+        header("Location:" . BASE_URL . "?act=goToBill");
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="relative">
 <div class="openShowCategories w-screen h-full z-30 absolute top-0 animate-fadeInLogin hidden">
@@ -77,11 +112,9 @@
                 </a>
                 <a href="?action=goToInfoWeb"
                     class="flex justify-center items-center gap-[10px] hover:bg-[#ffffff33] hover:h-[55px] h-[42px] rounded-[10px] px-[8px] py-[5px]">
-                    <i class="fa-solid fa-circle-info text-[20px] text-white"></i>
+                    <i class="fa-solid fa-table-list text-[20px] text-white"></i>
                     <p class="text-white text-[12px]">
-                        Giới thiệu
-                        <br />
-                        về CellphoneS
+                        Hoá đơn
                     </p>
                 </a>
                 <a href="<?= BASE_URL ?>?act=goToCart"

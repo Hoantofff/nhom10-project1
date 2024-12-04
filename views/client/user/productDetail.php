@@ -199,10 +199,10 @@
             </div>
         </div>
         <div class="section-right w-[40%] box-border pl-[30px]">
-            <div class="list-price-memory w-full flex justify-center">
+            <div class="list-price-memory w-full flex ">
                 <?php foreach ($variantsBySize as $size): ?>
                     <a href="javascript:void(0);"
-                        class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%] size-option"
+                        class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%] size-option"
                         data-size="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>"
                         onclick="selectVariant(<?= $size['vr_id'] ?>, 'size')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
@@ -215,7 +215,7 @@
                 <?php endforeach; ?>
             </div>
 
-            <div class="list-color-price flex flex-wrap w-full justify-center">
+            <div class="list-color-price flex flex-wrap w-full ">
                 <p class="text-[14px] text-[#444] font-bold mb-[10px] w-full">
                     Chọn màu để xem giá và chi nhánh có hàng
                 </p>
@@ -498,7 +498,9 @@
                 </div>
                 <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
                     <?= $cmt['comment'] ?>
-                    <a onclick="confirm('Bạn Có Chắc Muốn Xóa Hay Không?')" href="<?= BASE_URL ?>?act=deleteReview&id=<?= $cmt['id'] ?>" class="delete-btn text-[#ff0000] ml-[10px]">
+                    <a onclick="confirm('Bạn Có Chắc Muốn Xóa Hay Không?')"
+                        href="<?= BASE_URL ?>?act=deleteReview&id=<?= $cmt['id'] ?>"
+                        class="delete-btn text-[#ff0000] ml-[10px]">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </div>

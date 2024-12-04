@@ -92,23 +92,14 @@
         </table>
         <h2 class=" font-bold float-right mt-[30px]">
             Tổng thành tiền: <?= number_format($total, 0, ',', '.')  ?>đ</h2>
-        <div class="w-full flex flex-row-reverse mt-[100px]">
-            <button type="submit"
-                class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">
-                Cập nhật giỏ hàng
-            </button>
-            <a href="?act=goToPayment"
-                class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-center text-[#fff] font-bold">Thanh
-                toán</a>
-        </div>
 
-        <div class="w-full flex flex-row-reverse mt-[20px]">
+        <div class="w-full flex flex-row-reverse gap-[20px] mt-[90px]">
             <button type="submit"
                 class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-[#fff] font-bold">
                 Lưu và Cập nhật giỏ hàng
             </button>
             <a class="px-[20px] py-[10px] border-[1px] rounded-[10px] bg-[#e1042b] text-[#fff] font-bold"
-                href="<?= BASE_URL ?>?act=goToPayment">Đặt Hàng</a>
+                href="<?= BASE_URL ?>?act=goToPayment">Thanh toán</a>
         </div>
     </form>
 <?php else: ?>

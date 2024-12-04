@@ -17,7 +17,7 @@
     <div class="slider w-[767.5px] h-[450px] mt-[20px] rounded-b-[10px] shadow-menu bg-[#ffffff]">
         <div id="slider-container-img" class=" w-full h-[75%] relative overflow-hidden">
             <?php foreach ($sliders as $slider) { ?>
-                <img src="<?= BASE_ASSETS_UPLOADS ?>/img/<?= $slider['img'] ?>"
+                <img src="<?= BASE_ASSETS_UPLOADS ?><?= $slider['s_img_slider'] ?>"
                     class="w-full h-full object-cover absolute first:left-[0%] left-[-100%]" alt="" />
             <?php } ?>
         </div>
@@ -25,15 +25,12 @@
             <?php foreach ($sliders as $slider) { ?>
                 <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
                     <p class="text-[13px]">
-                        <?= $slider['slider_product_name'] ?>
-                        <br />
-                        <?= $slider['content'] ?>
+                        <?= $slider['s_content'] ?>
                     </p>
                 </div>
             <?php  } ?>
         </div>
     </div>
-    <script src="./assets/js/slider.js"></script>
     <!-- RIGHT BANNER -->
     <div class="right-banner w-[265px] h-[450px] flex flex-wrap justify-between flex-col mt-[20px]">
         <a href="#" class="shadow-menu h-[25%] block w-full rounded-[10px]">

@@ -30,7 +30,6 @@ match ($act) {
     'goToBill' => (new BillClientController)->billList(),
     'bills-detail' => (new HomeController)->billDetail(),
     'bills-delete' => (new BillClientController)->deleteClientBill(),
-    "addToBill" => (new onlinePaymentController)->startPayOnline(),
     'cancel-bill' => (new BillClientController)->deleteClientBill(),
     // CART 
     "goToCart" => (new HomeController)->goToCart(),
