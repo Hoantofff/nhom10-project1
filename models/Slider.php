@@ -4,7 +4,7 @@ class Slider extends BaseModel
 {
     protected $table = 'sliders';
 
-    public function getAll() 
+    public function getAll()
     {
         $sql = "
             SELECT 
@@ -27,7 +27,7 @@ class Slider extends BaseModel
         $result = $stmt->fetchAll();
         return $result ?: [];
     }
-    public function getActiveSlider() 
+    public function getActiveSlider()
     {
         $sql = "
             SELECT 
@@ -35,13 +35,11 @@ class Slider extends BaseModel
                 s.img_slider AS s_img_slider,
                 s.content AS s_content,
                 s.created_at AS s_created_at,
-                s.status AS s_status,
                 p.id AS p_id,
                 p.brand_id AS p_brand_id,
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id
-            WHERE s.status=1
             ORDER BY s.id ASC
         ";
 
@@ -76,7 +74,7 @@ class Slider extends BaseModel
         $result = $stmt->fetch();
         return $result ?: null;
     }
-    public function getCountStatus() 
+    public function getCountStatus()
     {
         $sql = "
             SELECT COUNT(id) AS active_sliders
