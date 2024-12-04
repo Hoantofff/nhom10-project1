@@ -126,7 +126,7 @@ class CartController
     {
         $userId = $_GET['user_id'];
         $productId = $_GET['product_id'];
-        $variantId = $_GET['variant_id']; 
+        $variantId = $_GET['variant_id'];
         $result = $this->cart->removeProduct($userId, $productId, $variantId);
         $errors = [];
         if ($result) {

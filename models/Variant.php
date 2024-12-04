@@ -101,7 +101,7 @@ class Variant extends BaseModel
         $stmt->execute();
 
         $colors = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $uniqueColor = [];
         foreach ($colors as $color) {
             $uniqueColor[$color['color_id']] = $color;

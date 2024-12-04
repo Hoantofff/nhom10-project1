@@ -203,7 +203,8 @@
                 <?php foreach ($variantsBySize as $size): ?>
                     <a href="javascript:void(0);"
                         class="border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[33.33333%] size-option"
-                        data-size-id="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>" onclick="selectVariant(<?= $size['size_id'] ?>, 'size')">
+                        data-size-id="<?= $size['size_id'] ?>" data-variant-id="<?= $size['vr_id'] ?>"
+                        onclick="selectVariant(<?= $size['size_id'] ?>, 'size')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
                             <strong><?= $size['sz_size_value'] ?></strong>
                         </div>
@@ -221,7 +222,8 @@
                 <?php foreach ($variantsByColor as $color): ?>
                     <a href="javascript:void(0);"
                         class="color-option border-[1px] border-solid border-[#d1d5db] flex flex-wrap items-center justify-center rounded-[8px] text-[#444] text-[12px] mb-[10px] mr-[10px] overflow-hidden py-[5px] px-[4px] w-[30%]"
-                        data-color-id="<?= $color['color_id'] ?>"  data-variant-id="<?= $color['vr_id'] ?>" onclick="selectVariant(<?= $color['color_id'] ?>, 'color')">
+                        data-color-id="<?= $color['color_id'] ?>" data-variant-id="<?= $color['vr_id'] ?>"
+                        onclick="selectVariant(<?= $color['color_id'] ?>, 'color')">
                         <div class="phone-memory line-clamp-3 w-full font-semibold text-center">
                             <strong><?= $color['cl_color_value'] ?></strong>
                         </div>
@@ -496,7 +498,9 @@
                 </div>
                 <div class="cmt-user bg-[#fff] rounded-[10px] shadow-menu p-[10px] text-[13px] w-[80%] ">
                     <?= $cmt['comment'] ?>
-                    <a onclick="confirm('Bạn Có Chắc Muốn Xóa Hay Không?')" href="<?= BASE_URL ?>?act=deleteReview&id=<?= $cmt['id'] ?>" class="delete-btn text-[#ff0000] ml-[10px]">
+                    <a onclick="confirm('Bạn Có Chắc Muốn Xóa Hay Không?')"
+                        href="<?= BASE_URL ?>?act=deleteReview&id=<?= $cmt['id'] ?>"
+                        class="delete-btn text-[#ff0000] ml-[10px]">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </div>

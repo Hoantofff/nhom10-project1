@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-?> 
-<section class="flex justify-between gap-[20px]">    
+?>
+<section class="flex justify-between gap-[20px]">
     <!-- MENU  -->
     <div class="menu-main w-[225px] mt-[20px] rounded-[15px] shadow-menu bg-[#ffffff]">
         <?php foreach ($categories as $category) { ?>
@@ -34,8 +34,6 @@
             <?php  } ?>
         </div>
     </div>
-    <!-- END SLIDER -->
-    <script src="./assets/js/slider.js"></script>
     <!-- RIGHT BANNER -->
     <div class="right-banner w-[265px] h-[450px] flex flex-wrap justify-between flex-col mt-[20px]">
         <a href="#" class="shadow-menu h-[25%] block w-full rounded-[10px]">

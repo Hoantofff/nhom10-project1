@@ -983,6 +983,10 @@ video {
   margin-top: 25px;
 }
 
+.mt-\[30px\] {
+  margin-top: 30px;
+}
+
 .mt-\[50px\] {
   margin-top: 50px;
 }
@@ -997,6 +1001,10 @@ video {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mt-\[90px\] {
+  margin-top: 90px;
 }
 
 .box-border {
