@@ -42,15 +42,13 @@ class BillClientController
         require_once PATH_VIEW_CLIENT . "main.php";
     }
     public function addBill() {
-        // Lấy thông tin từ form và kiểm tra tính hợp lệ
         $user_name = isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
         $user_email = isset($_POST['user_email']) ? trim($_POST['user_email']) : '';
         $user_address = isset($_POST['user_address']) ? trim($_POST['user_address']) : '';
         $user_phone = isset($_POST['user_phone']) ? trim($_POST['user_phone']) : '';
         $total = isset($_POST['total']) ? floatval($_POST['total']) : 0;
-        $user_id = $userId = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;;
+        $user_id = $_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;;
 
-        // Kiểm tra các trường hợp bắt buộc
         if (empty($user_name)) {
             $_SESSION['error'][] = 'Tên người nhận không được để trống.';
             header('Location: ' . BASE_URL . '?act=goToPayment');
@@ -94,7 +92,7 @@ class BillClientController
             exit();
         }
 
-        // Thêm chi tiết hóa đơn vào bảng `bill_detail`
+        // Thêm chi tiết hóa đơn vào bảng bill detail
         foreach ($cartItems as $item) {
             $this->billDetail->addBillDetail($billId, $item['pd_id'], $item['pd_sale_price'], $item['pd_name'], $item['pd_image'], $item['variant_id'], $item['c_quantity']);
             $result=$this->variant->decreaseVariantQuantity($item['variant_id'],$item['c_quantity']);
@@ -103,23 +101,20 @@ class BillClientController
                 header('location:' . BASE_URL . '?act=goToPayment');
             }
         }
-
-        // Xóa giỏ hàng sau khi đặt hàng thành công (optional)
         $this->cart->clearCart($user_id);
-        // Chuyển hướng về trang khác (ví dụ: trang cảm ơn hoặc đơn hàng của người dùng)
         header('Location: ' . BASE_URL . '?act=goToBill');
         exit();
     }
     public function deleteClientBill() {
             $bill_id=$_GET['id'] ?? null;
             $userId=$_SESSION['user_client']['id'] ?? $_SESSION['user_admin']['id'] ?? null;
-            // kiểm tra id người dùng
+
             if(!$userId) {
                 $_SESSION['error']='Không xác định được người dùng. Vui lòng đăng nhập lại.';
                 header("Location: " . BASE_URL . "?act=goToBill");
                 exit;
             }
-            // lấy thông tin hóa đơn
+
             $bill=$this->bill->getBillStatusAndOwner($bill_id);
             // kiểm tra trạng thái hóa đơn và quyền sở hữu
             if(!$bill || $userId != $bill['user_id']) {
