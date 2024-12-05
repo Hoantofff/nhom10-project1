@@ -999,12 +999,12 @@ video {
   margin-top: 70px;
 }
 
-.mt-auto {
-  margin-top: auto;
-}
-
 .mt-\[90px\] {
   margin-top: 90px;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
 
 .box-border {

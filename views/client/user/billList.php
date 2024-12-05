@@ -51,7 +51,7 @@
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_name'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_address'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_phone'] ?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?= $item['total'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= number_format($item['total'], 0, ',', '.') ?>đ</td>
                     <td class="p-[10px] w-[10%]  text-center">
                         <a href="?act=bills-detail&id=<?= $item['id'] ?>">Xem chi tiết</i></a>
                     </td>
