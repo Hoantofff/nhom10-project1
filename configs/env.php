@@ -28,7 +28,7 @@ define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'nhom10-project11');
+define('DB_NAME', 'nhom10-project1-hoan');
 define('DB_OPTIONS', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
