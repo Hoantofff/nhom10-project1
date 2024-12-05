@@ -73,9 +73,53 @@ class ProductController
             // debug($data);die;
             // debug($data['data_variant']);die;
             $_SESSION['error'] = [];
+            if (empty($data['name'])) {
+                $_SESSION['error']['name'] = 'Trường name bắt buộc';
+            }
+
+            if (
+                empty($data['price'])
+            ) {
+                $_SESSION['error']['price'] = 'Trường giá bắt buộc';
+            }
+
+            if (empty($data['sale_price'])) {
+                $_SESSION['error']['sale_price'] = 'Trường giá sau khi giảm bắt buộc';
+            }
             if ($data['price'] < $data['sale_price']) {
                 $_SESSION['error']['logic_price'] = "Giá ban đầu phải lớn hơn giá đã giảm";
             }
+            if (empty($data['description'])) {
+                $_SESSION['error']['description'] = 'Trường mô tả sản phẩm không được bỏ trống';
+            }
+            if (empty($data['content'])) {
+                $_SESSION['error']['content'] = 'Trường giới thiệu sản phẩm không được bỏ trống';
+            }
+            if ($data['image']['size'] > 2 * 1024 * 1024) {
+                $_SESSION['error']['image_size'] = 'Trường image có dung lượng tối đa 2MB';
+            }
+            if (empty($data['data_variant'])) {
+                $_SESSION['error'][] = 'Bạn phải thêm ít nhất một biến thể sản phẩm';
+            } else {
+                foreach ($data['data_variant'] as $index => $variant) {
+                    if (empty($variant['size_id'])) {
+                        $_SESSION['error'][] = 'Dung lượng cho biến thể ' . ($index + 1) . ' không được để trống';
+                    }
+                    if (empty($variant['color_id'])) {
+                        $_SESSION['error'][] = 'Màu sắc cho biến thể ' . ($index + 1) . ' không được để trống';
+                    }
+                    if (empty($variant['quantity']) || !is_numeric($variant['quantity']) || $variant['quantity'] <= 0) {
+                        $_SESSION['error'][] = 'Số lượng phải là số dương cho biến thể ' . ($index + 1);
+                    }
+                    if (empty($variant['price-varian']) || !is_numeric($variant['price-varian']) || $variant['price-varian'] <= 0) {
+                        $_SESSION['error'][] = 'Giá cho biến thể ' . ($index + 1) . ' phải là số dương';
+                    }
+                    if (empty($variant['price-sale-varian']) || !is_numeric($variant['price-sale-varian']) || $variant['price-sale-varian'] <= 0) {
+                        $_SESSION['error'][] = 'Giá Sale cho biến thể ' . ($index + 1) . ' phải là số dương';
+                    }
+                }
+            }
+
             if (!empty($_SESSION['error'])) {
                 $_SESSION['data'] = $data;
                 throw new Exception('Dữ Liệu Lỗi');
@@ -90,30 +134,32 @@ class ProductController
             $data['updated_at'] = date('Y-m-d h:i:s');
             $data['discount'] = 100 - ceil(($data['sale_price'] / $data['price']) * 100);
             $productData = [
-                'name' =>$data['name'],
-                'price' =>$data['price'],
-                'sale_price' =>$data['sale_price'],
-                'category_id' =>$data['category_id'],
-                'brand_id' =>$data['brand_id'],
-                'discount' =>$data['discount'],
-                'image' =>$data['image'],
-                'description' =>$data['description'],
-                'content' =>$data['content'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'sale_price' => $data['sale_price'],
+                'category_id' => $data['category_id'],
+                'brand_id' => $data['brand_id'],
+                'discount' => $data['discount'],
+                'image' => $data['image'],
+                'description' => $data['description'],
+                'content' => $data['content'],
                 'updated_at' => $data['updated_at']
             ];
             $this->product->update($productData, 'id = :id', ['id' => $id]);
 
             if (!empty($data['data_variant'])) {
-                $existingVariants = $this->variant->getProductId($id); 
-                $handledVariants = []; 
-            
+                $existingVariants = $this->variant->getProductId($id);
+                $handledVariants = [];
+
                 foreach ($data['data_variant'] as $variant) {
                     $found = false;
-            
+
                     foreach ($existingVariants as $existingVariant) {
-                        if ($existingVariant['vr_size_id'] == $variant['size_id'] &&
-                            $existingVariant['vr_color_id'] == $variant['color_id']) {
-                           
+                        if (
+                            $existingVariant['vr_size_id'] == $variant['size_id'] &&
+                            $existingVariant['vr_color_id'] == $variant['color_id']
+                        ) {
+
                             $this->variant->update([
                                 'size_id' => $variant['size_id'],
                                 'color_id' => $variant['color_id'],
@@ -121,7 +167,7 @@ class ProductController
                                 'variant_price' => $variant['price-varian'],
                                 'variant_price_sale' => $variant['price-sale-varian']
                             ], 'id = :id', ['id' => $existingVariant['v_id']]);
-            
+
                             $handledVariants[] = $existingVariant['v_id'];
                             $found = true;
                             break;
@@ -145,7 +191,7 @@ class ProductController
                     }
                 }
             }
-            
+
             $_SESSION['success'] = true;
             $_SESSION['msg'] = 'Cập nhật sản phẩm thành công';
         } catch (\Throwable $th) {
@@ -207,7 +253,7 @@ class ProductController
             }
             if (empty($data['image']['size'])) {
                 $_SESSION['error']['image_size'] = 'Trường image không được bỏ trống';
-            }else if ($data['image']['size'] > 2 * 1024 * 1024) {
+            } else if ($data['image']['size'] > 2 * 1024 * 1024) {
                 $_SESSION['error']['image_size'] = 'Trường image có dung lượng tối đa 2MB';
             }
             if (empty($data['data_variant'])) {
@@ -246,19 +292,19 @@ class ProductController
             $data['discount'] = ceil($data['price'] / $data['sale_price'] * 100) - 100;
 
             $productData = [
-                'name' =>$data['name'],
-                'price' =>$data['price'],
-                'sale_price' =>$data['sale_price'],
-                'category_id' =>$data['category_id'],
-                'brand_id' =>$data['brand_id'],
-                'discount' =>$data['discount'],
-                'image' =>$data['image'],
-                'description' =>$data['description'],
-                'content' =>$data['content'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'sale_price' => $data['sale_price'],
+                'category_id' => $data['category_id'],
+                'brand_id' => $data['brand_id'],
+                'discount' => $data['discount'],
+                'image' => $data['image'],
+                'description' => $data['description'],
+                'content' => $data['content'],
             ];
-            
+
             $productId = $this->product->insert($productData);
-            
+
             if (!empty($data['data_variant']) && $productId) {
                 foreach ($data['data_variant'] as $variant) {
                     $variantData = [
@@ -272,7 +318,7 @@ class ProductController
                     $this->variant->insert($variantData);
                 }
             }
-            
+
             $_SESSION['success'] = true;
             $_SESSION['msg'] = 'Thao Tác Thành Công';
         } catch (\Throwable $th) {
