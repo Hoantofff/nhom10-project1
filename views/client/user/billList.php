@@ -1,19 +1,14 @@
 <?php if (!empty($_SESSION['user_admin']) || !empty($_SESSION['user_client'])): ?>
-<?php
-    if (isset($_SESSION['error'])) {
-
-        
-     echo'
+    <?php if (!empty($_SESSION['error'])): ?>
         <div class="flex items-center p-4 mb-4 text-sm text-white rounded-lg  bg-[#ac3b3a] mt-[100px]">
-        <span class="sr-only">Info</span>
-        <div>
-          <span class="font-medium">' . $_SESSION["error"] . '</span> 
+            <ul>
+                <?php foreach ($_SESSION['error'] as $err):  ?>
+                    <li><?= $err ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-      </div>
-       ';
-       unset($_SESSION["error"]);
-    }
-    ?>
+        <?php unset($_SESSION['error']) ?>
+    <?php endif; ?>
 <form class="w-[1290px] mt-[100px] pb-[30px]  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]"
     action="">
     <table class="w-full">
@@ -56,7 +51,7 @@
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_name'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_address'] ?></td>
                     <td class="p-[10px] w-[10%] text-center "><?= $item['user_phone'] ?></td>
-                    <td class="p-[10px] w-[10%] text-center "><?= $item['total'] ?></td>
+                    <td class="p-[10px] w-[10%] text-center "><?= number_format($item['total'], 0, ',', '.') ?>đ</td>
                     <td class="p-[10px] w-[10%]  text-center">
                         <a href="?act=bills-detail&id=<?= $item['id'] ?>">Xem chi tiết</i></a>
                     </td>

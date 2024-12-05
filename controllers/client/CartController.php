@@ -26,7 +26,7 @@ class CartController
         }
 
         if (!$productId || !$variantId) {
-            $_SESSION['error'][] = 'Thêm không thành công, sản phẩm tồn tại.';
+            $_SESSION['error'][] = 'Thêm sản phẩm không thành công, sản phẩm không tồn tại.';
             header("Location: " . BASE_URL . "?act=goToCart");
             exit();
         }
@@ -92,13 +92,13 @@ class CartController
             foreach ($products as $key => $product) {
                 $variantId = $product['variant_id'] ?? null;
                 $quantity = $product['quantity'] ?? null;
-
+                
                 if ($variantId && $quantity && is_numeric($quantity) && $quantity > 0) {
                     $cartItem = $this->cart->getByVariantId($variantId, $userId);
                     if ($cartItem) {
                         $variant = $this->variant->getById($variantId);
                         if ($variant['variant_quantity'] < $quantity) {
-                            $errors[] = "Số lượng sản phẩm (ID biến thể {$variantId}) trong kho không đủ.";
+                            $errors[] = "Số lượng sản phẩm trong kho không đủ.";
                         } else {
                             $this->cart->updateQuantity($userId, $quantity, $variantId);
                             $successes[] = "Sản phẩm (ID biến thể {$variantId}) đã được cập nhật.";

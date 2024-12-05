@@ -6,15 +6,12 @@ class BillAdminController
     private $cart;
     protected $table;
     private $billDetail;
-    // protected $db;
+
     public function __construct()
     {
-        // $this->home = new Home();
         $this->bill = new Bill();
         $this->cart = new Cart();
         $this->billDetail = new BillDetail();
-        // $this->db = new PDO("mysql:host=localhost;dbname=my_database", "username", "password");
-        // $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Bật chế độ báo lỗi
     }
     public function billList()
     {
@@ -27,8 +24,6 @@ class BillAdminController
             4 => 'Đã thanh toán',
             5 => 'Hủy đơn'
         ];
-        // $client_id = $_SESSION['user-client']['id'];
-        // $data = $this->bill->getByID($client_id);
         require_once PATH_VIEW_CLIENT . 'main.php';
     }
     public function billDetail()
@@ -141,11 +136,9 @@ class BillAdminController
                 throw new Exception('Thao Tác Không Thành Công');
             }
         } catch (\Throwable $th) {
-            // Xử lý lỗi
             $_SESSION['success'] = false;
             $_SESSION['msg'] = $th->getMessage();
     
-            // Check
             if ($th->getCode() == 99) {
                 header('location: ' . BASE_URL_ADMIN . '&act=bills-index');
             } else {

@@ -60,8 +60,8 @@
                                 <img class="w-[140px] object-cover" src="<?= BASE_ASSETS_UPLOADS . $item['pd_image'] ?>" alt="">
                             </td>
                             <td class="p-[10px] w-[10%] text-center"><?= number_format($item['pd_sale_price'], 0, ',', '.') ?>đ</td>
-                            <td class="p-[10px] w-[10%] text-center">Đen</td>
-                            <td class="p-[10px] w-[15%] text-nowrap text-center">256GB/8GB RAM</td>
+                            <td class="p-[10px] w-[10%] text-center"><?= $item['color_value'] ?></td>
+                            <td class="p-[10px] w-[15%] text-nowrap text-center"><?= $item['size_value'] ?></td>
                             <td class="p-[10px] w-[10%] text-center">
                                 <input class="w-[40px] h-[40px] border-[1px] border-[#ccc] rounded-[5px] text-center" type="number"
                                     name="products[<?= $item['variant_id'] ?>][quantity]" value="<?= $item['c_quantity'] ?>"
@@ -105,9 +105,14 @@
         </form>
     <?php else: ?>
         <div
-            class="w-[1290px] mt-[100px] pb-[30px] text-center  border-[1px] border-[#ccc] rounded-[15px] px-[10px] mx-auto my-[0]">
-            <a class="px-6 py-3 bg-blue-500 font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition-all"
-                href="<?= BASE_URL ?>?action=index">Bạn phải thêm sản phẩm để vào giỏ hàng</a>
+            class="w-[1290px] mt-[100px] pb-[30px] text-center border border-[#ccc] rounded-2xl px-5 mx-auto shadow-lg bg-gradient-to-r from-blue-50 to-white">
+            <p class="text-lg font-medium text-gray-700 mb-5">
+                Giỏ Hàng Trống
+            </p>
+            <a class="inline-block px-[100px] py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-offset-2 transition-all"
+                href="<?= BASE_URL ?>">
+                Thêm Sản Phẩm Vào Giỏ Hàng
+            </a>
         </div>
     <?php endif; ?>
 <?php else: ?>

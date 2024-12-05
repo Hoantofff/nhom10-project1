@@ -36,6 +36,7 @@ class Slider extends BaseModel
                 s.content AS s_content,
                 s.created_at AS s_created_at,
                 p.id AS p_id,
+                p.brand_id AS p_brand_id,
                 p.name AS p_name
             FROM sliders s
             JOIN products p ON p.id = s.product_id

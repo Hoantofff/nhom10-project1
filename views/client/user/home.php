@@ -27,7 +27,7 @@
         <div class="slider-title w-full h-[25%] flex">
             <?php foreach ($sliders as $slider) { ?>
                 <div class="slider-title-item w-[20%] hover:bg-[#eee] cursor-pointer flex items-center justify-center  ">
-                    <p class="text-[13px]">
+                    <p class="text-[13px] text-center">
                         <?= $slider['s_content'] ?>
                     </p>
                 </div>
